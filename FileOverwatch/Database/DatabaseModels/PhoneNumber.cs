@@ -4,9 +4,12 @@ using System.Text;
 
 namespace Database.DatabaseModels
 {
-    public class FileOverhead
+    public class PhoneNumber
     {
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
+        public string CountryFlag { get; set; }
+        public string PhoneNr { get; set; }
+        public string Description { get; set; }
     }
 }

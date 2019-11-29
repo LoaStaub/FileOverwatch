@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Database.DatabaseModels
 {
-    class LinkedFiles
+    public class LinkedFile
     {
+        public int Id { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

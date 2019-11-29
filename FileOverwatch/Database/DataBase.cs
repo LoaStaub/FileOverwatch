@@ -11,7 +11,7 @@ namespace Database
         {
         }
         
-        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Employee> Customers { get; set; }
         //public virtual DbSet<>
     }
 }
