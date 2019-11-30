@@ -10,8 +10,8 @@ namespace Database.DatabaseModels.LinkingTables
         [Key]
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
-        public ICollection<ExcelFile> ExcelFiles { get; set; }
-        public ICollection<FileOverhead> FileOverheads { get; set; }
+        public ExcelFile ExcelFile { get; set; }
+        public FileOverhead FileOverhead { get; set; }
         public bool Deleted { get; set; }
     }
 }

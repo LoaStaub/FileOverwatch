@@ -10,8 +10,8 @@ namespace Database.DatabaseModels.LinkingTables
         [Key]
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
-        public ICollection<Email> Emails { get; set; }
-        public ICollection<Employee> Employees { get; set; }
+        public Email Email { get; set; }
+        public Employee Employee { get; set; }
         public bool Deleted { get; set; }
     }
 }
