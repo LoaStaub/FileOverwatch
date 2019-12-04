@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using Database.DatabaseModels.LinkingTables;
 
 namespace Database.DatabaseModels
 {
@@ -14,5 +15,6 @@ namespace Database.DatabaseModels
         public string Directory { get; set; }
         public string Description { get; set; }
         public DateTime LastAccess { get; set; }
+        public ICollection<ExcelToOverhead> OverheadNode { get; set; }
     }
 }

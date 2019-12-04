@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using Database.DatabaseModels.LinkingTables;
 
 namespace Database.DatabaseModels
 {
@@ -13,5 +14,8 @@ namespace Database.DatabaseModels
         public string Mail { get; set; }
         public string Description { get; set; }
         public bool Deleted { get; set; }
+        public ICollection<EmailToEmployee> EmployeeNode { get; set; }
+        public ICollection<EmailToGroup> GroupNode { get; set; }
+        public ICollection<EmailToOrganization> OrganizationNode { get; set; }
     }
 }

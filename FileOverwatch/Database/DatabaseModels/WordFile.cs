@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using Database.DatabaseModels.LinkingTables;
 
 namespace Database.DatabaseModels
 {
@@ -15,5 +16,6 @@ namespace Database.DatabaseModels
         public string Description { get; set; }
         public DateTime LastAccess { get; set; }
         public bool Deleted { get; set; }
+        public ICollection<WordToOverhead> OverheadNode { get; set; }
     }
 }

@@ -2,8 +2,31 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Database\Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="OverlayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OverlayForm.Designer.cs">
+      <DependentUpon>OverlayForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="OverlayForm.resx">
+      <DependentUpon>OverlayForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
 
 </Project>

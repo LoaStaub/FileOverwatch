@@ -1,4 +1,4 @@
-﻿namespace Executable
+﻿namespace Preview
 {
     partial class OverlayForm
     {

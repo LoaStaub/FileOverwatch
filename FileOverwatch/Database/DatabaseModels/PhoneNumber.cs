@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Database.DatabaseModels.LinkingTables;
 
 namespace Database.DatabaseModels
 {
@@ -11,5 +12,6 @@ namespace Database.DatabaseModels
         public string CountryFlag { get; set; }
         public string PhoneNr { get; set; }
         public string Description { get; set; }
+        
     }
 }
