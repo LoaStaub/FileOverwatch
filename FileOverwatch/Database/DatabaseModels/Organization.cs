@@ -21,7 +21,7 @@ namespace Database.DatabaseModels
         public string City { get; set; }
         public string Street { get; set; }
         public string HouseNumber { get; set; }
-        public byte Picture { get; set; }
+        public byte[] Picture { get; set; }
         public bool Deleted { get; set; }
         public ICollection<OverheadToOrganization> OverheadNode { get; set; }
         public ICollection<EmailToOrganization> EmailNode { get; set; }

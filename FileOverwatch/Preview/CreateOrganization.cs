@@ -12,9 +12,40 @@ namespace Preview
 {
     public partial class CreateOrganization : Form
     {
-        public CreateOrganization()
+
+        public CreateOrganization(ref int organizationId)
         {
             InitializeComponent();
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CreateOrganization_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnAbort_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnUploadPicture_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnDeletePicture_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

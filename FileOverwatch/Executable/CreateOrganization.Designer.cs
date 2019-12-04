@@ -1,4 +1,6 @@
-﻿namespace Preview
+﻿using System.Windows.Forms;
+
+namespace Executable
 {
     partial class CreateOrganization
     {
@@ -218,6 +220,7 @@
             this.PbImage.Size = new System.Drawing.Size(188, 124);
             this.PbImage.TabIndex = 23;
             this.PbImage.TabStop = false;
+            this.PbImage.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
             // BtnUploadPicture
             // 

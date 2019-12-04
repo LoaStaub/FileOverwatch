@@ -87,7 +87,9 @@ namespace Executable
 
         private void organizationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var lol = 0;
+            var orgaForm = new CreateOrganization(ref lol);
+            orgaForm.ShowDialog();
         }
     }
 }
