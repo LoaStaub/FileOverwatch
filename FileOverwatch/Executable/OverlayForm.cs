@@ -45,13 +45,13 @@ namespace Executable
                             Text = groupNode.Group.Name,
                             Name = "Gruppe"
                         };
-                        foreach (var groupNode2 in groupNode.Group.EmployeeNode)
+                        foreach (var groupNode2 in groupNode.Group.MemberNode)
                         {
                             if (!groupNode2.Deleted)
                             {
                                 var employeeTreeNode = new TreeNode
                                 {
-                                    Text = groupNode2.Employee.FirstName + " " + groupNode2.Employee.LastName,
+                                    Text = groupNode2.Member.FirstName + " " + groupNode2.Member.LastName,
                                     Name = "Employee"
                                 };
                                 groupTreeNode.Nodes.Add(employeeTreeNode);

@@ -27,5 +27,6 @@ namespace Database.DatabaseModels
         public ICollection<EmailToOrganization> EmailNode { get; set; }
         public ICollection<HomepageToOrganization> HomepageNode { get; set; }
         public ICollection<GroupToOrganization> GroupNode { get; set; }
+        public ICollection<PhoneToOrganization> PhoneNode { get; set; }
     }
 }

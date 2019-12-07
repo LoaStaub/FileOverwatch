@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Database.DatabaseModels.LinkingTables
 {
-    public class HomepageToEmployee
+    public class PhoneToGroup
     {
-        [Key]
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
-        public Homepage Homepage { get; set; }
-        public Employee Employee { get; set; }
+        public PhoneNumber PhoneNumber { get; set; }
+        public Group Group { get; set; }
         public bool Deleted { get; set; }
     }
 }

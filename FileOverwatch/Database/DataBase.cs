@@ -12,7 +12,7 @@ namespace Database
         {
         }
         
-        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Member> Employees { get; set; }
         public virtual DbSet<Email> Emails { get; set; }
         public virtual DbSet<ExcelFile> ExcelFiles { get; set; }
         public virtual DbSet<FileOverhead> FileOverheads { get; set; }
@@ -25,15 +25,15 @@ namespace Database
 
         #region LinkingTables
 
-        public virtual DbSet<EmailToEmployee> EmailToEmployeeNode { get; set; }
+        public virtual DbSet<EmailToMember> EmailToEmployeeNode { get; set; }
         public virtual DbSet<EmailToGroup> EmailGroupNode { get; set; }
         public virtual DbSet<EmailToOrganization> EmailToOrganizationNode { get; set; }
         public virtual DbSet<ExcelToOverhead> ExcelToOverheadNode { get; set; }
         public virtual DbSet<FileToOverhead> FileToOverheadNode { get; set; }
-        public virtual DbSet<HomepageToEmployee> HomepageToEmployeeNode { get; set; }
+        public virtual DbSet<HomepageToMember> HomepageToEmployeeNode { get; set; }
         public virtual DbSet<HomepageToGroup> HomepageToGroupNode { get; set; }
         public virtual DbSet<HomepageToOrganization> HomepageToOrganizationNode { get; set; }
-        public virtual DbSet<OverheadToEmployee> OverheadToEmployeeNode { get; set; }
+        public virtual DbSet<OverheadToMember> OverheadToEmployeeNode { get; set; }
         public virtual DbSet<OverheadToOrganization> OverheadToOrganizationNode { get; set; }
         public virtual DbSet<WordToOverhead> WordToOverheadNode { get; set; }
 

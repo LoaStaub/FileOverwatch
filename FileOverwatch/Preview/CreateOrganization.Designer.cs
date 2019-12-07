@@ -54,6 +54,11 @@
             this.BtnDelete = new System.Windows.Forms.Button();
             this.BtnSave = new System.Windows.Forms.Button();
             this.DtpFounded = new System.Windows.Forms.DateTimePicker();
+            this.BtnEmails = new System.Windows.Forms.Button();
+            this.BtnGroups = new System.Windows.Forms.Button();
+            this.BtnHomepages = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.BtnMembers = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PbImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -277,11 +282,65 @@
             this.DtpFounded.Size = new System.Drawing.Size(105, 20);
             this.DtpFounded.TabIndex = 29;
             // 
+            // BtnEmails
+            // 
+            this.BtnEmails.Location = new System.Drawing.Point(75, 147);
+            this.BtnEmails.Name = "BtnEmails";
+            this.BtnEmails.Size = new System.Drawing.Size(46, 23);
+            this.BtnEmails.TabIndex = 30;
+            this.BtnEmails.Text = "Emails";
+            this.BtnEmails.UseVisualStyleBackColor = true;
+            this.BtnEmails.Click += new System.EventHandler(this.BtnEmails_Click);
+            // 
+            // BtnGroups
+            // 
+            this.BtnGroups.Location = new System.Drawing.Point(127, 147);
+            this.BtnGroups.Name = "BtnGroups";
+            this.BtnGroups.Size = new System.Drawing.Size(52, 23);
+            this.BtnGroups.TabIndex = 31;
+            this.BtnGroups.Text = "Groups";
+            this.BtnGroups.UseVisualStyleBackColor = true;
+            this.BtnGroups.Click += new System.EventHandler(this.BtnGroups_Click);
+            // 
+            // BtnHomepages
+            // 
+            this.BtnHomepages.Location = new System.Drawing.Point(185, 147);
+            this.BtnHomepages.Name = "BtnHomepages";
+            this.BtnHomepages.Size = new System.Drawing.Size(74, 23);
+            this.BtnHomepages.TabIndex = 32;
+            this.BtnHomepages.Text = "Homepages";
+            this.BtnHomepages.UseVisualStyleBackColor = true;
+            this.BtnHomepages.Click += new System.EventHandler(this.BtnHomepages_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 152);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(46, 13);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "Manage";
+            // 
+            // BtnMembers
+            // 
+            this.BtnMembers.Location = new System.Drawing.Point(269, 147);
+            this.BtnMembers.Name = "BtnMembers";
+            this.BtnMembers.Size = new System.Drawing.Size(59, 23);
+            this.BtnMembers.TabIndex = 34;
+            this.BtnMembers.Text = "Members";
+            this.BtnMembers.UseVisualStyleBackColor = true;
+            this.BtnMembers.Click += new System.EventHandler(this.BtnMembers_Click);
+            // 
             // CreateOrganization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(550, 368);
+            this.Controls.Add(this.BtnMembers);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.BtnHomepages);
+            this.Controls.Add(this.BtnGroups);
+            this.Controls.Add(this.BtnEmails);
             this.Controls.Add(this.DtpFounded);
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.BtnDelete);
@@ -345,5 +404,10 @@
         private System.Windows.Forms.Button BtnDelete;
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.DateTimePicker DtpFounded;
+        private System.Windows.Forms.Button BtnEmails;
+        private System.Windows.Forms.Button BtnGroups;
+        private System.Windows.Forms.Button BtnHomepages;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button BtnMembers;
     }
 }

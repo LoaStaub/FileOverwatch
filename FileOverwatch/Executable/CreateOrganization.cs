@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Database;
 using Database.DatabaseModels;
@@ -18,6 +12,7 @@ namespace Executable
     {
         private int _organizationId;
         private Organization _organization = new Organization();
+        private Image _image;
         public CreateOrganization(ref int organizationId)
         {
             _organizationId = organizationId;
@@ -36,7 +31,14 @@ namespace Executable
             _organization.Type = TbType.Text;
             _organization.PostalCode = TbZipCode.Text;
             _organization.Founded = DtpFounded.Value;
-            _organization.Picture = ImageByteConverter.ImageToBytes(PbImage.Image);
+            _organization.CreateDate = DateTime.UtcNow;
+            var db = new DataBase();
+            if (_organizationId == 0)
+            {
+                db.Organizations.Add(_organization);
+            }
+
+            db.SaveChanges();
         }
 
         private void CreateOrganization_Load(object sender, EventArgs e)
@@ -70,7 +72,7 @@ namespace Executable
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             var db = new DataBase();
-            db.Remove(_organization);
+            db.Organizations.Remove(_organization);
             db.SaveChanges();
             Close();
         }
@@ -100,13 +102,34 @@ namespace Executable
             var pathToPic = openFileDialog.FileName;
             var image = Image.FromFile(pathToPic);
             PbImage.Image = image;
+            _image = image;
             _organization.Picture = ImageByteConverter.ImageToBytes(image);
         }
 
         private void BtnDeletePicture_Click(object sender, EventArgs e)
         {
             _organization.Picture = null;
+            _image = null;
             PbImage.Image = null;
+        }
+        private void BtnEmails_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnGroups_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnHomepages_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnMembers_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

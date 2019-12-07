@@ -7,20 +7,18 @@ using Database.DatabaseModels.LinkingTables;
 
 namespace Database.DatabaseModels
 {
-    public class Group : IEnumerable
+    public class Group
     {
         [Key]
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public byte[] Picture { get; set; }
         public ICollection<EmailToGroup> EmailNode { get; set; }
         public ICollection<HomepageToGroup> HomepageNode { get; set; }
-        public ICollection<GroupToEmployee> EmployeeNode { get; set; }
+        public ICollection<GroupToMember> MemberNode { get; set; }
         public ICollection<GroupToOrganization> OrganizationNode { get; set; }
-        public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        public ICollection<PhoneToGroup> PhoneNode { get; set; }
     }
 }

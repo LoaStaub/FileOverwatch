@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Database.DatabaseModels.LinkingTables
 {
-    public class GroupToEmployee
+    public class EmailToMember
     {
         [Key]
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
-        public Group Group { get; set; }
-        public Employee Employee { get; set; }
+        public Email Email { get; set; }
+        public Member Member { get; set; }
         public bool Deleted { get; set; }
     }
 }

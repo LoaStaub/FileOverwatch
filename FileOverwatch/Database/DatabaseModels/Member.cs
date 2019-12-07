@@ -6,7 +6,7 @@ using Database.DatabaseModels.LinkingTables;
 
 namespace Database.DatabaseModels
 {
-    public class Employee
+    public class Member
     {
         [Key]
         public int Id { get; set; }
@@ -22,10 +22,12 @@ namespace Database.DatabaseModels
         public string Street { get; set; }
         public string HouseNumber { get; set; }
         public string Description { get; set; }
+        public DateTime MemberDate { get; set; }
         public bool Deleted { get; set; }
-        public ICollection<EmailToEmployee> EmailNode { get; set; }
-        public ICollection<HomepageToEmployee> HomepageNode { get; set; }
-        public ICollection<OverheadToEmployee> OverheadNode { get; set; }
-        public ICollection<GroupToEmployee> GroupNode { get; set; }
+        public ICollection<EmailToMember> EmailNode { get; set; }
+        public ICollection<HomepageToMember> HomepageNode { get; set; }
+        public ICollection<OverheadToMember> OverheadNode { get; set; }
+        public ICollection<GroupToMember> GroupNode { get; set; }
+        public ICollection<PhoneToMember> PhoneNode { get; set; }
     }
 }

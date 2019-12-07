@@ -16,7 +16,7 @@ namespace Database.DatabaseModels
         public ICollection<FileToOverhead> FileNode { get; set; }
         public ICollection<ExcelToOverhead> ExcelNode { get; set; }
         public ICollection<WordToOverhead> WordNode { get; set; }
-        public ICollection<OverheadToEmployee> EmployeeNode { get; set; }
+        public ICollection<OverheadToMember> EmployeeNode { get; set; }
         public ICollection<OverheadToOrganization> OrganizationNode { get; set; }
     }
 }

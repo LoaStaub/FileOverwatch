@@ -10,20 +10,14 @@ using System.Windows.Forms;
 
 namespace Preview
 {
-    public partial class CreateOrganization : Form
+    public partial class CreateGroup : Form
     {
-
-        public CreateOrganization(ref int organizationId)
+        public CreateGroup()
         {
             InitializeComponent();
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CreateOrganization_Load(object sender, EventArgs e)
         {
 
         }
@@ -48,22 +42,27 @@ namespace Preview
 
         }
 
+        private void BtnOrganizations_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void BtnEmails_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void BtnGroups_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnHomepages_Click(object sender, EventArgs e)
+        private void BtnPhones_Click(object sender, EventArgs e)
         {
 
         }
 
         private void BtnMembers_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CreateGroup_Load(object sender, EventArgs e)
         {
 
         }

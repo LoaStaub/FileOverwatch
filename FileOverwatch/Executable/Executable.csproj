@@ -15,6 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="CreateGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CreateGroup.Designer.cs">
+      <DependentUpon>CreateGroup.cs</DependentUpon>
+    </Compile>
     <Compile Update="CreateOrganization.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -30,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="CreateGroup.resx">
+      <DependentUpon>CreateGroup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Update="CreateOrganization.resx">
       <DependentUpon>CreateOrganization.cs</DependentUpon>
     </EmbeddedResource>
