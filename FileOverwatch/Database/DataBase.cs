@@ -12,7 +12,7 @@ namespace Database
         {
         }
         
-        public virtual DbSet<Member> Employees { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Email> Emails { get; set; }
         public virtual DbSet<ExcelFile> ExcelFiles { get; set; }
         public virtual DbSet<FileOverhead> FileOverheads { get; set; }

@@ -17,12 +17,13 @@ namespace Database.DatabaseModels
         public DateTime Birthdate { get; set; }
         public string Country { get; set; }
         public string State { get; set; }
-        public string PostalCode { get; set; }
+        public string ZipCode { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public string HouseNumber { get; set; }
         public string Description { get; set; }
         public DateTime MemberDate { get; set; }
+        public byte[] Picture { get; set; }
         public bool Deleted { get; set; }
         public ICollection<EmailToMember> EmailNode { get; set; }
         public ICollection<HomepageToMember> HomepageNode { get; set; }

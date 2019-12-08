@@ -112,6 +112,22 @@ namespace Executable
 
         private void FillElements()
         {
+            var db = new DataBase();
+            var organizations = db.Organizations.Where(orga => !orga.Deleted).Select(d => d.Name);
+            foreach (var organization in organizations)
+            {
+                CbOrganizations.Items.Add(organization);
+            }
+
+            foreach (var organization in _group.OrganizationNode)
+            {
+                if(!organization.Organization.Deleted)
+                {
+                    CbOrganizations.SelectedItem = organization.Organization.Name;
+                    break;
+                }
+            }
+            
             TbName.Text = _group.Name;
             TbDescription.Text = _group.Description;
             PbImage.Image = ImageByteConverter.BytesToImage(_group.Picture);

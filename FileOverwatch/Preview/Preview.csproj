@@ -52,6 +52,12 @@
     <Compile Include="CreateGroup.Designer.cs">
       <DependentUpon>CreateGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateMember.Designer.cs">
+      <DependentUpon>CreateMember.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateOrganization.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CreateGroup.resx">
       <DependentUpon>CreateGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateMember.resx">
+      <DependentUpon>CreateMember.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateOrganization.resx">
       <DependentUpon>CreateOrganization.cs</DependentUpon>

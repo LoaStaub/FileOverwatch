@@ -66,30 +66,39 @@ namespace Executable
 
         }
 
-        private void AddEmployee()
+        private void AddMember()
         {
-
+            var id = 0;
+            var memberForm = new CreateMember(ref id);
+            memberForm.ShowDialog();
         }
 
         private void AddGroup()
         {
-
+            var id = 0;
+            var groupForm = new CreateGroup(ref id);
+            groupForm.ShowDialog();
         }
-        private void employeeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
+        private void AddOrganization()
+        {
+            var id = 0;
+            var organizationForm = new CreateOrganization(ref id);
+            organizationForm.ShowDialog();
+        }
+        private void memberToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddMember();
         }
 
         private void groupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            AddGroup();
         }
 
         private void organizationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var lol = 0;
-            var orgaForm = new CreateOrganization(ref lol);
-            orgaForm.ShowDialog();
+            AddOrganization();
         }
     }
 }
