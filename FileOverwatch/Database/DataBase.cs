@@ -7,9 +7,16 @@ namespace Database
 {
     public partial class DataBase : DbContext
     {
+        private static bool _created = false;
         public DataBase()
             //: base("name=ApiDb")
         {
+            if (!_created)
+            {
+                _created = true;
+                //Database.EnsureDeleted();
+                Database.EnsureCreated();
+            }
         }
         
         public virtual DbSet<Member> Members { get; set; }
@@ -38,5 +45,8 @@ namespace Database
         public virtual DbSet<WordToOverhead> WordToOverheadNode { get; set; }
 
         #endregion
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+            => options.UseSqlite(@"Data Source=C:\Users\a-p-i\source\repos\FileOverwatch\FileOverwatch\Database\FileOverwatch.db");
     }
 }

@@ -10,15 +10,14 @@ namespace Executable
 {
     public partial class CreateOrganization : Form
     {
-        private int _organizationId;
-        private Organization _organization = new Organization();
-        private Image _image;
+        private readonly int _organizationId;
         public CreateOrganization(ref int organizationId)
         {
             _organizationId = organizationId;
             InitializeComponent();
         }
 
+        
         private void BtnSave_Click(object sender, EventArgs e)
         {
             _organization.City = TbCity.Text;
@@ -31,16 +30,17 @@ namespace Executable
             _organization.Type = TbType.Text;
             _organization.PostalCode = TbZipCode.Text;
             _organization.Founded = DtpFounded.Value;
-            _organization.CreateDate = DateTime.UtcNow;
             var db = new DataBase();
             if (_organizationId == 0)
             {
+                _organization.CreateDate = DateTime.UtcNow;
                 db.Organizations.Add(_organization);
             }
 
             db.SaveChanges();
         }
 
+        private Organization _organization = new Organization();
         private void CreateOrganization_Load(object sender, EventArgs e)
         {
             if (_organizationId == 0)
@@ -72,7 +72,7 @@ namespace Executable
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             var db = new DataBase();
-            db.Organizations.Remove(_organization);
+            _organization.Deleted = true;
             db.SaveChanges();
             Close();
         }
@@ -102,14 +102,12 @@ namespace Executable
             var pathToPic = openFileDialog.FileName;
             var image = Image.FromFile(pathToPic);
             PbImage.Image = image;
-            _image = image;
             _organization.Picture = ImageByteConverter.ImageToBytes(image);
         }
 
         private void BtnDeletePicture_Click(object sender, EventArgs e)
         {
             _organization.Picture = null;
-            _image = null;
             PbImage.Image = null;
         }
         private void BtnEmails_Click(object sender, EventArgs e)

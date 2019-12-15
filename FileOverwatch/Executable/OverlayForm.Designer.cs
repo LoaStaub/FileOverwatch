@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TvOrga = new System.Windows.Forms.TreeView();
+            this.TvOrga = new System.Windows.Forms.ListView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.BtnRefresh = new System.Windows.Forms.Button();
-            this.TvFileOverview = new System.Windows.Forms.TreeView();
+            this.TvFileOverview = new System.Windows.Forms.ListView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -166,10 +166,10 @@
 
         #endregion
 
-        private System.Windows.Forms.TreeView TvOrga;
+        private System.Windows.Forms.ListView TvOrga;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BtnRefresh;
-        private System.Windows.Forms.TreeView TvFileOverview;
+        private System.Windows.Forms.ListView TvFileOverview;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.MenuStrip menuStrip1;

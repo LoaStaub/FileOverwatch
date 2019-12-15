@@ -41,5 +41,10 @@ namespace Preview
         {
 
         }
+
+        private void TvOrga_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

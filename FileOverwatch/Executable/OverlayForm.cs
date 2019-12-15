@@ -21,7 +21,7 @@ namespace Executable
 
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
-            
+            OrgaHead();
         }
 
         private void OrgaHead()
@@ -36,32 +36,41 @@ namespace Executable
                     Text = organization.Name,
                     Name = "Organization"
                 };
-                foreach (var groupNode in organization.GroupNode)
+                if (organization.GroupNode != null)
                 {
-                    if (!groupNode.Deleted)
+                    foreach (var groupNode in organization.GroupNode)
                     {
-                        var groupTreeNode = new TreeNode
+                        if (!groupNode.Deleted)
                         {
-                            Text = groupNode.Group.Name,
-                            Name = "Gruppe"
-                        };
-                        foreach (var groupNode2 in groupNode.Group.MemberNode)
-                        {
-                            if (!groupNode2.Deleted)
+                            var groupTreeNode = new TreeNode
                             {
-                                var employeeTreeNode = new TreeNode
+                                Text = groupNode.Group.Name,
+                                Name = "Gruppe"
+                            };
+                            foreach (var groupNode2 in groupNode.Group.MemberNode)
+                            {
+                                if (!groupNode2.Deleted)
                                 {
-                                    Text = groupNode2.Member.FirstName + " " + groupNode2.Member.LastName,
-                                    Name = "Employee"
-                                };
-                                groupTreeNode.Nodes.Add(employeeTreeNode);
+                                    var employeeTreeNode = new TreeNode
+                                    {
+                                        Text = groupNode2.Member.FirstName + " " + groupNode2.Member.LastName,
+                                        Name = "Employee"
+                                    };
+                                    groupTreeNode.Nodes.Add(employeeTreeNode);
+                                }
                             }
-                        }
 
-                        orgaTreeNode.Nodes.Add(groupTreeNode);
+                            orgaTreeNode.Nodes.Add(groupTreeNode);
+                        }
                     }
                 }
-                TvFileOverview.Nodes.Add(orgaTreeNode);
+
+                //TvFileOverview.Nodes.Add(orgaTreeNode);
+                var gr = new ListViewGroup
+                {
+
+                };
+                //TvFileOverview.Groups.Add();
             }
 
         }
