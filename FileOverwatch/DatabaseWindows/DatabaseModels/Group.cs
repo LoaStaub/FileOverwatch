@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using Database.DatabaseModels.LinkingTables;
+using DatabaseWindows.DatabaseModels.LinkingTables;
 
-namespace Database.DatabaseModels
+namespace DatabaseWindows.DatabaseModels
 {
     public class Group
     {

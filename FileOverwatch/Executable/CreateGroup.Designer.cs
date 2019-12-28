@@ -45,7 +45,7 @@
             this.BtnMembers = new System.Windows.Forms.Button();
             this.CbOrganizations = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.LblCounter = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PbImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -208,19 +208,19 @@
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(220, 106);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(39, 13);
-            this.label5.TabIndex = 62;
-            this.label5.Text = "0 more";
+            this.LblCounter.AutoSize = true;
+            this.LblCounter.Location = new System.Drawing.Point(220, 106);
+            this.LblCounter.Name = "LblCounter";
+            this.LblCounter.Size = new System.Drawing.Size(39, 13);
+            this.LblCounter.TabIndex = 62;
+            this.LblCounter.Text = "0 more";
             // 
             // CreateGroup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(550, 368);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.LblCounter);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.CbOrganizations);
             this.Controls.Add(this.BtnMembers);
@@ -265,6 +265,6 @@
         private System.Windows.Forms.Button BtnMembers;
         private System.Windows.Forms.ComboBox CbOrganizations;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label LblCounter;
     }
 }

@@ -1,21 +1,16 @@
 ﻿using System;
-using Database.DatabaseModels;
-using Database.DatabaseModels.LinkingTables;
-using Microsoft.EntityFrameworkCore;
+using System.Data.Entity;
+using DatabaseWindows.DatabaseModels;
+using DatabaseWindows.DatabaseModels.LinkingTables;
 
-namespace Database
+namespace DatabaseWindows
 {
     public partial class DataBase : DbContext
     {
         private static bool _created = false;
         public DataBase()
         {
-            if (!_created)
-            {
-                _created = true;
-                //Database.EnsureDeleted();
-                Database.EnsureCreated();
-            }
+
         }
         
         public virtual DbSet<Member> Members { get; set; }
@@ -46,7 +41,7 @@ namespace Database
 
         #endregion
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite(@"Data Source=C:\Users\a-p-i\source\repos\FileOverwatch\FileOverwatch\Database\FileOverwatch.db");
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //    => options.UseSqlite(@"Data Source=C:\Users\a-p-i\source\repos\FileOverwatch\FileOverwatch\Database\FileOverwatch.db");
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Preview
+﻿namespace ExecutableWindows
 {
     partial class CreateGroup
     {
@@ -206,7 +206,7 @@
             this.label4.TabIndex = 61;
             this.label4.Text = "Organization:";
             // 
-            // LblCounter
+            // label5
             // 
             this.LblCounter.AutoSize = true;
             this.LblCounter.Location = new System.Drawing.Point(220, 106);

@@ -2,11 +2,11 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Database;
-using Database.DatabaseModels;
+using DatabaseWindows;
+using DatabaseWindows.DatabaseModels;
 using Executable.Classes;
 
-namespace Executable
+namespace ExecutableWindows
 {
     public partial class CreateOrganization : Form
     {
