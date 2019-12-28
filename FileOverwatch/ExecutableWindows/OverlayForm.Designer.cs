@@ -40,6 +40,8 @@
             this.organizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.employeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnAddContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -47,10 +49,12 @@
             // 
             // TvOrga
             // 
+            this.TvOrga.HideSelection = false;
             this.TvOrga.Location = new System.Drawing.Point(3, 43);
             this.TvOrga.Name = "TvOrga";
             this.TvOrga.Size = new System.Drawing.Size(249, 561);
             this.TvOrga.TabIndex = 0;
+            this.TvOrga.UseCompatibleStateImageBehavior = false;
             // 
             // panel1
             // 
@@ -73,10 +77,12 @@
             // 
             // TvFileOverview
             // 
+            this.TvFileOverview.HideSelection = false;
             this.TvFileOverview.Location = new System.Drawing.Point(3, 77);
             this.TvFileOverview.Name = "TvFileOverview";
             this.TvFileOverview.Size = new System.Drawing.Size(824, 527);
             this.TvFileOverview.TabIndex = 0;
+            this.TvFileOverview.UseCompatibleStateImageBehavior = false;
             // 
             // panel2
             // 
@@ -95,12 +101,14 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Refresh";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem,
-            this.erstellenToolStripMenuItem});
+            this.erstellenToolStripMenuItem,
+            this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1375, 24);
@@ -126,23 +134,38 @@
             // organizationToolStripMenuItem
             // 
             this.organizationToolStripMenuItem.Name = "organizationToolStripMenuItem";
-            this.organizationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.organizationToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.organizationToolStripMenuItem.Text = "Organization";
             this.organizationToolStripMenuItem.Click += new System.EventHandler(this.organizationToolStripMenuItem_Click);
             // 
             // groupToolStripMenuItem
             // 
             this.groupToolStripMenuItem.Name = "groupToolStripMenuItem";
-            this.groupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.groupToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.groupToolStripMenuItem.Text = "Group";
             this.groupToolStripMenuItem.Click += new System.EventHandler(this.groupToolStripMenuItem_Click);
             // 
             // employeeToolStripMenuItem
             // 
             this.employeeToolStripMenuItem.Name = "employeeToolStripMenuItem";
-            this.employeeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.employeeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.employeeToolStripMenuItem.Text = "Employee";
             this.employeeToolStripMenuItem.Click += new System.EventHandler(this.memberToolStripMenuItem_Click);
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BtnAddContextMenu});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // BtnAddContextMenu
+            // 
+            this.BtnAddContextMenu.Name = "BtnAddContextMenu";
+            this.BtnAddContextMenu.Size = new System.Drawing.Size(180, 22);
+            this.BtnAddContextMenu.Text = "Add Context Menu";
+            this.BtnAddContextMenu.Click += new System.EventHandler(this.BtnAddContextMenu_Click);
             // 
             // OverlayForm
             // 
@@ -178,6 +201,9 @@
         private System.Windows.Forms.ToolStripMenuItem organizationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem groupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem employeeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem BtnAddContextMenu;
     }
 }
 

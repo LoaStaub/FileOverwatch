@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using DatabaseWindows;
+using System;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DatabaseWindows;
+using Microsoft.Win32;
 
 namespace ExecutableWindows
 {
     public partial class OverlayForm : Form
     {
         private int _organizationId, _employeeId, _groupId, _fileId;
+
         public OverlayForm()
         {
             InitializeComponent();
@@ -95,6 +92,19 @@ namespace ExecutableWindows
             var organizationForm = new CreateOrganization(ref id);
             organizationForm.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnAddContextMenu_Click(object sender, EventArgs e)
+        {
+            var key = Registry.ClassesRoot.OpenSubKey("Folder\\Shell", true);
+            var newKey = key.CreateSubKey("Add File to FileOverwatch");
+
+        }
+
         private void memberToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddMember();

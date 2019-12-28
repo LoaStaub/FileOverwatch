@@ -7,8 +7,7 @@ namespace DatabaseWindows
 {
     public partial class DataBase : DbContext
     {
-        private static bool _created = false;
-        public DataBase()
+        public DataBase(): base("name=DataBase")
         {
 
         }

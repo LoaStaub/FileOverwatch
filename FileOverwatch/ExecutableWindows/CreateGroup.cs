@@ -97,12 +97,10 @@ namespace ExecutableWindows
         private void CreateGroup_Load(object sender, EventArgs e)
         {
             var db = new DataBase();
-            var organizations = db.Organizations.Where(orga => !orga.Deleted);
-            foreach (var organization in organizations)
-            {
-                CbOrganizations.Items.Add(organization);
-            }
-
+            var organizations = db.Organizations.Where(orga => !orga.Deleted).ToList();
+            CbOrganizations.DataSource = organizations;
+            CbOrganizations.DisplayMember = "Name";
+            CbOrganizations.ValueMember = "Id";
             if (_groupId == 0)
             {
                 BtnDelete.Visible = false;
