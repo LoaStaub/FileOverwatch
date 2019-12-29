@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
+using DatabaseWindows.DatabaseModels.LinkingTables;
 using Executable.Classes;
 
 namespace ExecutableWindows
@@ -75,7 +77,7 @@ namespace ExecutableWindows
 
         }
 
-        private void BtnSave_Click(object sender, EventArgs e)
+        private async void BtnSave_Click(object sender, EventArgs e)
         {
             _member.City = TbCity.Text;
             _member.Country = TbCountry.Text;
@@ -92,10 +94,18 @@ namespace ExecutableWindows
             var db = new DataBase();
             if (_memberId == 0)
             {
+                var node = new GroupToMember
+                {
+                    CreateDate = DateTime.Now,
+                    Deleted = false,
+                    Group = (Group)CbGroups.SelectedItem,
+                    Member = _member
+                };
+                _member.GroupNode.Add(node);
                 db.Members.Add(_member);
             }
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
@@ -111,15 +121,21 @@ namespace ExecutableWindows
             Close();
         }
 
-        private void CreateMember_Load(object sender, EventArgs e)
+        private async void CreateMember_Load(object sender, EventArgs e)
         {
+            var db = new DataBase();
+            var organizations = await db.Organizations.Where(d => !d.Deleted).ToListAsync();
+            CbOrganizations.DataSource = organizations;
+            CbOrganizations.DisplayMember = "Name";
+            CbOrganizations.ValueMember = "Id";
+
             if (_memberId == 0)
             {
                 BtnDelete.Visible = false;
                 return;
             }
 
-            var db = new DataBase();
+            
             _member = db.Members.FirstOrDefault(member => member.Id == _memberId);
             FillElements();
         }
@@ -138,6 +154,14 @@ namespace ExecutableWindows
             TbZipCode.Text = _member.ZipCode;
             DtpBirthdate.Value = _member.Birthdate;
             PbImage.Image = ImageByteConverter.BytesToImage(_member.Picture);
+        }
+
+        private async void CbOrganizations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var db = new DataBase();
+            var groups = await db.Groups.Where(d =>
+                !d.Deleted &&
+                d.OrganizationNode.Any(f => f.Organization == (Organization) CbOrganizations.SelectedItem)).ToListAsync();
         }
     }
 }

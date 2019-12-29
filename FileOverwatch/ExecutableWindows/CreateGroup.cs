@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
+using DatabaseWindows.DatabaseModels.LinkingTables;
 using Executable.Classes;
 
 namespace ExecutableWindows
@@ -17,7 +18,7 @@ namespace ExecutableWindows
             InitializeComponent();
         }
 
-        private void BtnSave_Click(object sender, EventArgs e)
+        private async void BtnSave_Click(object sender, EventArgs e)
         {
             _group.Picture = ImageByteConverter.ImageToBytes(PbImage.Image);
             _group.Description = TbDescription.Text;
@@ -29,7 +30,15 @@ namespace ExecutableWindows
                 db.Groups.Add(_group);
             }
 
-            db.SaveChanges();
+            var node = new GroupToOrganization
+            {
+                CreateDate = DateTime.Now,
+                Group = _group,
+                Deleted = false,
+                Organization = (Organization) CbOrganizations.SelectedItem
+            };
+
+            await db.SaveChangesAsync();
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)

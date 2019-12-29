@@ -1,4 +1,4 @@
-﻿namespace FileAdding
+﻿namespace ExecutableWindows
 {
     partial class FileAdder
     {
@@ -42,13 +42,15 @@
             this.label5 = new System.Windows.Forms.Label();
             this.CbFileOverhead = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.BtnBrowse = new System.Windows.Forms.Button();
+            this.TbFilepath = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // CbOrganizations
             // 
             this.CbOrganizations.FormattingEnabled = true;
             this.CbOrganizations.Location = new System.Drawing.Point(16, 36);
-            this.CbOrganizations.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CbOrganizations.Margin = new System.Windows.Forms.Padding(4);
             this.CbOrganizations.Name = "CbOrganizations";
             this.CbOrganizations.Size = new System.Drawing.Size(160, 24);
             this.CbOrganizations.TabIndex = 0;
@@ -58,7 +60,7 @@
             // 
             this.CbGroups.FormattingEnabled = true;
             this.CbGroups.Location = new System.Drawing.Point(185, 36);
-            this.CbGroups.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CbGroups.Margin = new System.Windows.Forms.Padding(4);
             this.CbGroups.Name = "CbGroups";
             this.CbGroups.Size = new System.Drawing.Size(160, 24);
             this.CbGroups.TabIndex = 1;
@@ -68,7 +70,7 @@
             // 
             this.CbMember.FormattingEnabled = true;
             this.CbMember.Location = new System.Drawing.Point(355, 36);
-            this.CbMember.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CbMember.Margin = new System.Windows.Forms.Padding(4);
             this.CbMember.Name = "CbMember";
             this.CbMember.Size = new System.Drawing.Size(160, 24);
             this.CbMember.TabIndex = 2;
@@ -106,16 +108,18 @@
             // 
             // TbFilename
             // 
-            this.TbFilename.Location = new System.Drawing.Point(16, 147);
-            this.TbFilename.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TbFilename.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TbFilename.Location = new System.Drawing.Point(16, 171);
+            this.TbFilename.Margin = new System.Windows.Forms.Padding(4);
             this.TbFilename.Name = "TbFilename";
             this.TbFilename.Size = new System.Drawing.Size(329, 22);
             this.TbFilename.TabIndex = 6;
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 128);
+            this.label4.Location = new System.Drawing.Point(12, 152);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(122, 17);
@@ -124,8 +128,9 @@
             // 
             // LblFilePath
             // 
+            this.LblFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LblFilePath.AutoSize = true;
-            this.LblFilePath.Location = new System.Drawing.Point(12, 176);
+            this.LblFilePath.Location = new System.Drawing.Point(12, 200);
             this.LblFilePath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblFilePath.Name = "LblFilePath";
             this.LblFilePath.Size = new System.Drawing.Size(46, 17);
@@ -134,8 +139,9 @@
             // 
             // BtnAddFile
             // 
-            this.BtnAddFile.Location = new System.Drawing.Point(355, 145);
-            this.BtnAddFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnAddFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BtnAddFile.Location = new System.Drawing.Point(355, 169);
+            this.BtnAddFile.Margin = new System.Windows.Forms.Padding(4);
             this.BtnAddFile.Name = "BtnAddFile";
             this.BtnAddFile.Size = new System.Drawing.Size(157, 28);
             this.BtnAddFile.TabIndex = 9;
@@ -145,16 +151,18 @@
             // 
             // CbType
             // 
+            this.CbType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CbType.FormattingEnabled = true;
-            this.CbType.Location = new System.Drawing.Point(80, 82);
+            this.CbType.Location = new System.Drawing.Point(80, 106);
             this.CbType.Name = "CbType";
             this.CbType.Size = new System.Drawing.Size(96, 24);
             this.CbType.TabIndex = 10;
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 85);
+            this.label5.Location = new System.Drawing.Point(13, 109);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 17);
             this.label5.TabIndex = 11;
@@ -162,26 +170,48 @@
             // 
             // CbFileOverhead
             // 
+            this.CbFileOverhead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CbFileOverhead.FormattingEnabled = true;
-            this.CbFileOverhead.Location = new System.Drawing.Point(260, 82);
+            this.CbFileOverhead.Location = new System.Drawing.Point(260, 106);
             this.CbFileOverhead.Name = "CbFileOverhead";
             this.CbFileOverhead.Size = new System.Drawing.Size(180, 24);
             this.CbFileOverhead.TabIndex = 12;
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(183, 85);
+            this.label6.Location = new System.Drawing.Point(183, 109);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(71, 17);
             this.label6.TabIndex = 13;
             this.label6.Text = "Filegroup:";
             // 
+            // BtnBrowse
+            // 
+            this.BtnBrowse.Location = new System.Drawing.Point(16, 72);
+            this.BtnBrowse.Name = "BtnBrowse";
+            this.BtnBrowse.Size = new System.Drawing.Size(75, 23);
+            this.BtnBrowse.TabIndex = 14;
+            this.BtnBrowse.Text = "Browse";
+            this.BtnBrowse.UseVisualStyleBackColor = true;
+            this.BtnBrowse.Click += new System.EventHandler(this.BtnBrowse_Click);
+            // 
+            // TbFilepath
+            // 
+            this.TbFilepath.Location = new System.Drawing.Point(97, 72);
+            this.TbFilepath.Name = "TbFilepath";
+            this.TbFilepath.Size = new System.Drawing.Size(415, 22);
+            this.TbFilepath.TabIndex = 15;
+            this.TbFilepath.TextChanged += new System.EventHandler(this.TbFilepath_TextChanged);
+            // 
             // FileAdder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 194);
+            this.ClientSize = new System.Drawing.Size(528, 218);
+            this.Controls.Add(this.TbFilepath);
+            this.Controls.Add(this.BtnBrowse);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.CbFileOverhead);
             this.Controls.Add(this.label5);
@@ -196,7 +226,7 @@
             this.Controls.Add(this.CbMember);
             this.Controls.Add(this.CbGroups);
             this.Controls.Add(this.CbOrganizations);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FileAdder";
             this.Text = "File Adding";
             this.Load += new System.EventHandler(this.FileAdder_Load);
@@ -221,6 +251,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox CbFileOverhead;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button BtnBrowse;
+        private System.Windows.Forms.TextBox TbFilepath;
     }
 }
 

@@ -11,14 +11,13 @@ using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
 
-namespace FileAdding
+namespace ExecutableWindows
 {
     public partial class FileAdder : Form
     {
-        private static string[] _args;
-        public FileAdder(string[] args)
+        private static string _pathToFile;
+        public FileAdder()
         {
-            _args = args;
             InitializeComponent();
         }
 
@@ -63,34 +62,24 @@ namespace FileAdding
 
         private async void FileAdder_Load(object sender, EventArgs e)
         {
-            if (_args.Length == 0)
-            {
-                var db2 = new DataBase();
-                var organizations2 = await db2.Organizations.Where(d => !d.Deleted).ToListAsync();
-                CbOrganizations.DataSource = organizations2;
-                CbOrganizations.DisplayMember = "Name";
-                CbOrganizations.ValueMember = "Id";
-                return;
-            }
-            var directory = _args[0];
-            LblFilePath.Text = directory;
             var db = new DataBase();
-            if (await db.LinkedFiles.AnyAsync(d => d.Directory == directory) && await db.ExcelFiles.AnyAsync(d => d.Directory == directory) && await db.WordFiles.AnyAsync(d => d.Directory == directory))
-            {
-                var option = MessageBox.Show("This File got linked, do you want to link it to another Entry?", "File already linked",
-                    MessageBoxButtons.OKCancel);
-                if (option == DialogResult.OK)
-                {
-                    return;
-                }
-
-                Close();
-            }
-
             var organizations = await db.Organizations.Where(d => !d.Deleted).ToListAsync();
             CbOrganizations.DataSource = organizations;
             CbOrganizations.DisplayMember = "Name";
             CbOrganizations.ValueMember = "Id";
+        }
+
+        private void BtnBrowse_Click(object sender, EventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.ShowDialog();
+            _pathToFile = openFileDialog.FileName;
+            TbFilepath.Text = _pathToFile;
+        }
+
+        private void TbFilepath_TextChanged(object sender, EventArgs e)
+        {
+            _pathToFile = TbFilepath.Text;
         }
     }
 }

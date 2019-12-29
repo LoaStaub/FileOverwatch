@@ -105,6 +105,12 @@ namespace ExecutableWindows
 
         }
 
+        private void BtnLinkFile_Click(object sender, EventArgs e)
+        {
+            var newFileLinking = new FileAdder();
+            newFileLinking.ShowDialog();
+        }
+
         private void memberToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddMember();

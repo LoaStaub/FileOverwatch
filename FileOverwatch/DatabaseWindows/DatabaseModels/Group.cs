@@ -15,6 +15,7 @@ namespace DatabaseWindows.DatabaseModels
         public string Name { get; set; }
         public string Description { get; set; }
         public byte[] Picture { get; set; }
+        public bool Deleted { get; set; }
         public ICollection<EmailToGroup> EmailNode { get; set; }
         public ICollection<HomepageToGroup> HomepageNode { get; set; }
         public ICollection<GroupToMember> MemberNode { get; set; }

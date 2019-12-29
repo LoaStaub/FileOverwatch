@@ -87,6 +87,12 @@
     <Compile Include="CreateOrganization.Designer.cs">
       <DependentUpon>CreateOrganization.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileAdder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileAdder.Designer.cs">
+      <DependentUpon>FileAdder.cs</DependentUpon>
+    </Compile>
     <Compile Include="OverlayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CreateOrganization.resx">
       <DependentUpon>CreateOrganization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileAdder.resx">
+      <DependentUpon>FileAdder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OverlayForm.resx">
       <DependentUpon>OverlayForm.cs</DependentUpon>
