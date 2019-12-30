@@ -35,9 +35,9 @@ namespace ExecutableWindows
                 CreateDate = DateTime.Now,
                 Group = _group,
                 Deleted = false,
-                Organization = (Organization) CbOrganizations.SelectedItem
+                OrganizationId = ((Organization)CbOrganizations.SelectedItem).Id
             };
-
+            db.GroupToOrganizationNode.Add(node);
             await db.SaveChangesAsync();
         }
 

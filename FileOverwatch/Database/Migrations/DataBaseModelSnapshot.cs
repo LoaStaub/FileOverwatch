@@ -80,8 +80,8 @@ namespace Database.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<byte>("Icon")
-                        .HasColumnType("INTEGER");
+                    b.Property<byte[]>("Icon")
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -99,6 +99,9 @@ namespace Database.Migrations
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
@@ -158,8 +161,8 @@ namespace Database.Migrations
                     b.Property<string>("FileName")
                         .HasColumnType("TEXT");
 
-                    b.Property<byte>("Icon")
-                        .HasColumnType("INTEGER");
+                    b.Property<byte[]>("Icon")
+                        .HasColumnType("BLOB");
 
                     b.Property<DateTime>("LastAccess")
                         .HasColumnType("TEXT");
@@ -355,7 +358,7 @@ namespace Database.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("GroupToOrganization");
+                    b.ToTable("GroupToOrganizations");
                 });
 
             modelBuilder.Entity("Database.DatabaseModels.LinkingTables.HomepageToGroup", b =>
@@ -437,6 +440,33 @@ namespace Database.Migrations
                     b.HasIndex("OrganizationId");
 
                     b.ToTable("HomepageToOrganizationNode");
+                });
+
+            modelBuilder.Entity("Database.DatabaseModels.LinkingTables.OverheadToGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("FileOverheadId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileOverheadId");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("OverheadToGroupNode");
                 });
 
             modelBuilder.Entity("Database.DatabaseModels.LinkingTables.OverheadToMember", b =>
@@ -869,6 +899,17 @@ namespace Database.Migrations
                         .HasForeignKey("OrganizationId");
                 });
 
+            modelBuilder.Entity("Database.DatabaseModels.LinkingTables.OverheadToGroup", b =>
+                {
+                    b.HasOne("Database.DatabaseModels.FileOverhead", "FileOverhead")
+                        .WithMany("GroupNode")
+                        .HasForeignKey("FileOverheadId");
+
+                    b.HasOne("Database.DatabaseModels.Group", "Group")
+                        .WithMany("OverheadNode")
+                        .HasForeignKey("GroupId");
+                });
+
             modelBuilder.Entity("Database.DatabaseModels.LinkingTables.OverheadToMember", b =>
                 {
                     b.HasOne("Database.DatabaseModels.FileOverhead", "FileOverhead")
@@ -898,7 +939,7 @@ namespace Database.Migrations
                         .HasForeignKey("GroupId");
 
                     b.HasOne("Database.DatabaseModels.PhoneNumber", "PhoneNumber")
-                        .WithMany()
+                        .WithMany("GroupNode")
                         .HasForeignKey("PhoneNumberId");
                 });
 
@@ -909,7 +950,7 @@ namespace Database.Migrations
                         .HasForeignKey("MemberId");
 
                     b.HasOne("Database.DatabaseModels.PhoneNumber", "PhoneNumber")
-                        .WithMany()
+                        .WithMany("MemberNode")
                         .HasForeignKey("PhoneNumberId");
                 });
 
@@ -920,7 +961,7 @@ namespace Database.Migrations
                         .HasForeignKey("OrganizationId");
 
                     b.HasOne("Database.DatabaseModels.PhoneNumber", "PhoneNumber")
-                        .WithMany()
+                        .WithMany("OrganizationNode")
                         .HasForeignKey("PhoneNumberId");
                 });
 

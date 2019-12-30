@@ -49,7 +49,7 @@ namespace Database.Migrations
                     CreateDate = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    Icon = table.Column<byte>(nullable: false),
+                    Icon = table.Column<byte[]>(nullable: true),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -66,7 +66,8 @@ namespace Database.Migrations
                     CreateDate = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    Picture = table.Column<byte[]>(nullable: true)
+                    Picture = table.Column<byte[]>(nullable: true),
+                    Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,7 +101,7 @@ namespace Database.Migrations
                     Directory = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     LastAccess = table.Column<DateTime>(nullable: false),
-                    Icon = table.Column<byte>(nullable: false),
+                    Icon = table.Column<byte[]>(nullable: true),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -244,6 +245,34 @@ namespace Database.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_EmailGroupNode_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OverheadToGroupNode",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CreateDate = table.Column<DateTime>(nullable: false),
+                    FileOverheadId = table.Column<int>(nullable: true),
+                    GroupId = table.Column<int>(nullable: true),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OverheadToGroupNode", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OverheadToGroupNode_FileOverheads_FileOverheadId",
+                        column: x => x.FileOverheadId,
+                        principalTable: "FileOverheads",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_OverheadToGroupNode_Groups_GroupId",
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
@@ -447,7 +476,7 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GroupToOrganization",
+                name: "GroupToOrganizations",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -459,15 +488,15 @@ namespace Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GroupToOrganization", x => x.Id);
+                    table.PrimaryKey("PK_GroupToOrganizations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GroupToOrganization_Groups_GroupId",
+                        name: "FK_GroupToOrganizations_Groups_GroupId",
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_GroupToOrganization_Organizations_OrganizationId",
+                        name: "FK_GroupToOrganizations_Organizations_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
@@ -703,13 +732,13 @@ namespace Database.Migrations
                 column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupToOrganization_GroupId",
-                table: "GroupToOrganization",
+                name: "IX_GroupToOrganizations_GroupId",
+                table: "GroupToOrganizations",
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupToOrganization_OrganizationId",
-                table: "GroupToOrganization",
+                name: "IX_GroupToOrganizations_OrganizationId",
+                table: "GroupToOrganizations",
                 column: "OrganizationId");
 
             migrationBuilder.CreateIndex(
@@ -751,6 +780,16 @@ namespace Database.Migrations
                 name: "IX_OverheadToEmployeeNode_MemberId",
                 table: "OverheadToEmployeeNode",
                 column: "MemberId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OverheadToGroupNode_FileOverheadId",
+                table: "OverheadToGroupNode",
+                column: "FileOverheadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OverheadToGroupNode_GroupId",
+                table: "OverheadToGroupNode",
+                column: "GroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OverheadToOrganizationNode_FileOverheadId",
@@ -824,7 +863,7 @@ namespace Database.Migrations
                 name: "GroupToMember");
 
             migrationBuilder.DropTable(
-                name: "GroupToOrganization");
+                name: "GroupToOrganizations");
 
             migrationBuilder.DropTable(
                 name: "HomepageToEmployeeNode");
@@ -837,6 +876,9 @@ namespace Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "OverheadToEmployeeNode");
+
+            migrationBuilder.DropTable(
+                name: "OverheadToGroupNode");
 
             migrationBuilder.DropTable(
                 name: "OverheadToOrganizationNode");

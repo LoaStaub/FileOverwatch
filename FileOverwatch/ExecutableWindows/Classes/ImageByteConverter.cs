@@ -16,6 +16,10 @@ namespace Executable.Classes
         /// <returns>Byte Array as byte[]</returns>
         public static byte[] ImageToBytes(Image image)
         {
+            if(image == null)
+            {
+                return null;
+            }
             //Create MemoryStream and initialize
             var memoryStream = new MemoryStream();
             //Save Image into memoryStream

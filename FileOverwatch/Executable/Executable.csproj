@@ -54,6 +54,9 @@
     <EmbeddedResource Update="OverlayForm.resx">
       <DependentUpon>OverlayForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Update="OverlayForm2.resx">
+      <DependentUpon>OverlayForm2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

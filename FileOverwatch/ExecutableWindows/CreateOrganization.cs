@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -18,7 +19,7 @@ namespace ExecutableWindows
         }
 
         
-        private void BtnSave_Click(object sender, EventArgs e)
+        private async void BtnSave_Click(object sender, EventArgs e)
         {
             _organization.City = TbCity.Text;
             _organization.Country = TbCountry.Text;
@@ -37,11 +38,11 @@ namespace ExecutableWindows
                 db.Organizations.Add(_organization);
             }
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         private Organization _organization = new Organization();
-        private void CreateOrganization_Load(object sender, EventArgs e)
+        private async void CreateOrganization_Load(object sender, EventArgs e)
         {
             if (_organizationId == 0)
             {
@@ -50,7 +51,7 @@ namespace ExecutableWindows
             }
 
             var db = new DataBase();
-            _organization = db.Organizations.FirstOrDefault(orga => orga.Id == _organizationId);
+            _organization = await db.Organizations.FirstOrDefaultAsync(orga => orga.Id == _organizationId);
             FillElements();
         }
 

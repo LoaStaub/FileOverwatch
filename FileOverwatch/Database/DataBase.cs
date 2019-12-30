@@ -14,7 +14,7 @@ namespace Database
             {
                 _created = true;
                 //Database.EnsureDeleted();
-                Database.EnsureCreated();
+                //Database.EnsureCreated();
             }
         }
         
@@ -43,10 +43,11 @@ namespace Database
         public virtual DbSet<OverheadToOrganization> OverheadToOrganizationNode { get; set; }
         public virtual DbSet<WordToOverhead> WordToOverheadNode { get; set; }
         public virtual DbSet<OverheadToGroup> OverheadToGroupNode { get; set; }
+        public virtual DbSet<GroupToOrganization> GroupToOrganizationNode { get; set; }
 
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite(@"Data Source=C:\Users\a-p-i\source\repos\FileOverwatch\FileOverwatch\Database\FileOverwatch.db");
+            => options.UseSqlite(@"Data Source=C:\Users\a-p-i\source\repos\FileOverwatch\FileOverwatch\DatabaseWindows\FileOverwatch.db");
     }
 }

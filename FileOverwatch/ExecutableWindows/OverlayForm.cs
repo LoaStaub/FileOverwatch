@@ -1,8 +1,12 @@
 ﻿using DatabaseWindows;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using DatabaseWindows.DatabaseModels;
 using Microsoft.Win32;
 
 namespace ExecutableWindows
@@ -93,9 +97,12 @@ namespace ExecutableWindows
             organizationForm.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-
+            var db = new DataBase();
+            var organizations = await db.Organizations.Where(d => !d.Deleted).AsNoTracking().ToListAsync();
+            objectListView1.AddObjects(organizations);
+            TvOrganization.AddObjects(organizations);
         }
 
         private void BtnAddContextMenu_Click(object sender, EventArgs e)
@@ -109,6 +116,11 @@ namespace ExecutableWindows
         {
             var newFileLinking = new FileAdder();
             newFileLinking.ShowDialog();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void memberToolStripMenuItem_Click(object sender, EventArgs e)
