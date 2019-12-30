@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseWindows.DatabaseModels;
+using ExecutableWindows.Models;
 using Microsoft.Win32;
 
 namespace ExecutableWindows
@@ -99,16 +100,17 @@ namespace ExecutableWindows
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            TvOrganization.Items.Clear();
             var db = new DataBase();
             var organizations = await db.Organizations.Where(d => !d.Deleted).AsNoTracking().ToListAsync();
-            objectListView1.AddObjects(organizations);
+            TvOrganization.ShowGroups = false;
             TvOrganization.AddObjects(organizations);
         }
 
         private void BtnAddContextMenu_Click(object sender, EventArgs e)
         {
-            var key = Registry.ClassesRoot.OpenSubKey("Folder\\Shell", true);
-            var newKey = key.CreateSubKey("Add File to FileOverwatch");
+            //var key = Registry.ClassesRoot.OpenSubKey("Folder\\Shell", true);
+            //var newKey = key.CreateSubKey("Add File to FileOverwatch");
 
         }
 
@@ -119,6 +121,50 @@ namespace ExecutableWindows
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private async void TvOrganization_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (TvOrganization.SelectedObject != null)
+            {
+                var organization = (Organization) TvOrganization.SelectedObject;
+                var db = new DataBase();
+                var groups = await db.Groups.Where(d =>
+                    !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == organization.Id)).ToListAsync();
+
+                foreach (var group in groups)
+                {
+                    var members = await db.Members
+                        .Where(d => !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == group.Id))
+                        .ToListAsync();
+                    var membersWithGroupList = members.Select(member => new MemberWithGroup
+                        {
+                            Picture = member.Picture,
+                            Birthdate = member.Birthdate,
+                            Id = member.Id,
+                            Description = member.Description,
+                            City = member.City,
+                            LastName = member.LastName,
+                            ZipCode = member.ZipCode,
+                            Gender = member.Gender,
+                            FirstName = member.FirstName,
+                            State = member.State,
+                            Street = member.Street,
+                            HouseNumber = member.HouseNumber,
+                            Country = member.Country,
+                            CreateDate = member.CreateDate,
+                            GroupName = @group.Name,
+                            MemberDate = member.MemberDate
+                        })
+                        .ToList();
+                    TvOrganization.AddObjects(membersWithGroupList);
+                }
+            }
+        }
+
+        private void BtnRefreshGroupsMembers_Click(object sender, EventArgs e)
         {
 
         }

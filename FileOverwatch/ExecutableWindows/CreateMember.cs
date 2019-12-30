@@ -161,7 +161,7 @@ namespace ExecutableWindows
             var db = new DataBase();
             var groups = await db.Groups.Where(d =>
                 !d.Deleted &&
-                d.OrganizationNode.Any(f => f.Organization == (Organization) CbOrganizations.SelectedItem)).ToListAsync();
+                d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == ((Organization) CbOrganizations.SelectedItem).Id)).ToListAsync();
         }
     }
 }

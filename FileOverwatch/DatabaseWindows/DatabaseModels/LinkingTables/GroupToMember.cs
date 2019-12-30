@@ -12,6 +12,8 @@ namespace DatabaseWindows.DatabaseModels.LinkingTables
         public DateTime CreateDate { get; set; }
         public Group Group { get; set; }
         public Member Member { get; set; }
+        public int GroupId { get; set; }
+        public int MemberId { get; set; }
         public bool Deleted { get; set; }
     }
 }

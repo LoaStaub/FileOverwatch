@@ -35,7 +35,6 @@ namespace ExecutableWindows
             this.treeListView1 = new BrightIdeasSoftware.TreeListView();
             this.BtnRefresh = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.TvOrganization = new BrightIdeasSoftware.TreeListView();
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,24 +45,30 @@ namespace ExecutableWindows
             this.BtnLinkFile = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnAddContextMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
+            this.TvOrganization = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.TvGroupsMembers = new BrightIdeasSoftware.ObjectListView();
+            this.BtnRefreshGroupsMembers = new System.Windows.Forms.Button();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TvOrganization)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TvOrganization)).BeginInit();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TvGroupsMembers)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.treeListView1);
             this.panel1.Controls.Add(this.BtnRefresh);
-            this.panel1.Location = new System.Drawing.Point(273, 32);
+            this.panel1.Location = new System.Drawing.Point(486, 32);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(830, 604);
+            this.panel1.Size = new System.Drawing.Size(617, 604);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -96,24 +101,8 @@ namespace ExecutableWindows
             this.panel2.Controls.Add(this.button1);
             this.panel2.Location = new System.Drawing.Point(12, 32);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(255, 604);
+            this.panel2.Size = new System.Drawing.Size(256, 604);
             this.panel2.TabIndex = 2;
-            // 
-            // TvOrganization
-            // 
-            this.TvOrganization.AllColumns.Add(this.olvColumn1);
-            this.TvOrganization.CellEditUseWholeCell = false;
-            this.TvOrganization.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn1});
-            this.TvOrganization.HideSelection = false;
-            this.TvOrganization.Location = new System.Drawing.Point(3, 29);
-            this.TvOrganization.Name = "TvOrganization";
-            this.TvOrganization.ShowGroups = false;
-            this.TvOrganization.Size = new System.Drawing.Size(249, 572);
-            this.TvOrganization.TabIndex = 4;
-            this.TvOrganization.UseCompatibleStateImageBehavior = false;
-            this.TvOrganization.View = System.Windows.Forms.View.Details;
-            this.TvOrganization.VirtualMode = true;
             // 
             // button1
             // 
@@ -199,35 +188,86 @@ namespace ExecutableWindows
             this.BtnAddContextMenu.Text = "Add Context Menu";
             this.BtnAddContextMenu.Click += new System.EventHandler(this.BtnAddContextMenu_Click);
             // 
-            // olvColumn1
+            // TvOrganization
             // 
-            this.olvColumn1.AspectName = "Name";
-            this.olvColumn1.Text = "Name";
-            // 
-            // objectListView1
-            // 
-            this.objectListView1.AllColumns.Add(this.olvColumn2);
-            this.objectListView1.CellEditUseWholeCell = false;
-            this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.TvOrganization.AllColumns.Add(this.olvColumn2);
+            this.TvOrganization.CellEditUseWholeCell = false;
+            this.TvOrganization.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn2});
-            this.objectListView1.HideSelection = false;
-            this.objectListView1.Location = new System.Drawing.Point(1109, 32);
-            this.objectListView1.Name = "objectListView1";
-            this.objectListView1.Size = new System.Drawing.Size(254, 349);
-            this.objectListView1.TabIndex = 4;
-            this.objectListView1.UseCompatibleStateImageBehavior = false;
-            this.objectListView1.View = System.Windows.Forms.View.Details;
+            this.TvOrganization.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TvOrganization.HideSelection = false;
+            this.TvOrganization.Location = new System.Drawing.Point(4, 29);
+            this.TvOrganization.Name = "TvOrganization";
+            this.TvOrganization.Size = new System.Drawing.Size(248, 572);
+            this.TvOrganization.TabIndex = 4;
+            this.TvOrganization.UseCompatibleStateImageBehavior = false;
+            this.TvOrganization.View = System.Windows.Forms.View.Details;
+            this.TvOrganization.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.TvOrganization_ItemSelectionChanged);
             // 
             // olvColumn2
             // 
             this.olvColumn2.AspectName = "Name";
+            this.olvColumn2.Text = "Name";
+            this.olvColumn2.Width = 100;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.BtnRefreshGroupsMembers);
+            this.panel3.Controls.Add(this.TvGroupsMembers);
+            this.panel3.Location = new System.Drawing.Point(274, 32);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(206, 604);
+            this.panel3.TabIndex = 4;
+            // 
+            // TvGroupsMembers
+            // 
+            this.TvGroupsMembers.AllColumns.Add(this.olvColumn1);
+            this.TvGroupsMembers.AllColumns.Add(this.olvColumn3);
+            this.TvGroupsMembers.AllColumns.Add(this.olvColumn4);
+            this.TvGroupsMembers.CellEditUseWholeCell = false;
+            this.TvGroupsMembers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn3,
+            this.olvColumn4});
+            this.TvGroupsMembers.HideSelection = false;
+            this.TvGroupsMembers.Location = new System.Drawing.Point(3, 29);
+            this.TvGroupsMembers.Name = "TvGroupsMembers";
+            this.TvGroupsMembers.Size = new System.Drawing.Size(200, 572);
+            this.TvGroupsMembers.TabIndex = 0;
+            this.TvGroupsMembers.UseCompatibleStateImageBehavior = false;
+            this.TvGroupsMembers.View = System.Windows.Forms.View.Details;
+            // 
+            // BtnRefreshGroupsMembers
+            // 
+            this.BtnRefreshGroupsMembers.Location = new System.Drawing.Point(128, 3);
+            this.BtnRefreshGroupsMembers.Name = "BtnRefreshGroupsMembers";
+            this.BtnRefreshGroupsMembers.Size = new System.Drawing.Size(75, 23);
+            this.BtnRefreshGroupsMembers.TabIndex = 1;
+            this.BtnRefreshGroupsMembers.Text = "Refresh";
+            this.BtnRefreshGroupsMembers.UseVisualStyleBackColor = true;
+            this.BtnRefreshGroupsMembers.Click += new System.EventHandler(this.BtnRefreshGroupsMembers_Click);
+            // 
+            // olvColumn1
+            // 
+            this.olvColumn1.AspectName = "FirstName";
+            this.olvColumn1.Text = "Firstname";
+            // 
+            // olvColumn3
+            // 
+            this.olvColumn3.AspectName = "LastName";
+            this.olvColumn3.Text = "Lastname";
+            // 
+            // olvColumn4
+            // 
+            this.olvColumn4.AspectName = "GroupName";
+            this.olvColumn4.Text = "Group";
             // 
             // OverlayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1375, 648);
-            this.Controls.Add(this.objectListView1);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -237,10 +277,11 @@ namespace ExecutableWindows
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).EndInit();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.TvOrganization)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TvOrganization)).EndInit();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TvGroupsMembers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,10 +303,14 @@ namespace ExecutableWindows
         private System.Windows.Forms.ToolStripMenuItem BtnAddContextMenu;
         private System.Windows.Forms.ToolStripMenuItem BtnLinkFile;
         private BrightIdeasSoftware.TreeListView treeListView1;
-        private BrightIdeasSoftware.TreeListView TvOrganization;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.ObjectListView objectListView1;
+        private BrightIdeasSoftware.ObjectListView TvOrganization;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button BtnRefreshGroupsMembers;
+        private BrightIdeasSoftware.ObjectListView TvGroupsMembers;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn olvColumn4;
     }
 }
 

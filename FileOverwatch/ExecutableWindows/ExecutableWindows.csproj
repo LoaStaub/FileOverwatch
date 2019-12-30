@@ -94,6 +94,7 @@
     <Compile Include="FileAdder.Designer.cs">
       <DependentUpon>FileAdder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\MemberWithGroup.cs" />
     <Compile Include="OverlayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +158,7 @@
       <Name>ObjectListView2012</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
