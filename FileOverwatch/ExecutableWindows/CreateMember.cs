@@ -98,11 +98,11 @@ namespace ExecutableWindows
                 {
                     CreateDate = DateTime.Now,
                     Deleted = false,
-                    Group = (Group)CbGroups.SelectedItem,
+                    GroupId = ((Group) CbGroups.SelectedItem).Id,
                     Member = _member
                 };
-                _member.GroupNode.Add(node);
                 db.Members.Add(_member);
+                db.GroupToMemberNode.Add(node);
             }
 
             await db.SaveChangesAsync();
@@ -162,6 +162,12 @@ namespace ExecutableWindows
             var groups = await db.Groups.Where(d =>
                 !d.Deleted &&
                 d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == ((Organization) CbOrganizations.SelectedItem).Id)).ToListAsync();
+            if (groups.Count != 0)
+            {
+                CbGroups.DataSource = groups;
+                CbGroups.DisplayMember = "Name";
+                CbGroups.ValueMember = "Id";
+            }
         }
     }
 }

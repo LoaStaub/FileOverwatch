@@ -34,6 +34,10 @@ namespace Executable.Classes
         /// <returns>Image</returns>
         public static Image BytesToImage(byte[] bytes)
         {
+            if (bytes == null)
+            {
+                return null;
+            }
             // Saves bytes into MemoryStream
             var memoryStream = new MemoryStream(bytes);
             //Returns memoryStream as Image

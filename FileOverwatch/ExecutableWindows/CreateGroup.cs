@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,10 +12,9 @@ namespace ExecutableWindows
 {
     public partial class CreateGroup : Form
     {
-        private int _groupId;
-        public CreateGroup(ref int groupId)
+        public CreateGroup(ref Group group)
         {
-            _groupId = groupId;
+            _group = group;
             InitializeComponent();
         }
 
@@ -25,19 +25,23 @@ namespace ExecutableWindows
             _group.Name = TbName.Text;
             _group.CreateDate = DateTime.UtcNow;
             var db = new DataBase();
-            if (_groupId == 0)
+            if (_group.Id == 0)
             {
                 db.Groups.Add(_group);
+                var node = new GroupToOrganization
+                {
+                    CreateDate = DateTime.Now,
+                    Group = _group,
+                    Deleted = false,
+                    OrganizationId = ((Organization)CbOrganizations.SelectedItem).Id
+                };
+                db.GroupToOrganizationNode.Add(node);
+            }
+            else
+            {
+                db.Entry(_group).State = EntityState.Modified;
             }
 
-            var node = new GroupToOrganization
-            {
-                CreateDate = DateTime.Now,
-                Group = _group,
-                Deleted = false,
-                OrganizationId = ((Organization)CbOrganizations.SelectedItem).Id
-            };
-            db.GroupToOrganizationNode.Add(node);
             await db.SaveChangesAsync();
         }
 
@@ -110,13 +114,13 @@ namespace ExecutableWindows
             CbOrganizations.DataSource = organizations;
             CbOrganizations.DisplayMember = "Name";
             CbOrganizations.ValueMember = "Id";
-            if (_groupId == 0)
+            if (_group.Id == 0)
             {
                 BtnDelete.Visible = false;
                 return;
             }
 
-            _group = db.Groups.FirstOrDefault(group => group.Id == _groupId);
+            _group = db.Groups.FirstOrDefault(group => group.Id == _group.Id);
             FillElements();
         }
 

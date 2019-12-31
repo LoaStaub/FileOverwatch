@@ -70,6 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ImageByteConverter.cs" />
+    <Compile Include="CreateFilegroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateFilegroup.Designer.cs">
+      <DependentUpon>CreateFilegroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateGroup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     <Compile Include="SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CreateFilegroup.resx">
+      <DependentUpon>CreateFilegroup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateGroup.resx">
       <DependentUpon>CreateGroup.cs</DependentUpon>
     </EmbeddedResource>

@@ -25,10 +25,12 @@ namespace ExecutableWindows
         {
         }
 
-        private void CbOrganizations_SelectedIndexChanged(object sender, EventArgs e)
+        private async void CbOrganizations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var groupNode = ((Organization) CbOrganizations.SelectedItem).GroupNode;
-            var groups = groupNode.Where(node => !node.Deleted).Select(node => node.Group).ToList();
+            var db = new DataBase();
+            var groups = await db.Groups.Where(d =>
+                !d.Deleted &&
+                d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == ((Organization)CbOrganizations.SelectedItem).Id)).ToListAsync();
 
             CbGroups.DataSource = groups;
             CbGroups.DisplayMember = "Name";
@@ -37,18 +39,14 @@ namespace ExecutableWindows
 
         private async void CbGroups_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var memberNode = ((Group) CbGroups.SelectedItem).MemberNode;
-            var members = memberNode.Where(node => !node.Deleted).Select(node => node.Group).ToList();
+            var db = new DataBase();
+            var members = await db.Members
+                .Where(d => !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == ((Group) CbGroups.SelectedItem).Id))
+                .ToListAsync();
 
             CbGroups.DataSource = members;
             CbGroups.DisplayMember = "Name";
             CbGroups.ValueMember = "Id";
-
-            var db = new DataBase();
-            var fileOverhead = await db.FileOverheads.Where(d => !d.Deleted && d.GroupNode.Any(f => f.Group == (Group) CbGroups.SelectedItem)).ToListAsync();
-            CbFileOverhead.DataSource = fileOverhead;
-            CbFileOverhead.DisplayMember = "Name";
-            CbFileOverhead.ValueMember = "Id";
         }
 
         private async void CbMember_SelectedIndexChanged(object sender, EventArgs e)
@@ -80,6 +78,13 @@ namespace ExecutableWindows
         private void TbFilepath_TextChanged(object sender, EventArgs e)
         {
             _pathToFile = TbFilepath.Text;
+        }
+
+        private void BtnNewFilegroup_Click(object sender, EventArgs e)
+        {
+            var fileHead = new FileOverhead();
+            var createFileGroup = new CreateFilegroup(ref fileHead);
+            createFileGroup.ShowDialog();
         }
     }
 }

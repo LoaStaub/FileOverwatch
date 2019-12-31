@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DatabaseWindows.DatabaseModels;
 
 namespace ExecutableWindows.Models
 {
@@ -24,5 +25,6 @@ namespace ExecutableWindows.Models
         public DateTime MemberDate { get; set; }
         public byte[] Picture { get; set; }
         public string GroupName { get; set; }
+        public Group Group { get; set; }
     }
 }

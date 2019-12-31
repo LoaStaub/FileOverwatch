@@ -11,10 +11,9 @@ namespace ExecutableWindows
 {
     public partial class CreateOrganization : Form
     {
-        private readonly int _organizationId;
-        public CreateOrganization(ref int organizationId)
+        public CreateOrganization(ref Organization organization)
         {
-            _organizationId = organizationId;
+            _organization = organization;
             InitializeComponent();
         }
 
@@ -32,26 +31,27 @@ namespace ExecutableWindows
             _organization.PostalCode = TbZipCode.Text;
             _organization.Founded = DtpFounded.Value;
             var db = new DataBase();
-            if (_organizationId == 0)
+            if (_organization.Id == 0)
             {
                 _organization.CreateDate = DateTime.UtcNow;
                 db.Organizations.Add(_organization);
             }
-
+            else
+            {
+                db.Entry(_organization).State = EntityState.Modified;
+            }
             await db.SaveChangesAsync();
         }
 
         private Organization _organization = new Organization();
         private async void CreateOrganization_Load(object sender, EventArgs e)
         {
-            if (_organizationId == 0)
+            if (_organization.Id == 0)
             {
                 BtnDelete.Visible = false;
                 return;
             }
 
-            var db = new DataBase();
-            _organization = await db.Organizations.FirstOrDefaultAsync(orga => orga.Id == _organizationId);
             FillElements();
         }
 

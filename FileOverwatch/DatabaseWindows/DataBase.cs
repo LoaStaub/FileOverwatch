@@ -38,6 +38,7 @@ namespace DatabaseWindows
         public virtual DbSet<WordToOverhead> WordToOverheadNode { get; set; }
         public virtual DbSet<OverheadToGroup> OverheadToGroupNode { get; set; }
         public virtual DbSet<GroupToOrganization> GroupToOrganizationNode { get; set; }
+        public virtual DbSet<GroupToMember> GroupToMemberNode { get; set; }
 
 
         #endregion
