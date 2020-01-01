@@ -94,6 +94,12 @@
     <Compile Include="CreateOrganization.Designer.cs">
       <DependentUpon>CreateOrganization.cs</DependentUpon>
     </Compile>
+    <Compile Include="Emails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Emails.Designer.cs">
+      <DependentUpon>Emails.cs</DependentUpon>
+    </Compile>
     <Compile Include="FileAdder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CreateOrganization.resx">
       <DependentUpon>CreateOrganization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Emails.resx">
+      <DependentUpon>Emails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FileAdder.resx">
       <DependentUpon>FileAdder.cs</DependentUpon>

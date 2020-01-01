@@ -70,11 +70,12 @@ namespace ExecutableWindows
             PbImage.Image = ImageByteConverter.BytesToImage(_organization.Picture);
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
+        private async void BtnDelete_Click(object sender, EventArgs e)
         {
             var db = new DataBase();
             _organization.Deleted = true;
-            db.SaveChanges();
+            db.Entry(_organization).State = EntityState.Modified;
+            await db.SaveChangesAsync();
             Close();
         }
 

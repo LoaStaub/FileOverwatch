@@ -79,8 +79,8 @@ namespace ExecutableWindows
 
         private void AddGroup()
         {
-            var id = 0;
-            var groupForm = new CreateGroup(ref id);
+            var group = new Group();
+            var groupForm = new CreateGroup(ref group);
             groupForm.ShowDialog();
         }
 
@@ -274,6 +274,9 @@ namespace ExecutableWindows
         {
             var group = ((MemberWithGroup) TvGroupsMembers.SelectedObject).Group;
             var editGroup = new CreateGroup(ref group);
+            editGroup.ShowDialog();
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).GroupName = group.Name;
+            TvGroupsMembers.UpdateObject((MemberWithGroup)TvGroupsMembers.SelectedObject);
         }
     }
 }

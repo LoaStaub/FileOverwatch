@@ -108,11 +108,12 @@ namespace ExecutableWindows
             await db.SaveChangesAsync();
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
+        private async void BtnDelete_Click(object sender, EventArgs e)
         {
             var db = new DataBase();
-            db.Members.Remove(_member);
-            db.SaveChanges();
+            _member.Deleted = true;
+            db.Entry(_member).State = EntityState.Modified;
+            await db.SaveChangesAsync();
             Close();
         }
 

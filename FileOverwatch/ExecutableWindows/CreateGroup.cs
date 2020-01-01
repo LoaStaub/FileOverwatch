@@ -45,11 +45,12 @@ namespace ExecutableWindows
             await db.SaveChangesAsync();
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
+        private async void BtnDelete_Click(object sender, EventArgs e)
         {
             var db = new DataBase();
-            db.Groups.Remove(_group);
-            db.SaveChanges();
+            _group.Deleted = true;
+            db.Entry(_group).State = EntityState.Modified;
+            await db.SaveChangesAsync();
             Close();
         }
 

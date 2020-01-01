@@ -44,12 +44,6 @@ namespace FileAdding
             CbGroups.DataSource = members;
             CbGroups.DisplayMember = "Name";
             CbGroups.ValueMember = "Id";
-
-            var db = new DataBase();
-            var fileOverhead = await db.FileOverheads.Where(d => !d.Deleted && d.GroupNode.Any(f => f.Group == (Group) CbGroups.SelectedItem)).ToListAsync();
-            CbFileOverhead.DataSource = fileOverhead;
-            CbFileOverhead.DisplayMember = "Name";
-            CbFileOverhead.ValueMember = "Id";
         }
 
         private async void CbMember_SelectedIndexChanged(object sender, EventArgs e)
