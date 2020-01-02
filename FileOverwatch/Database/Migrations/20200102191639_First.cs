@@ -170,7 +170,8 @@ namespace Database.Migrations
                     CreateDate = table.Column<DateTime>(nullable: false),
                     CountryFlag = table.Column<string>(nullable: true),
                     PhoneNr = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -196,7 +197,7 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExcelToOverheadNode",
+                name: "ExcelToOverhead",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -208,15 +209,15 @@ namespace Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExcelToOverheadNode", x => x.Id);
+                    table.PrimaryKey("PK_ExcelToOverhead", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExcelToOverheadNode_ExcelFiles_ExcelFileId",
+                        name: "FK_ExcelToOverhead_ExcelFiles_ExcelFileId",
                         column: x => x.ExcelFileId,
                         principalTable: "ExcelFiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ExcelToOverheadNode_FileOverheads_FileOverheadId",
+                        name: "FK_ExcelToOverhead_FileOverheads_FileOverheadId",
                         column: x => x.FileOverheadId,
                         principalTable: "FileOverheads",
                         principalColumn: "Id",
@@ -224,35 +225,35 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmailGroupNode",
+                name: "EmailToGroup",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    EmailId = table.Column<int>(nullable: true),
-                    GroupId = table.Column<int>(nullable: true),
+                    EmailId = table.Column<int>(nullable: false),
+                    GroupId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmailGroupNode", x => x.Id);
+                    table.PrimaryKey("PK_EmailToGroup", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmailGroupNode_Emails_EmailId",
+                        name: "FK_EmailToGroup_Emails_EmailId",
                         column: x => x.EmailId,
                         principalTable: "Emails",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmailGroupNode_Groups_GroupId",
+                        name: "FK_EmailToGroup_Groups_GroupId",
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OverheadToGroupNode",
+                name: "OverheadToGroup",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -264,15 +265,15 @@ namespace Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OverheadToGroupNode", x => x.Id);
+                    table.PrimaryKey("PK_OverheadToGroup", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OverheadToGroupNode_FileOverheads_FileOverheadId",
+                        name: "FK_OverheadToGroup_FileOverheads_FileOverheadId",
                         column: x => x.FileOverheadId,
                         principalTable: "FileOverheads",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_OverheadToGroupNode_Groups_GroupId",
+                        name: "FK_OverheadToGroup_Groups_GroupId",
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
@@ -280,35 +281,35 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HomepageToGroupNode",
+                name: "HomepageToGroup",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    HomepageId = table.Column<int>(nullable: true),
-                    GroupId = table.Column<int>(nullable: true),
+                    HomepageId = table.Column<int>(nullable: false),
+                    GroupId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HomepageToGroupNode", x => x.Id);
+                    table.PrimaryKey("PK_HomepageToGroup", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_HomepageToGroupNode_Groups_GroupId",
+                        name: "FK_HomepageToGroup_Groups_GroupId",
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_HomepageToGroupNode_Homepages_HomepageId",
+                        name: "FK_HomepageToGroup_Homepages_HomepageId",
                         column: x => x.HomepageId,
                         principalTable: "Homepages",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "FileToOverheadNode",
+                name: "FileToOverhead",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -320,15 +321,15 @@ namespace Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FileToOverheadNode", x => x.Id);
+                    table.PrimaryKey("PK_FileToOverhead", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FileToOverheadNode_FileOverheads_FileOverheadId",
+                        name: "FK_FileToOverhead_FileOverheads_FileOverheadId",
                         column: x => x.FileOverheadId,
                         principalTable: "FileOverheads",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FileToOverheadNode_LinkedFiles_LinkedFileId",
+                        name: "FK_FileToOverhead_LinkedFiles_LinkedFileId",
                         column: x => x.LinkedFileId,
                         principalTable: "LinkedFiles",
                         principalColumn: "Id",
@@ -336,31 +337,31 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmailToEmployeeNode",
+                name: "EmailToMember",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    EmailId = table.Column<int>(nullable: true),
-                    MemberId = table.Column<int>(nullable: true),
+                    EmailId = table.Column<int>(nullable: false),
+                    MemberId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmailToEmployeeNode", x => x.Id);
+                    table.PrimaryKey("PK_EmailToMember", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmailToEmployeeNode_Emails_EmailId",
+                        name: "FK_EmailToMember_Emails_EmailId",
                         column: x => x.EmailId,
                         principalTable: "Emails",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmailToEmployeeNode_Members_MemberId",
+                        name: "FK_EmailToMember_Members_MemberId",
                         column: x => x.MemberId,
                         principalTable: "Members",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -370,8 +371,8 @@ namespace Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    GroupId = table.Column<int>(nullable: true),
-                    MemberId = table.Column<int>(nullable: true),
+                    GroupId = table.Column<int>(nullable: false),
+                    MemberId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -382,45 +383,45 @@ namespace Database.Migrations
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_GroupToMember_Members_MemberId",
                         column: x => x.MemberId,
                         principalTable: "Members",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "HomepageToEmployeeNode",
+                name: "HomepageToMember",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    HomepageId = table.Column<int>(nullable: true),
-                    MemberId = table.Column<int>(nullable: true),
+                    HomepageId = table.Column<int>(nullable: false),
+                    MemberId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HomepageToEmployeeNode", x => x.Id);
+                    table.PrimaryKey("PK_HomepageToMember", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_HomepageToEmployeeNode_Homepages_HomepageId",
+                        name: "FK_HomepageToMember_Homepages_HomepageId",
                         column: x => x.HomepageId,
                         principalTable: "Homepages",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_HomepageToEmployeeNode_Members_MemberId",
+                        name: "FK_HomepageToMember_Members_MemberId",
                         column: x => x.MemberId,
                         principalTable: "Members",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OverheadToEmployeeNode",
+                name: "OverheadToMember",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -432,15 +433,15 @@ namespace Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OverheadToEmployeeNode", x => x.Id);
+                    table.PrimaryKey("PK_OverheadToMember", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OverheadToEmployeeNode_FileOverheads_FileOverheadId",
+                        name: "FK_OverheadToMember_FileOverheads_FileOverheadId",
                         column: x => x.FileOverheadId,
                         principalTable: "FileOverheads",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_OverheadToEmployeeNode_Members_MemberId",
+                        name: "FK_OverheadToMember_Members_MemberId",
                         column: x => x.MemberId,
                         principalTable: "Members",
                         principalColumn: "Id",
@@ -448,7 +449,7 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmailToOrganizationNode",
+                name: "EmailToOrganization",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -460,15 +461,15 @@ namespace Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmailToOrganizationNode", x => x.Id);
+                    table.PrimaryKey("PK_EmailToOrganization", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmailToOrganizationNode_Emails_EmailId",
+                        name: "FK_EmailToOrganization_Emails_EmailId",
                         column: x => x.EmailId,
                         principalTable: "Emails",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_EmailToOrganizationNode_Organizations_OrganizationId",
+                        name: "FK_EmailToOrganization_Organizations_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
@@ -476,35 +477,35 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GroupToOrganizations",
+                name: "GroupToOrganization",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    GroupId = table.Column<int>(nullable: true),
-                    OrganizationId = table.Column<int>(nullable: true),
+                    GroupId = table.Column<int>(nullable: false),
+                    OrganizationId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GroupToOrganizations", x => x.Id);
+                    table.PrimaryKey("PK_GroupToOrganization", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GroupToOrganizations_Groups_GroupId",
+                        name: "FK_GroupToOrganization_Groups_GroupId",
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GroupToOrganizations_Organizations_OrganizationId",
+                        name: "FK_GroupToOrganization_Organizations_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "HomepageToOrganizationNode",
+                name: "HomepageToOrganization",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -516,15 +517,15 @@ namespace Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HomepageToOrganizationNode", x => x.Id);
+                    table.PrimaryKey("PK_HomepageToOrganization", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_HomepageToOrganizationNode_Homepages_HomepageId",
+                        name: "FK_HomepageToOrganization_Homepages_HomepageId",
                         column: x => x.HomepageId,
                         principalTable: "Homepages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_HomepageToOrganizationNode_Organizations_OrganizationId",
+                        name: "FK_HomepageToOrganization_Organizations_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
@@ -532,7 +533,7 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OverheadToOrganizationNode",
+                name: "OverheadToOrganization",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -544,15 +545,15 @@ namespace Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OverheadToOrganizationNode", x => x.Id);
+                    table.PrimaryKey("PK_OverheadToOrganization", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OverheadToOrganizationNode_FileOverheads_FileOverheadId",
+                        name: "FK_OverheadToOrganization_FileOverheads_FileOverheadId",
                         column: x => x.FileOverheadId,
                         principalTable: "FileOverheads",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_OverheadToOrganizationNode_Organizations_OrganizationId",
+                        name: "FK_OverheadToOrganization_Organizations_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
@@ -566,8 +567,8 @@ namespace Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    PhoneNumberId = table.Column<int>(nullable: true),
-                    GroupId = table.Column<int>(nullable: true),
+                    GroupId = table.Column<int>(nullable: false),
+                    PhoneNumberId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -578,13 +579,13 @@ namespace Database.Migrations
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PhoneToGroup_PhoneNumbers_PhoneNumberId",
                         column: x => x.PhoneNumberId,
                         principalTable: "PhoneNumbers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -594,8 +595,8 @@ namespace Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    PhoneNumberId = table.Column<int>(nullable: true),
-                    MemberId = table.Column<int>(nullable: true),
+                    PhoneNumberId = table.Column<int>(nullable: false),
+                    MemberId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -606,13 +607,13 @@ namespace Database.Migrations
                         column: x => x.MemberId,
                         principalTable: "Members",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PhoneToMember_PhoneNumbers_PhoneNumberId",
                         column: x => x.PhoneNumberId,
                         principalTable: "PhoneNumbers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -644,7 +645,7 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WordToOverheadNode",
+                name: "WordToOverhead",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -656,15 +657,15 @@ namespace Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WordToOverheadNode", x => x.Id);
+                    table.PrimaryKey("PK_WordToOverhead", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WordToOverheadNode_FileOverheads_FileOverheadId",
+                        name: "FK_WordToOverhead_FileOverheads_FileOverheadId",
                         column: x => x.FileOverheadId,
                         principalTable: "FileOverheads",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_WordToOverheadNode_WordFiles_WordFileId",
+                        name: "FK_WordToOverhead_WordFiles_WordFileId",
                         column: x => x.WordFileId,
                         principalTable: "WordFiles",
                         principalColumn: "Id",
@@ -672,53 +673,53 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmailGroupNode_EmailId",
-                table: "EmailGroupNode",
+                name: "IX_EmailToGroup_EmailId",
+                table: "EmailToGroup",
                 column: "EmailId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmailGroupNode_GroupId",
-                table: "EmailGroupNode",
+                name: "IX_EmailToGroup_GroupId",
+                table: "EmailToGroup",
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmailToEmployeeNode_EmailId",
-                table: "EmailToEmployeeNode",
+                name: "IX_EmailToMember_EmailId",
+                table: "EmailToMember",
                 column: "EmailId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmailToEmployeeNode_MemberId",
-                table: "EmailToEmployeeNode",
+                name: "IX_EmailToMember_MemberId",
+                table: "EmailToMember",
                 column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmailToOrganizationNode_EmailId",
-                table: "EmailToOrganizationNode",
+                name: "IX_EmailToOrganization_EmailId",
+                table: "EmailToOrganization",
                 column: "EmailId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmailToOrganizationNode_OrganizationId",
-                table: "EmailToOrganizationNode",
+                name: "IX_EmailToOrganization_OrganizationId",
+                table: "EmailToOrganization",
                 column: "OrganizationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExcelToOverheadNode_ExcelFileId",
-                table: "ExcelToOverheadNode",
+                name: "IX_ExcelToOverhead_ExcelFileId",
+                table: "ExcelToOverhead",
                 column: "ExcelFileId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExcelToOverheadNode_FileOverheadId",
-                table: "ExcelToOverheadNode",
+                name: "IX_ExcelToOverhead_FileOverheadId",
+                table: "ExcelToOverhead",
                 column: "FileOverheadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FileToOverheadNode_FileOverheadId",
-                table: "FileToOverheadNode",
+                name: "IX_FileToOverhead_FileOverheadId",
+                table: "FileToOverhead",
                 column: "FileOverheadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FileToOverheadNode_LinkedFileId",
-                table: "FileToOverheadNode",
+                name: "IX_FileToOverhead_LinkedFileId",
+                table: "FileToOverhead",
                 column: "LinkedFileId");
 
             migrationBuilder.CreateIndex(
@@ -732,73 +733,73 @@ namespace Database.Migrations
                 column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupToOrganizations_GroupId",
-                table: "GroupToOrganizations",
+                name: "IX_GroupToOrganization_GroupId",
+                table: "GroupToOrganization",
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupToOrganizations_OrganizationId",
-                table: "GroupToOrganizations",
+                name: "IX_GroupToOrganization_OrganizationId",
+                table: "GroupToOrganization",
                 column: "OrganizationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HomepageToEmployeeNode_HomepageId",
-                table: "HomepageToEmployeeNode",
-                column: "HomepageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HomepageToEmployeeNode_MemberId",
-                table: "HomepageToEmployeeNode",
-                column: "MemberId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HomepageToGroupNode_GroupId",
-                table: "HomepageToGroupNode",
+                name: "IX_HomepageToGroup_GroupId",
+                table: "HomepageToGroup",
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HomepageToGroupNode_HomepageId",
-                table: "HomepageToGroupNode",
+                name: "IX_HomepageToGroup_HomepageId",
+                table: "HomepageToGroup",
                 column: "HomepageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HomepageToOrganizationNode_HomepageId",
-                table: "HomepageToOrganizationNode",
+                name: "IX_HomepageToMember_HomepageId",
+                table: "HomepageToMember",
                 column: "HomepageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HomepageToOrganizationNode_OrganizationId",
-                table: "HomepageToOrganizationNode",
+                name: "IX_HomepageToMember_MemberId",
+                table: "HomepageToMember",
+                column: "MemberId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HomepageToOrganization_HomepageId",
+                table: "HomepageToOrganization",
+                column: "HomepageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HomepageToOrganization_OrganizationId",
+                table: "HomepageToOrganization",
                 column: "OrganizationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OverheadToEmployeeNode_FileOverheadId",
-                table: "OverheadToEmployeeNode",
+                name: "IX_OverheadToGroup_FileOverheadId",
+                table: "OverheadToGroup",
                 column: "FileOverheadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OverheadToEmployeeNode_MemberId",
-                table: "OverheadToEmployeeNode",
-                column: "MemberId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OverheadToGroupNode_FileOverheadId",
-                table: "OverheadToGroupNode",
-                column: "FileOverheadId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OverheadToGroupNode_GroupId",
-                table: "OverheadToGroupNode",
+                name: "IX_OverheadToGroup_GroupId",
+                table: "OverheadToGroup",
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OverheadToOrganizationNode_FileOverheadId",
-                table: "OverheadToOrganizationNode",
+                name: "IX_OverheadToMember_FileOverheadId",
+                table: "OverheadToMember",
                 column: "FileOverheadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OverheadToOrganizationNode_OrganizationId",
-                table: "OverheadToOrganizationNode",
+                name: "IX_OverheadToMember_MemberId",
+                table: "OverheadToMember",
+                column: "MemberId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OverheadToOrganization_FileOverheadId",
+                table: "OverheadToOrganization",
+                column: "FileOverheadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OverheadToOrganization_OrganizationId",
+                table: "OverheadToOrganization",
                 column: "OrganizationId");
 
             migrationBuilder.CreateIndex(
@@ -832,56 +833,56 @@ namespace Database.Migrations
                 column: "PhoneNumberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WordToOverheadNode_FileOverheadId",
-                table: "WordToOverheadNode",
+                name: "IX_WordToOverhead_FileOverheadId",
+                table: "WordToOverhead",
                 column: "FileOverheadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WordToOverheadNode_WordFileId",
-                table: "WordToOverheadNode",
+                name: "IX_WordToOverhead_WordFileId",
+                table: "WordToOverhead",
                 column: "WordFileId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EmailGroupNode");
+                name: "EmailToGroup");
 
             migrationBuilder.DropTable(
-                name: "EmailToEmployeeNode");
+                name: "EmailToMember");
 
             migrationBuilder.DropTable(
-                name: "EmailToOrganizationNode");
+                name: "EmailToOrganization");
 
             migrationBuilder.DropTable(
-                name: "ExcelToOverheadNode");
+                name: "ExcelToOverhead");
 
             migrationBuilder.DropTable(
-                name: "FileToOverheadNode");
+                name: "FileToOverhead");
 
             migrationBuilder.DropTable(
                 name: "GroupToMember");
 
             migrationBuilder.DropTable(
-                name: "GroupToOrganizations");
+                name: "GroupToOrganization");
 
             migrationBuilder.DropTable(
-                name: "HomepageToEmployeeNode");
+                name: "HomepageToGroup");
 
             migrationBuilder.DropTable(
-                name: "HomepageToGroupNode");
+                name: "HomepageToMember");
 
             migrationBuilder.DropTable(
-                name: "HomepageToOrganizationNode");
+                name: "HomepageToOrganization");
 
             migrationBuilder.DropTable(
-                name: "OverheadToEmployeeNode");
+                name: "OverheadToGroup");
 
             migrationBuilder.DropTable(
-                name: "OverheadToGroupNode");
+                name: "OverheadToMember");
 
             migrationBuilder.DropTable(
-                name: "OverheadToOrganizationNode");
+                name: "OverheadToOrganization");
 
             migrationBuilder.DropTable(
                 name: "PhoneToGroup");
@@ -893,7 +894,7 @@ namespace Database.Migrations
                 name: "PhoneToOrganization");
 
             migrationBuilder.DropTable(
-                name: "WordToOverheadNode");
+                name: "WordToOverhead");
 
             migrationBuilder.DropTable(
                 name: "Emails");

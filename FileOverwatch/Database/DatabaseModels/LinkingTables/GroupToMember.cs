@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.DatabaseModels.LinkingTables
 {
+    [Table("GroupToMember")]
     public class GroupToMember
     {
         [Key]
@@ -12,6 +12,8 @@ namespace Database.DatabaseModels.LinkingTables
         public DateTime CreateDate { get; set; }
         public Group Group { get; set; }
         public Member Member { get; set; }
+        public int GroupId { get; set; }
+        public int MemberId { get; set; }
         public bool Deleted { get; set; }
     }
 }

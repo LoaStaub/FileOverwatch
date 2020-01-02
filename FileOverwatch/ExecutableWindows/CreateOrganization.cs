@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
 using Executable.Classes;
+using ExecutableWindows.ListForms;
 
 namespace ExecutableWindows
 {
@@ -17,7 +19,6 @@ namespace ExecutableWindows
             InitializeComponent();
         }
 
-        
         private async void BtnSave_Click(object sender, EventArgs e)
         {
             _organization.City = TbCity.Text;
@@ -39,6 +40,21 @@ namespace ExecutableWindows
             else
             {
                 db.Entry(_organization).State = EntityState.Modified;
+            }
+
+            if (_gotEmails)
+            {
+                db.Emails.AddRange(_emails);
+            }
+
+            if (_gotHomepage)
+            {
+                db.Homepages.AddRange(_homepages);
+            }
+
+            if (_gotPhone)
+            {
+                db.PhoneNumbers.AddRange(_phoneNumbers);
             }
             await db.SaveChangesAsync();
         }
@@ -113,9 +129,22 @@ namespace ExecutableWindows
             PbImage.Image = null;
         }
 
-        private void BtnEmails_Click(object sender, EventArgs e)
+        private static bool _gotEmails;
+        private static List<Email> _emails;
+        private async void BtnEmails_Click(object sender, EventArgs e)
         {
+            var db = new DataBase();
+            var emails = new List<Email>();
+            if (_organization.Id != 0)
+            {
+                emails = await db.Emails.Where(d =>
+                    !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == _organization.Id)).ToListAsync();
+            }
 
+            var emailForm = new Emails(ref emails);
+            emailForm.ShowDialog();
+            _gotEmails = true;
+            _emails = emails;
         }
 
         private void BtnGroups_Click(object sender, EventArgs e)
@@ -123,14 +152,45 @@ namespace ExecutableWindows
 
         }
 
-        private void BtnHomepages_Click(object sender, EventArgs e)
+        private static bool _gotHomepage;
+        private static List<Homepage> _homepages;
+        private async void BtnHomepages_Click(object sender, EventArgs e)
         {
+            var db = new DataBase();
+            var homepages = new List<Homepage>();
+            if (_organization.Id != 0)
+            {
+                homepages = await db.Homepages.Where(d =>
+                    !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == _organization.Id)).ToListAsync();
+            }
 
+            var homepageForm = new Homepages(ref homepages);
+            homepageForm.ShowDialog();
+            _gotHomepage = true;
+            _homepages = homepages;
         }
 
         private void BtnMembers_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private static bool _gotPhone;
+        private static List<PhoneNumber> _phoneNumbers;
+        private async void BtnPhones_Click(object sender, EventArgs e)
+        {
+            var db = new DataBase();
+            var phoneNumbers = new List<PhoneNumber>();
+            if (_organization.Id != 0)
+            {
+                phoneNumbers = await db.PhoneNumbers.Where(d =>
+                    !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == _organization.Id)).ToListAsync();
+            }
+
+            var phoneForm = new Phones(ref phoneNumbers);
+            phoneForm.ShowDialog();
+            _gotPhone = true;
+            _phoneNumbers = phoneNumbers;
         }
     }
 }

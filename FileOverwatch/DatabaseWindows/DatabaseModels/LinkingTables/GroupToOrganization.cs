@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DatabaseWindows.DatabaseModels.LinkingTables
 {
-    [Table("GroupToOrganizations")]
+    [Table("GroupToOrganization")]
     public class GroupToOrganization
     {
         [Key]

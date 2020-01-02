@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Database.DatabaseModels.LinkingTables;
 
 namespace Database.DatabaseModels
@@ -18,6 +17,5 @@ namespace Database.DatabaseModels
         public ICollection<WordToOverhead> WordNode { get; set; }
         public ICollection<OverheadToMember> EmployeeNode { get; set; }
         public ICollection<OverheadToOrganization> OrganizationNode { get; set; }
-        public ICollection<OverheadToGroup> GroupNode { get; set; }
     }
 }

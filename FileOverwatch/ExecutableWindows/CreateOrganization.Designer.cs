@@ -61,6 +61,7 @@ namespace ExecutableWindows
             this.BtnHomepages = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.BtnMembers = new System.Windows.Forms.Button();
+            this.BtnPhones = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PbImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -223,9 +224,9 @@ namespace ExecutableWindows
             this.PbImage.Location = new System.Drawing.Point(350, 6);
             this.PbImage.Name = "PbImage";
             this.PbImage.Size = new System.Drawing.Size(188, 124);
+            this.PbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PbImage.TabIndex = 23;
             this.PbImage.TabStop = false;
-            this.PbImage.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
             // BtnUploadPicture
             // 
@@ -307,7 +308,7 @@ namespace ExecutableWindows
             // 
             // BtnHomepages
             // 
-            this.BtnHomepages.Location = new System.Drawing.Point(185, 147);
+            this.BtnHomepages.Location = new System.Drawing.Point(184, 147);
             this.BtnHomepages.Name = "BtnHomepages";
             this.BtnHomepages.Size = new System.Drawing.Size(74, 23);
             this.BtnHomepages.TabIndex = 32;
@@ -318,7 +319,7 @@ namespace ExecutableWindows
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 152);
+            this.label7.Location = new System.Drawing.Point(12, 132);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 13);
             this.label7.TabIndex = 33;
@@ -326,7 +327,7 @@ namespace ExecutableWindows
             // 
             // BtnMembers
             // 
-            this.BtnMembers.Location = new System.Drawing.Point(269, 147);
+            this.BtnMembers.Location = new System.Drawing.Point(264, 147);
             this.BtnMembers.Name = "BtnMembers";
             this.BtnMembers.Size = new System.Drawing.Size(59, 23);
             this.BtnMembers.TabIndex = 34;
@@ -334,11 +335,22 @@ namespace ExecutableWindows
             this.BtnMembers.UseVisualStyleBackColor = true;
             this.BtnMembers.Click += new System.EventHandler(this.BtnMembers_Click);
             // 
+            // BtnPhones
+            // 
+            this.BtnPhones.Location = new System.Drawing.Point(15, 147);
+            this.BtnPhones.Name = "BtnPhones";
+            this.BtnPhones.Size = new System.Drawing.Size(54, 23);
+            this.BtnPhones.TabIndex = 35;
+            this.BtnPhones.Text = "Phone";
+            this.BtnPhones.UseVisualStyleBackColor = true;
+            this.BtnPhones.Click += new System.EventHandler(this.BtnPhones_Click);
+            // 
             // CreateOrganization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(550, 368);
+            this.Controls.Add(this.BtnPhones);
             this.Controls.Add(this.BtnMembers);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.BtnHomepages);
@@ -412,5 +424,6 @@ namespace ExecutableWindows
         private System.Windows.Forms.Button BtnHomepages;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button BtnMembers;
+        private Button BtnPhones;
     }
 }

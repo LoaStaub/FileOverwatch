@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.DatabaseModels.LinkingTables
 {
+    [Table("EmailToMember")]
     public class EmailToMember
     {
         [Key]
@@ -12,6 +12,10 @@ namespace Database.DatabaseModels.LinkingTables
         public DateTime CreateDate { get; set; }
         public Email Email { get; set; }
         public Member Member { get; set; }
+        [ForeignKey("Email")]
+        public int EmailId { get; set; }
+        [ForeignKey("Member")]
+        public int MemberId { get; set; }
         public bool Deleted { get; set; }
     }
 }

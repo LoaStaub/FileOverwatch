@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseWindows.DatabaseModels;
 using Executable.Classes;
+using ExecutableWindows.ListForms;
 using ExecutableWindows.Models;
 using Microsoft.Win32;
 
@@ -16,6 +17,7 @@ namespace ExecutableWindows
 {
     public partial class OverlayForm : Form
     {
+        private static bool _isItOrganization;
         public OverlayForm()
         {
             InitializeComponent();
@@ -119,6 +121,7 @@ namespace ExecutableWindows
 
         private async void TvOrganization_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
+            _isItOrganization = true;
             ClearAllLabels();
             TvGroupsMembers.Items.Clear();
             if (TvOrganization.SelectedObject != null)
@@ -151,18 +154,14 @@ namespace ExecutableWindows
                             CreateDate = member.CreateDate,
                             GroupName = @group.Name,
                             Group = group,
-                            MemberDate = member.MemberDate
+                            MemberDate = member.MemberDate,
+                            Member = member
                         })
                         .ToList();
                     TvGroupsMembers.AddObjects(membersWithGroupList);
                     OrganizationLabels(ref organization);
                 }
             }
-        }
-
-        private void BtnRefreshGroupsMembers_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void BtnFileLinking_Click(object sender, EventArgs e)
@@ -195,6 +194,8 @@ namespace ExecutableWindows
 
         private void TvGroupsMembers_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _isItOrganization = false;
+
             ClearAllLabels();
             var memberWithGroup = (MemberWithGroup) TvGroupsMembers.SelectedObject;
 
@@ -277,6 +278,66 @@ namespace ExecutableWindows
             editGroup.ShowDialog();
             ((MemberWithGroup) TvGroupsMembers.SelectedObject).GroupName = group.Name;
             TvGroupsMembers.UpdateObject((MemberWithGroup)TvGroupsMembers.SelectedObject);
+        }
+
+        private async void BtnPhones_Click(object sender, EventArgs e)
+        {
+            if (_isItOrganization)
+            {
+                var orga = (Organization) TvOrganization.SelectedObject;
+                var db = new DataBase();
+                var phoneList = await db.PhoneNumbers.Where(d =>
+                    !d.Deleted && d.OrganizationNode.Any(f => f.Organization.Id == orga.Id)).ToListAsync();
+                var phone = new Phones(ref phoneList);
+                phone.Show();
+            }
+            else
+            {
+                var member = ((MemberWithGroup) TvGroupsMembers.SelectedObject).Member;
+                var group = ((MemberWithGroup)TvGroupsMembers.SelectedObject).Group;
+                var doYouMean = new DoYouMean(ref group, ref member, 1);
+                doYouMean.Show();
+            }
+        }
+
+        private async void BtnEmail_Click(object sender, EventArgs e)
+        {
+            if (_isItOrganization)
+            {
+                var orga = (Organization)TvOrganization.SelectedObject;
+                var db = new DataBase();
+                var emailList = await db.Emails.Where(d =>
+                    !d.Deleted && d.OrganizationNode.Any(f => f.Organization.Id == orga.Id)).ToListAsync();
+                var emailForm = new Emails(ref emailList);
+                emailForm.Show();
+            }
+            else
+            {
+                var member = ((MemberWithGroup)TvGroupsMembers.SelectedObject).Member;
+                var group = ((MemberWithGroup)TvGroupsMembers.SelectedObject).Group;
+                var doYouMean = new DoYouMean(ref group, ref member, 2);
+                doYouMean.Show();
+            }
+        }
+
+        private async void BtnHomepage_Click(object sender, EventArgs e)
+        {
+            if (_isItOrganization)
+            {
+                var orga = (Organization)TvOrganization.SelectedObject;
+                var db = new DataBase();
+                var homepageList = await db.Homepages.Where(d =>
+                    !d.Deleted && d.OrganizationNode.Any(f => f.Organization.Id == orga.Id)).ToListAsync();
+                var homepageForm = new Homepages(ref homepageList);
+                homepageForm.Show();
+            }
+            else
+            {
+                var member = ((MemberWithGroup)TvGroupsMembers.SelectedObject).Member;
+                var group = ((MemberWithGroup)TvGroupsMembers.SelectedObject).Group;
+                var doYouMean = new DoYouMean(ref group, ref member, 3);
+                doYouMean.Show();
+            }
         }
     }
 }

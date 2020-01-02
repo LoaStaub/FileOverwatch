@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.DatabaseModels.LinkingTables
 {
+    [Table("OverheadToOrganization")]
     public class OverheadToOrganization
     {
         [Key]

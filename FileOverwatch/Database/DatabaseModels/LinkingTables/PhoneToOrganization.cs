@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.DatabaseModels.LinkingTables
 {
+    [Table("PhoneToOrganization")]
     public class PhoneToOrganization
     {
         public int Id { get; set; }

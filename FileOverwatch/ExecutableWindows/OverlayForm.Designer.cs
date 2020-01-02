@@ -63,7 +63,6 @@ namespace ExecutableWindows
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnAddContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.BtnRefreshGroupsMembers = new System.Windows.Forms.Button();
             this.TvGroupsMembers = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -94,6 +93,9 @@ namespace ExecutableWindows
             this.LblName = new System.Windows.Forms.Label();
             this.LblType = new System.Windows.Forms.Label();
             this.PbPicture = new System.Windows.Forms.PictureBox();
+            this.BtnPhones = new System.Windows.Forms.Button();
+            this.BtnEmail = new System.Windows.Forms.Button();
+            this.BtnHomepage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -370,22 +372,11 @@ namespace ExecutableWindows
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.BtnRefreshGroupsMembers);
             this.panel3.Controls.Add(this.TvGroupsMembers);
             this.panel3.Location = new System.Drawing.Point(274, 32);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(206, 604);
             this.panel3.TabIndex = 4;
-            // 
-            // BtnRefreshGroupsMembers
-            // 
-            this.BtnRefreshGroupsMembers.Location = new System.Drawing.Point(128, 3);
-            this.BtnRefreshGroupsMembers.Name = "BtnRefreshGroupsMembers";
-            this.BtnRefreshGroupsMembers.Size = new System.Drawing.Size(75, 23);
-            this.BtnRefreshGroupsMembers.TabIndex = 1;
-            this.BtnRefreshGroupsMembers.Text = "Refresh";
-            this.BtnRefreshGroupsMembers.UseVisualStyleBackColor = true;
-            this.BtnRefreshGroupsMembers.Click += new System.EventHandler(this.BtnRefreshGroupsMembers_Click);
             // 
             // TvGroupsMembers
             // 
@@ -429,6 +420,9 @@ namespace ExecutableWindows
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.BtnHomepage);
+            this.panel4.Controls.Add(this.BtnEmail);
+            this.panel4.Controls.Add(this.BtnPhones);
             this.panel4.Controls.Add(this.LblMemberOf);
             this.panel4.Controls.Add(this.LblCreateDate);
             this.panel4.Controls.Add(this.LblGender);
@@ -682,6 +676,36 @@ namespace ExecutableWindows
             this.PbPicture.TabIndex = 0;
             this.PbPicture.TabStop = false;
             // 
+            // BtnPhones
+            // 
+            this.BtnPhones.Location = new System.Drawing.Point(6, 385);
+            this.BtnPhones.Name = "BtnPhones";
+            this.BtnPhones.Size = new System.Drawing.Size(76, 23);
+            this.BtnPhones.TabIndex = 27;
+            this.BtnPhones.Text = "Call";
+            this.BtnPhones.UseVisualStyleBackColor = true;
+            this.BtnPhones.Click += new System.EventHandler(this.BtnPhones_Click);
+            // 
+            // BtnEmail
+            // 
+            this.BtnEmail.Location = new System.Drawing.Point(88, 385);
+            this.BtnEmail.Name = "BtnEmail";
+            this.BtnEmail.Size = new System.Drawing.Size(75, 23);
+            this.BtnEmail.TabIndex = 28;
+            this.BtnEmail.Text = "Email";
+            this.BtnEmail.UseVisualStyleBackColor = true;
+            this.BtnEmail.Click += new System.EventHandler(this.BtnEmail_Click);
+            // 
+            // BtnHomepage
+            // 
+            this.BtnHomepage.Location = new System.Drawing.Point(172, 385);
+            this.BtnHomepage.Name = "BtnHomepage";
+            this.BtnHomepage.Size = new System.Drawing.Size(79, 23);
+            this.BtnHomepage.TabIndex = 29;
+            this.BtnHomepage.Text = "Homepage";
+            this.BtnHomepage.UseVisualStyleBackColor = true;
+            this.BtnHomepage.Click += new System.EventHandler(this.BtnHomepage_Click);
+            // 
             // OverlayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -730,7 +754,6 @@ namespace ExecutableWindows
         private BrightIdeasSoftware.ObjectListView TvOrganization;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button BtnRefreshGroupsMembers;
         private BrightIdeasSoftware.ObjectListView TvGroupsMembers;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
@@ -776,6 +799,9 @@ namespace ExecutableWindows
         private System.Windows.Forms.ToolStripMenuItem BtnEditOrganization;
         private System.Windows.Forms.ToolStripMenuItem BtnEditGroup;
         private System.Windows.Forms.ToolStripMenuItem BtnEditMember;
+        private System.Windows.Forms.Button BtnHomepage;
+        private System.Windows.Forms.Button BtnEmail;
+        private System.Windows.Forms.Button BtnPhones;
     }
 }
 

@@ -14,7 +14,7 @@ namespace DatabaseWindows.DatabaseModels
         public string Mail { get; set; }
         public string Description { get; set; }
         public bool Deleted { get; set; }
-        public ICollection<EmailToMember> EmployeeNode { get; set; }
+        public ICollection<EmailToMember> MemberNode { get; set; }
         public ICollection<EmailToGroup> GroupNode { get; set; }
         public ICollection<EmailToOrganization> OrganizationNode { get; set; }
     }

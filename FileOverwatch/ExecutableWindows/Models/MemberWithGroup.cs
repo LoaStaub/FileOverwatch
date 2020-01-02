@@ -26,5 +26,6 @@ namespace ExecutableWindows.Models
         public byte[] Picture { get; set; }
         public string GroupName { get; set; }
         public Group Group { get; set; }
+        public Member Member { get; set; }
     }
 }

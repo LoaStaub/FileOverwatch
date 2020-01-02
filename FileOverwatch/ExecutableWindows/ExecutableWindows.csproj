@@ -94,10 +94,16 @@
     <Compile Include="CreateOrganization.Designer.cs">
       <DependentUpon>CreateOrganization.cs</DependentUpon>
     </Compile>
-    <Compile Include="Emails.cs">
+    <Compile Include="ListForms\DoYouMean.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Emails.Designer.cs">
+    <Compile Include="ListForms\DoYouMean.Designer.cs">
+      <DependentUpon>DoYouMean.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListForms\Emails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListForms\Emails.Designer.cs">
       <DependentUpon>Emails.cs</DependentUpon>
     </Compile>
     <Compile Include="FileAdder.cs">
@@ -106,7 +112,38 @@
     <Compile Include="FileAdder.Designer.cs">
       <DependentUpon>FileAdder.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListForms\Groups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListForms\Groups.Designer.cs">
+      <DependentUpon>Groups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListForms\Homepages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListForms\Homepages.Designer.cs">
+      <DependentUpon>Homepages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListForms\Members.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListForms\Members.Designer.cs">
+      <DependentUpon>Members.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListForms\Organizations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListForms\Organizations.Designer.cs">
+      <DependentUpon>Organizations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListForms\Phones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListForms\Phones.Designer.cs">
+      <DependentUpon>Phones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\MemberWithGroup.cs" />
+    <Compile Include="Models\Tradeable.cs" />
     <Compile Include="OverlayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,11 +170,29 @@
     <EmbeddedResource Include="CreateOrganization.resx">
       <DependentUpon>CreateOrganization.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Emails.resx">
+    <EmbeddedResource Include="ListForms\DoYouMean.resx">
+      <DependentUpon>DoYouMean.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListForms\Emails.resx">
       <DependentUpon>Emails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FileAdder.resx">
       <DependentUpon>FileAdder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListForms\Groups.resx">
+      <DependentUpon>Groups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListForms\Homepages.resx">
+      <DependentUpon>Homepages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListForms\Members.resx">
+      <DependentUpon>Members.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListForms\Organizations.resx">
+      <DependentUpon>Organizations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListForms\Phones.resx">
+      <DependentUpon>Phones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OverlayForm.resx">
       <DependentUpon>OverlayForm.cs</DependentUpon>

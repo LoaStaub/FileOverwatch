@@ -1,4 +1,4 @@
-﻿namespace ExecutableWindows
+﻿namespace ExecutableWindows.ListForms
 {
     partial class Emails
     {
@@ -29,26 +29,65 @@
         private void InitializeComponent()
         {
             this.TvEmails = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.TbEmail = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TbDescription = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnNew = new System.Windows.Forms.Button();
+            this.BtnSendMail = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TvEmails)).BeginInit();
             this.SuspendLayout();
             // 
             // TvEmails
             // 
+            this.TvEmails.AllColumns.Add(this.olvColumn1);
+            this.TvEmails.AllColumns.Add(this.olvColumn2);
+            this.TvEmails.AllColumns.Add(this.olvColumn3);
+            this.TvEmails.AllColumns.Add(this.olvColumn4);
             this.TvEmails.CellEditUseWholeCell = false;
+            this.TvEmails.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn2,
+            this.olvColumn3,
+            this.olvColumn4});
+            this.TvEmails.Cursor = System.Windows.Forms.Cursors.Default;
             this.TvEmails.HideSelection = false;
             this.TvEmails.Location = new System.Drawing.Point(12, 49);
             this.TvEmails.Name = "TvEmails";
-            this.TvEmails.Size = new System.Drawing.Size(591, 401);
+            this.TvEmails.Size = new System.Drawing.Size(652, 401);
             this.TvEmails.TabIndex = 0;
             this.TvEmails.UseCompatibleStateImageBehavior = false;
             this.TvEmails.View = System.Windows.Forms.View.Details;
             this.TvEmails.SelectionChanged += new System.EventHandler(this.TvEmails_SelectionChanged);
+            // 
+            // olvColumn1
+            // 
+            this.olvColumn1.AspectName = "Id";
+            this.olvColumn1.Text = "Id";
+            this.olvColumn1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "Mail";
+            this.olvColumn2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // olvColumn3
+            // 
+            this.olvColumn3.AspectName = "CreateDate";
+            this.olvColumn3.Text = "Create Date";
+            this.olvColumn3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // olvColumn4
+            // 
+            this.olvColumn4.AspectName = "Description";
+            this.olvColumn4.Text = "Description";
+            this.olvColumn4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TbEmail
             // 
@@ -84,7 +123,7 @@
             // 
             // BtnEdit
             // 
-            this.BtnEdit.Location = new System.Drawing.Point(544, 10);
+            this.BtnEdit.Location = new System.Drawing.Point(605, 10);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(59, 23);
             this.BtnEdit.TabIndex = 5;
@@ -102,11 +141,33 @@
             this.BtnNew.UseVisualStyleBackColor = true;
             this.BtnNew.Click += new System.EventHandler(this.BtnNew_Click);
             // 
+            // BtnSendMail
+            // 
+            this.BtnSendMail.Location = new System.Drawing.Point(589, 456);
+            this.BtnSendMail.Name = "BtnSendMail";
+            this.BtnSendMail.Size = new System.Drawing.Size(75, 23);
+            this.BtnSendMail.TabIndex = 7;
+            this.BtnSendMail.Text = "Send Mail";
+            this.BtnSendMail.UseVisualStyleBackColor = true;
+            this.BtnSendMail.Click += new System.EventHandler(this.BtnSendMail_Click);
+            // 
+            // BtnDelete
+            // 
+            this.BtnDelete.Location = new System.Drawing.Point(544, 10);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(55, 23);
+            this.BtnDelete.TabIndex = 8;
+            this.BtnDelete.Text = "Delete";
+            this.BtnDelete.UseVisualStyleBackColor = true;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
             // Emails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 477);
+            this.ClientSize = new System.Drawing.Size(676, 485);
+            this.Controls.Add(this.BtnDelete);
+            this.Controls.Add(this.BtnSendMail);
             this.Controls.Add(this.BtnNew);
             this.Controls.Add(this.BtnEdit);
             this.Controls.Add(this.label2);
@@ -131,5 +192,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BtnEdit;
         private System.Windows.Forms.Button BtnNew;
+        private System.Windows.Forms.Button BtnSendMail;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn olvColumn4;
+        private System.Windows.Forms.Button BtnDelete;
     }
 }
