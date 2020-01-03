@@ -16,7 +16,7 @@ namespace DatabaseWindows.DatabaseModels
         public ICollection<FileToOverhead> FileNode { get; set; }
         public ICollection<ExcelToOverhead> ExcelNode { get; set; }
         public ICollection<WordToOverhead> WordNode { get; set; }
-        public ICollection<OverheadToMember> EmployeeNode { get; set; }
+        public ICollection<OverheadToMember> MemberNode { get; set; }
         public ICollection<OverheadToOrganization> OrganizationNode { get; set; }
     }
 }

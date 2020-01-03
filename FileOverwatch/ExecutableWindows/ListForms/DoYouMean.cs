@@ -34,14 +34,14 @@ namespace ExecutableWindows.ListForms
                 case 1:
                     var phoneList = await db.PhoneNumbers.Where(d =>
                         !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == _group.Id)).ToListAsync();
-                    var phoneForm = new Phones(ref phoneList);
+                    var phoneForm = new Phones(ref phoneList, _group.Id, 2, false);
                     phoneForm.Show();
                     Close();
                     break;
                 case 2:
                     var emailList = await db.Emails.Where(d =>
                         !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == _group.Id)).ToListAsync();
-                    var emailForm = new Emails(ref emailList, false);
+                    var emailForm = new Emails(ref emailList, _group.Id, 2, false);
                     emailForm.Show();
                     Close();
                     break;
@@ -49,7 +49,7 @@ namespace ExecutableWindows.ListForms
                     var homepageList = await db.Homepages
                         .Where(d => !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == _group.Id))
                         .ToListAsync();
-                    var homepageForm = new Homepages(ref homepageList);
+                    var homepageForm = new Homepages(ref homepageList, _group.Id, 2, false);
                     homepageForm.Show();
                     Close();
                     break;
@@ -64,14 +64,14 @@ namespace ExecutableWindows.ListForms
                 case 1:
                     var phoneList = await db.PhoneNumbers.Where(d =>
                         !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == _group.Id)).ToListAsync();
-                    var phoneForm = new Phones(ref phoneList);
+                    var phoneForm = new Phones(ref phoneList, _member.Id, 3, false);
                     phoneForm.Show();
                     Close();
                     break;
                 case 2:
                     var emailList = await db.Emails.Where(d =>
                         !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == _group.Id)).ToListAsync();
-                    var emailForm = new Emails(ref emailList, false);
+                    var emailForm = new Emails(ref emailList, _member.Id, 3, false);
                     emailForm.Show();
                     Close();
                     break;
@@ -79,7 +79,7 @@ namespace ExecutableWindows.ListForms
                     var homepageList = await db.Homepages
                         .Where(d => !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == _group.Id))
                         .ToListAsync();
-                    var homepageForm = new Homepages(ref homepageList);
+                    var homepageForm = new Homepages(ref homepageList, _member.Id, 3, false);
                     homepageForm.Show();
                     Close();
                     break;

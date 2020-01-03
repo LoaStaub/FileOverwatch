@@ -107,12 +107,13 @@
             // 
             // BtnOpenPage
             // 
-            this.BtnOpenPage.Location = new System.Drawing.Point(546, 413);
+            this.BtnOpenPage.Location = new System.Drawing.Point(598, 413);
             this.BtnOpenPage.Name = "BtnOpenPage";
             this.BtnOpenPage.Size = new System.Drawing.Size(75, 23);
             this.BtnOpenPage.TabIndex = 9;
             this.BtnOpenPage.Text = "Open Page";
             this.BtnOpenPage.UseVisualStyleBackColor = true;
+            this.BtnOpenPage.Click += new System.EventHandler(this.BtnOpenPage_Click);
             // 
             // BtnDelete
             // 
@@ -140,6 +141,7 @@
             this.Controls.Add(this.TvPages);
             this.Name = "Homepages";
             this.Text = "Homepages";
+            this.Load += new System.EventHandler(this.Homepages_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TvPages)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

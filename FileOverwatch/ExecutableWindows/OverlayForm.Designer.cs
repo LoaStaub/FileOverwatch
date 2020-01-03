@@ -40,10 +40,9 @@
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoCleanUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.performCleanUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnFullCleanUp = new System.Windows.Forms.ToolStripMenuItem();
             this.databaseExportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backupDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.mapDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +65,9 @@
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel4 = new System.Windows.Forms.Panel();
+            this.BtnHomepage = new System.Windows.Forms.Button();
+            this.BtnEmail = new System.Windows.Forms.Button();
+            this.BtnPhones = new System.Windows.Forms.Button();
             this.LblMemberOf = new System.Windows.Forms.Label();
             this.LblCreateDate = new System.Windows.Forms.Label();
             this.LblGender = new System.Windows.Forms.Label();
@@ -91,9 +93,6 @@
             this.LblName = new System.Windows.Forms.Label();
             this.LblType = new System.Windows.Forms.Label();
             this.PbPicture = new System.Windows.Forms.PictureBox();
-            this.BtnPhones = new System.Windows.Forms.Button();
-            this.BtnEmail = new System.Windows.Forms.Button();
-            this.BtnHomepage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -209,45 +208,40 @@
             this.autoCleanUpToolStripMenuItem,
             this.databaseExportToolStripMenuItem});
             this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
-            this.executeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.executeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.executeToolStripMenuItem.Text = "Execute...";
             // 
             // autoCleanUpToolStripMenuItem
             // 
             this.autoCleanUpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.settingsToolStripMenuItem,
-            this.performCleanUpToolStripMenuItem});
+            this.BtnFullCleanUp});
             this.autoCleanUpToolStripMenuItem.Name = "autoCleanUpToolStripMenuItem";
-            this.autoCleanUpToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.autoCleanUpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.autoCleanUpToolStripMenuItem.Text = "Clean Up...";
             // 
-            // settingsToolStripMenuItem
+            // BtnFullCleanUp
             // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // performCleanUpToolStripMenuItem
-            // 
-            this.performCleanUpToolStripMenuItem.Name = "performCleanUpToolStripMenuItem";
-            this.performCleanUpToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.performCleanUpToolStripMenuItem.Text = "Perform Clean Up";
+            this.BtnFullCleanUp.Name = "BtnFullCleanUp";
+            this.BtnFullCleanUp.Size = new System.Drawing.Size(190, 22);
+            this.BtnFullCleanUp.Text = "Perform Full Clean Up";
+            this.BtnFullCleanUp.Click += new System.EventHandler(this.BtnFullCleanUp_Click);
             // 
             // databaseExportToolStripMenuItem
             // 
             this.databaseExportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.backupDatabaseToolStripMenuItem,
+            this.BtnBackup,
             this.mapDatabaseToolStripMenuItem,
             this.resetToolStripMenuItem});
             this.databaseExportToolStripMenuItem.Name = "databaseExportToolStripMenuItem";
-            this.databaseExportToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.databaseExportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.databaseExportToolStripMenuItem.Text = "Database...";
             // 
-            // backupDatabaseToolStripMenuItem
+            // BtnBackup
             // 
-            this.backupDatabaseToolStripMenuItem.Name = "backupDatabaseToolStripMenuItem";
-            this.backupDatabaseToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.backupDatabaseToolStripMenuItem.Text = "Backup";
+            this.BtnBackup.Name = "BtnBackup";
+            this.BtnBackup.Size = new System.Drawing.Size(116, 22);
+            this.BtnBackup.Text = "Backup";
+            this.BtnBackup.Click += new System.EventHandler(this.BtnBackup_Click);
             // 
             // mapDatabaseToolStripMenuItem
             // 
@@ -264,7 +258,7 @@
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             // 
             // erstellenToolStripMenuItem
@@ -364,7 +358,7 @@
             // BtnAddContextMenu
             // 
             this.BtnAddContextMenu.Name = "BtnAddContextMenu";
-            this.BtnAddContextMenu.Size = new System.Drawing.Size(174, 22);
+            this.BtnAddContextMenu.Size = new System.Drawing.Size(180, 22);
             this.BtnAddContextMenu.Text = "Add Context Menu";
             this.BtnAddContextMenu.Click += new System.EventHandler(this.BtnAddContextMenu_Click);
             // 
@@ -450,6 +444,36 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(254, 604);
             this.panel4.TabIndex = 5;
+            // 
+            // BtnHomepage
+            // 
+            this.BtnHomepage.Location = new System.Drawing.Point(172, 385);
+            this.BtnHomepage.Name = "BtnHomepage";
+            this.BtnHomepage.Size = new System.Drawing.Size(79, 23);
+            this.BtnHomepage.TabIndex = 29;
+            this.BtnHomepage.Text = "Homepage";
+            this.BtnHomepage.UseVisualStyleBackColor = true;
+            this.BtnHomepage.Click += new System.EventHandler(this.BtnHomepage_Click);
+            // 
+            // BtnEmail
+            // 
+            this.BtnEmail.Location = new System.Drawing.Point(88, 385);
+            this.BtnEmail.Name = "BtnEmail";
+            this.BtnEmail.Size = new System.Drawing.Size(75, 23);
+            this.BtnEmail.TabIndex = 28;
+            this.BtnEmail.Text = "Email";
+            this.BtnEmail.UseVisualStyleBackColor = true;
+            this.BtnEmail.Click += new System.EventHandler(this.BtnEmail_Click);
+            // 
+            // BtnPhones
+            // 
+            this.BtnPhones.Location = new System.Drawing.Point(6, 385);
+            this.BtnPhones.Name = "BtnPhones";
+            this.BtnPhones.Size = new System.Drawing.Size(76, 23);
+            this.BtnPhones.TabIndex = 27;
+            this.BtnPhones.Text = "Call";
+            this.BtnPhones.UseVisualStyleBackColor = true;
+            this.BtnPhones.Click += new System.EventHandler(this.BtnPhones_Click);
             // 
             // LblMemberOf
             // 
@@ -674,36 +698,6 @@
             this.PbPicture.TabIndex = 0;
             this.PbPicture.TabStop = false;
             // 
-            // BtnPhones
-            // 
-            this.BtnPhones.Location = new System.Drawing.Point(6, 385);
-            this.BtnPhones.Name = "BtnPhones";
-            this.BtnPhones.Size = new System.Drawing.Size(76, 23);
-            this.BtnPhones.TabIndex = 27;
-            this.BtnPhones.Text = "Call";
-            this.BtnPhones.UseVisualStyleBackColor = true;
-            this.BtnPhones.Click += new System.EventHandler(this.BtnPhones_Click);
-            // 
-            // BtnEmail
-            // 
-            this.BtnEmail.Location = new System.Drawing.Point(88, 385);
-            this.BtnEmail.Name = "BtnEmail";
-            this.BtnEmail.Size = new System.Drawing.Size(75, 23);
-            this.BtnEmail.TabIndex = 28;
-            this.BtnEmail.Text = "Email";
-            this.BtnEmail.UseVisualStyleBackColor = true;
-            this.BtnEmail.Click += new System.EventHandler(this.BtnEmail_Click);
-            // 
-            // BtnHomepage
-            // 
-            this.BtnHomepage.Location = new System.Drawing.Point(172, 385);
-            this.BtnHomepage.Name = "BtnHomepage";
-            this.BtnHomepage.Size = new System.Drawing.Size(79, 23);
-            this.BtnHomepage.TabIndex = 29;
-            this.BtnHomepage.Text = "Homepage";
-            this.BtnHomepage.UseVisualStyleBackColor = true;
-            this.BtnHomepage.Click += new System.EventHandler(this.BtnHomepage_Click);
-            // 
             // OverlayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -777,11 +771,10 @@
         private System.Windows.Forms.ToolStripMenuItem executeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoCleanUpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem databaseExportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem backupDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem BtnBackup;
         private System.Windows.Forms.ToolStripMenuItem mapDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem performCleanUpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem BtnFullCleanUp;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label LblMemberOf;
         private System.Windows.Forms.Label LblCreateDate;

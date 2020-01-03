@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CleanUp.cs" />
     <Compile Include="Classes\ImageByteConverter.cs" />
     <Compile Include="CreateFilegroup.cs">
       <SubType>Form</SubType>
@@ -139,6 +140,7 @@
     <Compile Include="ListForms\Phones.Designer.cs">
       <DependentUpon>Phones.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\MemberForCombobox.cs" />
     <Compile Include="Models\MemberWithGroup.cs" />
     <Compile Include="Models\Tradeable.cs" />
     <Compile Include="OverlayForm.cs">
@@ -149,6 +151,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingForms\DatabaseBackupSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingForms\DatabaseBackupSettings.Designer.cs">
+      <DependentUpon>DatabaseBackupSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +211,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SettingForms\DatabaseBackupSettings.resx">
+      <DependentUpon>DatabaseBackupSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="FileOverwatch.db" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

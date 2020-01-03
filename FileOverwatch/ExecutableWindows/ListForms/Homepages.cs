@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
+using DatabaseWindows.DatabaseModels.LinkingTables;
 
 namespace ExecutableWindows.ListForms
 {
@@ -18,10 +20,13 @@ namespace ExecutableWindows.ListForms
         private static List<Homepage> _pages;
         private static Homepage _page;
         private static bool _isOpenedByEditor;
-        public Homepages(ref List<Homepage> pages, bool isOpenedByEditor)
+        private static int _id, _index;
+        public Homepages(ref List<Homepage> pages, int id, int index, bool isOpenedByEditor)
         {
             _pages = pages;
             _isOpenedByEditor = isOpenedByEditor;
+            _id = id;
+            _index = index;
             InitializeComponent();
         }
 
@@ -41,6 +46,39 @@ namespace ExecutableWindows.ListForms
                 return;
             }
             var db = new DataBase();
+            switch (_index)
+            {
+                case 1:
+                    var nodeToOrga = new HomepageToOrganization
+                    {
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        HomepageId = page.Id,
+                        OrganizationId = _id
+                    };
+                    db.HomepageToOrganizationNode.Add(nodeToOrga);
+                    break;
+                case 2:
+                    var nodeToGroup = new HomepageToGroup
+                    {
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        HomepageId = page.Id,
+                        GroupId = _id
+                    };
+                    db.HomepageToGroupNode.Add(nodeToGroup);
+                    break;
+                case 3:
+                    var nodeToMember = new HomepageToMember
+                    {
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        HomepageId = page.Id,
+                        MemberId = _id
+                    };
+                    db.HomepageToMemberNode.Add(nodeToMember);
+                    break;
+            }
             db.Homepages.Add(page);
             await db.SaveChangesAsync();
         }
@@ -48,6 +86,8 @@ namespace ExecutableWindows.ListForms
         private void TvPages_SelectedIndexChanged(object sender, EventArgs e)
         {
             _page = (Homepage) TvPages.SelectedObject;
+            TbDescription.Text = _page?.Description;
+            TbLink.Text = _page?.Link;
         }
 
         private async void BtnEdit_Click(object sender, EventArgs e)
@@ -66,6 +106,18 @@ namespace ExecutableWindows.ListForms
             var db = new DataBase();
             db.Entry(page).State = EntityState.Modified;
             await db.SaveChangesAsync();
+        }
+
+        private void Homepages_Load(object sender, EventArgs e)
+        {
+            TvPages.ShowGroups = false;
+            TvPages.ClearObjects();
+            TvPages.AddObjects(_pages);
+        }
+
+        private void BtnOpenPage_Click(object sender, EventArgs e)
+        {
+            Process.Start(_page.Link);
         }
 
         private async void BtnDelete_Click(object sender, EventArgs e)

@@ -70,7 +70,7 @@ namespace ExecutableWindows
                     !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == _member.Id)).ToListAsync();
             }
 
-            var phoneForm = new Phones(ref phoneNumbers);
+            var phoneForm = new Phones(ref phoneNumbers, 0, 0, true);
             phoneForm.ShowDialog();
             _gotPhone = true;
             _phoneNumbers = phoneNumbers;
@@ -88,7 +88,7 @@ namespace ExecutableWindows
                     !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == _member.Id)).ToListAsync();
             }
 
-            var homepageForm = new Homepages(ref homepages);
+            var homepageForm = new Homepages(ref homepages, 0, 0, true);
             homepageForm.ShowDialog();
             _gotHomepage = true;
             _homepages = homepages;
@@ -111,7 +111,7 @@ namespace ExecutableWindows
                     !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == _member.Id)).ToListAsync();
             }
 
-            var emailForm = new Emails(ref emails, true);
+            var emailForm = new Emails(ref emails, 0, 0, true);
             emailForm.ShowDialog();
             _gotEmails = true;
             _emails = emails;

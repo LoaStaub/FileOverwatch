@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
+using ExecutableWindows.Models;
 
 namespace ExecutableWindows
 {
@@ -43,19 +44,15 @@ namespace ExecutableWindows
             var members = await db.Members
                 .Where(d => !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == ((Group) CbGroups.SelectedItem).Id))
                 .ToListAsync();
+            var memberForCbList = members.Select(member => new MemberForCombobox {Id = member.Id, Member = member, Name = $"{member.FirstName} {member.LastName}"}).ToList();
 
-            CbGroups.DataSource = members;
-            CbGroups.DisplayMember = "Name";
-            CbGroups.ValueMember = "Id";
+            CbMember.DataSource = memberForCbList;
+            CbMember.DisplayMember = "Name";
+            CbMember.ValueMember = "Id";
         }
 
         private async void CbMember_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var db = new DataBase();
-            var fileOverhead = await db.FileOverheads.Where(d => !d.Deleted && d.EmployeeNode.Any(f => f.Member == (Member) CbMember.SelectedItem)).ToListAsync();
-            CbFileOverhead.DataSource = fileOverhead;
-            CbFileOverhead.DisplayMember = "Name";
-            CbFileOverhead.ValueMember = "Id";
         }
 
         private async void FileAdder_Load(object sender, EventArgs e)
@@ -83,7 +80,7 @@ namespace ExecutableWindows
         private void BtnNewFilegroup_Click(object sender, EventArgs e)
         {
             var fileHead = new FileOverhead();
-            var createFileGroup = new CreateFilegroup(ref fileHead);
+            var createFileGroup = new CreateFilegroup(ref fileHead, false);
             createFileGroup.ShowDialog();
         }
     }

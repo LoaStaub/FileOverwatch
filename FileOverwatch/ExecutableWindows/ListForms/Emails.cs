@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
+using DatabaseWindows.DatabaseModels.LinkingTables;
 
 namespace ExecutableWindows.ListForms
 {
@@ -19,10 +20,13 @@ namespace ExecutableWindows.ListForms
         private static List<Email> _emails;
         private static Email _email;
         private static bool _isOpenedByEditor;
-        public Emails(ref List<Email> emails, bool isOpenedByEditor)
+        private static int _id, _index;
+        public Emails(ref List<Email> emails, int id, int index, bool isOpenedByEditor)
         {
             _emails = emails;
             _isOpenedByEditor = isOpenedByEditor;
+            _index = index;
+            _id = id;
             InitializeComponent();
             TvEmails.ShowGroups = false;
         }
@@ -67,8 +71,40 @@ namespace ExecutableWindows.ListForms
                 {
                     return;
                 }
-
                 var db = new DataBase();
+                switch (_index)
+                {
+                    case 1:
+                        var nodeToOrga = new EmailToOrganization
+                        {
+                            CreateDate = DateTime.Now,
+                            Deleted = false,
+                            EmailId = email.Id,
+                            OrganizationId = _id
+                        };
+                        db.EmailToOrganizationNode.Add(nodeToOrga);
+                        break;
+                    case 2:
+                        var nodeToGroup = new EmailToGroup
+                        {
+                            CreateDate = DateTime.Now,
+                            Deleted = false,
+                            EmailId = email.Id,
+                            GroupId = _id
+                        };
+                        db.EmailToGroupNode.Add(nodeToGroup);
+                        break;
+                    case 3:
+                        var nodeToMember = new EmailToMember
+                        {
+                            CreateDate = DateTime.Now,
+                            Deleted = false,
+                            EmailId = email.Id,
+                            MemberId = _id
+                        };
+                        db.EmailToMemberNode.Add(nodeToMember);
+                        break;
+                }
                 db.Emails.Add(email);
                 await db.SaveChangesAsync();
             }
@@ -96,7 +132,8 @@ namespace ExecutableWindows.ListForms
         private void TvEmails_SelectionChanged(object sender, EventArgs e)
         {
             _email = (Email) TvEmails.SelectedObject;
-            TbEmail.Text = _email.Mail;
+            TbEmail.Text = _email?.Mail;
+            TbDescription.Text = _email?.Description;
         }
 
         private void BtnSendMail_Click(object sender, EventArgs e)
@@ -121,6 +158,12 @@ namespace ExecutableWindows.ListForms
             var db = new DataBase();
             db.Entry(email).State = EntityState.Modified;
             await db.SaveChangesAsync();
+        }
+
+        private void Emails_Load(object sender, EventArgs e)
+        {
+            TvEmails.ClearObjects();
+            TvEmails.AddObjects(_emails);
         }
     }
 }

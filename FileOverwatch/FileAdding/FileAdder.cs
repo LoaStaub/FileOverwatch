@@ -49,7 +49,7 @@ namespace FileAdding
         private async void CbMember_SelectedIndexChanged(object sender, EventArgs e)
         {
             var db = new DataBase();
-            var fileOverhead = await db.FileOverheads.Where(d => !d.Deleted && d.EmployeeNode.Any(f => f.Member == (Member) CbMember.SelectedItem)).ToListAsync();
+            var fileOverhead = await db.FileOverheads.Where(d => !d.Deleted && d.MemberNode.Any(f => f.Member == (Member) CbMember.SelectedItem)).ToListAsync();
             CbFileOverhead.DataSource = fileOverhead;
             CbFileOverhead.DisplayMember = "Name";
             CbFileOverhead.ValueMember = "Id";

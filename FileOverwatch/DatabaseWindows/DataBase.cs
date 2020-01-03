@@ -26,7 +26,7 @@ namespace DatabaseWindows
         #region LinkingTables
 
         public virtual DbSet<EmailToMember> EmailToMemberNode { get; set; }
-        public virtual DbSet<EmailToGroup> EmailGroupNode { get; set; }
+        public virtual DbSet<EmailToGroup> EmailToGroupNode { get; set; }
         public virtual DbSet<EmailToOrganization> EmailToOrganizationNode { get; set; }
         public virtual DbSet<ExcelToOverhead> ExcelToOverheadNode { get; set; }
         public virtual DbSet<FileToOverhead> FileToOverheadNode { get; set; }

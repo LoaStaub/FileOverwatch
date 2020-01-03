@@ -39,12 +39,28 @@
             this.BtnDelete = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.TbCountryFlag = new System.Windows.Forms.TextBox();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.TvPhonenumbers)).BeginInit();
             this.SuspendLayout();
             // 
             // TvPhonenumbers
             // 
+            this.TvPhonenumbers.AllColumns.Add(this.olvColumn1);
+            this.TvPhonenumbers.AllColumns.Add(this.olvColumn2);
+            this.TvPhonenumbers.AllColumns.Add(this.olvColumn3);
+            this.TvPhonenumbers.AllColumns.Add(this.olvColumn4);
+            this.TvPhonenumbers.AllColumns.Add(this.olvColumn5);
             this.TvPhonenumbers.CellEditUseWholeCell = false;
+            this.TvPhonenumbers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn2,
+            this.olvColumn3,
+            this.olvColumn4,
+            this.olvColumn5});
             this.TvPhonenumbers.Cursor = System.Windows.Forms.Cursors.Default;
             this.TvPhonenumbers.HideSelection = false;
             this.TvPhonenumbers.Location = new System.Drawing.Point(12, 42);
@@ -143,6 +159,31 @@
             this.TbCountryFlag.Size = new System.Drawing.Size(56, 20);
             this.TbCountryFlag.TabIndex = 17;
             // 
+            // olvColumn1
+            // 
+            this.olvColumn1.AspectName = "Id";
+            this.olvColumn1.Text = "Id";
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "CountryFlag";
+            this.olvColumn2.Text = "Flag";
+            // 
+            // olvColumn3
+            // 
+            this.olvColumn3.AspectName = "PhoneNr";
+            this.olvColumn3.Text = "Phone Nr";
+            // 
+            // olvColumn4
+            // 
+            this.olvColumn4.AspectName = "Description";
+            this.olvColumn4.Text = "Description";
+            // 
+            // olvColumn5
+            // 
+            this.olvColumn5.AspectName = "CreateDate";
+            this.olvColumn5.Text = "Create Date";
+            // 
             // Phones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,6 +202,7 @@
             this.Controls.Add(this.TvPhonenumbers);
             this.Name = "Phones";
             this.Text = "Phones";
+            this.Load += new System.EventHandler(this.Phones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TvPhonenumbers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -180,5 +222,10 @@
         private System.Windows.Forms.Button BtnDelete;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TbCountryFlag;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn olvColumn4;
+        private BrightIdeasSoftware.OLVColumn olvColumn5;
     }
 }

@@ -54,7 +54,7 @@ namespace ExecutableWindows
                         Deleted = false,
                         GroupId = _group.Id
                     };
-                    db.EmailGroupNode.Add(emailToGroupNode);
+                    db.EmailToGroupNode.Add(emailToGroupNode);
                 }
                 db.Emails.AddRange(_emails);
             }
@@ -153,7 +153,7 @@ namespace ExecutableWindows
                     !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == _group.Id)).ToListAsync();
             }
 
-            var emailForm = new Emails(ref emails, true);
+            var emailForm = new Emails(ref emails,0, 0, true);
             emailForm.ShowDialog();
             _gotEmails = true;
             _emails = emails;
@@ -171,7 +171,7 @@ namespace ExecutableWindows
                     !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == _group.Id)).ToListAsync();
             }
 
-            var phoneForm = new Phones(ref phoneNumbers);
+            var phoneForm = new Phones(ref phoneNumbers, 0, 0, true);
             phoneForm.ShowDialog();
             _gotPhone = true;
             _phoneNumbers = phoneNumbers;
@@ -239,7 +239,7 @@ namespace ExecutableWindows
                     !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == _group.Id)).ToListAsync();
             }
 
-            var homepageForm = new Homepages(ref homepages);
+            var homepageForm = new Homepages(ref homepages, 0, 0, true);
             homepageForm.ShowDialog();
             _gotHomepage = true;
             _homepages = homepages;

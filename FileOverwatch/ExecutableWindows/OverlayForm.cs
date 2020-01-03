@@ -173,7 +173,7 @@ namespace ExecutableWindows
         private void BtnFileGroup_Click(object sender, EventArgs e)
         {
             var fileHead = new FileOverhead();
-            var createFileGroup = new CreateFilegroup(ref fileHead);
+            var createFileGroup = new CreateFilegroup(ref fileHead, false);
             createFileGroup.ShowDialog();
         }
 
@@ -192,7 +192,7 @@ namespace ExecutableWindows
             AddOrganization();
         }
 
-        private void TvGroupsMembers_SelectedIndexChanged(object sender, EventArgs e)
+        private async void TvGroupsMembers_SelectedIndexChanged(object sender, EventArgs e)
         {
             _isItOrganization = false;
 
@@ -200,6 +200,11 @@ namespace ExecutableWindows
             var memberWithGroup = (MemberWithGroup) TvGroupsMembers.SelectedObject;
 
             MemberLabels(ref memberWithGroup, ((Organization) TvOrganization.SelectedObject).Name);
+            var db = new DataBase();
+            var fileOverheads = db.FileOverheads
+                .Where(d => !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == memberWithGroup.Id))
+                .ToListAsync();
+            var files = new LinkedFile();
         }
 
         private void BtnEditOrganization_Click(object sender, EventArgs e)
@@ -256,19 +261,19 @@ namespace ExecutableWindows
         private void MemberLabels(ref MemberWithGroup member, string orgaName)
         {
             LblType.Text = @"Member";
-            LblPath.Text = $@"{orgaName}/{member.GroupName}/{member.FirstName} {member.LastName}";
-            LblName.Text = $@"{member.FirstName} {member.LastName}";
-            LblBirthdate.Text = member.Birthdate.ToShortDateString();
-            LblCity.Text = member.City;
-            LblCountry.Text = member.Country;
-            LblCreateDate.Text = member.CreateDate.ToShortDateString();
-            LblGender.Text = member.Gender;
-            LblMemberOf.Text = member.GroupName;
-            LblNumber.Text = member.HouseNumber;
-            LblZip.Text = member.ZipCode;
-            LblState.Text = member.State;
-            LblStreet.Text = member.Street;
-            PbPicture.Image = ImageByteConverter.BytesToImage(member.Picture);
+            LblPath.Text = $@"{orgaName}/{member?.GroupName}/{member?.FirstName} {member?.LastName}";
+            LblName.Text = $@"{member?.FirstName} {member?.LastName}";
+            LblBirthdate.Text = member?.Birthdate.ToShortDateString();
+            LblCity.Text = member?.City;
+            LblCountry.Text = member?.Country;
+            LblCreateDate.Text = member?.CreateDate.ToShortDateString();
+            LblGender.Text = member?.Gender;
+            LblMemberOf.Text = member?.GroupName;
+            LblNumber.Text = member?.HouseNumber;
+            LblZip.Text = member?.ZipCode;
+            LblState.Text = member?.State;
+            LblStreet.Text = member?.Street;
+            PbPicture.Image = ImageByteConverter.BytesToImage(member?.Picture);
         }
 
         private void BtnEditGroup_Click(object sender, EventArgs e)
@@ -288,7 +293,7 @@ namespace ExecutableWindows
                 var db = new DataBase();
                 var phoneList = await db.PhoneNumbers.Where(d =>
                     !d.Deleted && d.OrganizationNode.Any(f => f.Organization.Id == orga.Id)).ToListAsync();
-                var phone = new Phones(ref phoneList);
+                var phone = new Phones(ref phoneList, orga.Id, 1, false);
                 phone.Show();
             }
             else
@@ -308,7 +313,7 @@ namespace ExecutableWindows
                 var db = new DataBase();
                 var emailList = await db.Emails.Where(d =>
                     !d.Deleted && d.OrganizationNode.Any(f => f.Organization.Id == orga.Id)).ToListAsync();
-                var emailForm = new Emails(ref emailList, false);
+                var emailForm = new Emails(ref emailList, orga.Id, 1, false);
                 emailForm.Show();
             }
             else
@@ -328,7 +333,7 @@ namespace ExecutableWindows
                 var db = new DataBase();
                 var homepageList = await db.Homepages.Where(d =>
                     !d.Deleted && d.OrganizationNode.Any(f => f.Organization.Id == orga.Id)).ToListAsync();
-                var homepageForm = new Homepages(ref homepageList);
+                var homepageForm = new Homepages(ref homepageList, orga.Id, 1, false);
                 homepageForm.Show();
             }
             else
@@ -338,6 +343,16 @@ namespace ExecutableWindows
                 var doYouMean = new DoYouMean(ref group, ref member, 3);
                 doYouMean.Show();
             }
+        }
+
+        private void BtnBackup_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnFullCleanUp_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -75,6 +75,7 @@
             // olvColumn2
             // 
             this.olvColumn2.AspectName = "Mail";
+            this.olvColumn2.Text = "MailAdress";
             this.olvColumn2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvColumn3
@@ -177,6 +178,7 @@
             this.Controls.Add(this.TvEmails);
             this.Name = "Emails";
             this.Text = "Emails";
+            this.Load += new System.EventHandler(this.Emails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TvEmails)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

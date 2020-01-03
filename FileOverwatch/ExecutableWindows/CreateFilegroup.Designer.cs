@@ -40,6 +40,7 @@
             this.BtnAbort = new System.Windows.Forms.Button();
             this.TbName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CbOrganizations
@@ -49,6 +50,7 @@
             this.CbOrganizations.Name = "CbOrganizations";
             this.CbOrganizations.Size = new System.Drawing.Size(121, 21);
             this.CbOrganizations.TabIndex = 0;
+            this.CbOrganizations.SelectedIndexChanged += new System.EventHandler(this.CbOrganizations_SelectedIndexChanged);
             // 
             // CbGroups
             // 
@@ -57,6 +59,7 @@
             this.CbGroups.Name = "CbGroups";
             this.CbGroups.Size = new System.Drawing.Size(121, 21);
             this.CbGroups.TabIndex = 1;
+            this.CbGroups.SelectedIndexChanged += new System.EventHandler(this.CbGroups_SelectedIndexChanged);
             // 
             // CbMembers
             // 
@@ -105,7 +108,7 @@
             // 
             // TbDescription
             // 
-            this.TbDescription.Location = new System.Drawing.Point(229, 12);
+            this.TbDescription.Location = new System.Drawing.Point(224, 38);
             this.TbDescription.Multiline = true;
             this.TbDescription.Name = "TbDescription";
             this.TbDescription.Size = new System.Drawing.Size(273, 75);
@@ -147,11 +150,21 @@
             this.label4.TabIndex = 11;
             this.label4.Text = "Name:";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(221, 15);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Description:";
+            // 
             // CreateFilegroup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 145);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.BtnAbort);
@@ -166,6 +179,7 @@
             this.Controls.Add(this.CbOrganizations);
             this.Name = "CreateFilegroup";
             this.Text = "CreateFilegroup";
+            this.Load += new System.EventHandler(this.CreateFilegroup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,5 +199,6 @@
         private System.Windows.Forms.Button BtnAbort;
         private System.Windows.Forms.TextBox TbName;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
