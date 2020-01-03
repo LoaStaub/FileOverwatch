@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -17,13 +18,16 @@ namespace ExecutableWindows.ListForms
     {
         private static List<Email> _emails;
         private static Email _email;
-        public Emails(ref List<Email> emails)
+        private static bool _isOpenedByEditor;
+        public Emails(ref List<Email> emails, bool isOpenedByEditor)
         {
             _emails = emails;
+            _isOpenedByEditor = isOpenedByEditor;
             InitializeComponent();
+            TvEmails.ShowGroups = false;
         }
 
-        private void BtnEdit_Click(object sender, EventArgs e)
+        private async void BtnEdit_Click(object sender, EventArgs e)
         {
             if (ContainsEmail())
             {
@@ -34,11 +38,19 @@ namespace ExecutableWindows.ListForms
                     email.Mail = TbDescription.Text;
 
                     TvEmails.UpdateObject(email);
+                    
+                    if (_isOpenedByEditor)
+                    {
+                        return;
+                    }
+                    var db = new DataBase();
+                    db.Entry(email).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
                 }
             }
         }
 
-        private void BtnNew_Click(object sender, EventArgs e)
+        private async void BtnNew_Click(object sender, EventArgs e)
         {
             if (ContainsEmail())
             {
@@ -51,19 +63,28 @@ namespace ExecutableWindows.ListForms
                 };
                 _emails.Add(email);
                 TvEmails.AddObject(email);
+                if (_isOpenedByEditor)
+                {
+                    return;
+                }
+
+                var db = new DataBase();
+                db.Emails.Add(email);
+                await db.SaveChangesAsync();
             }
+
         }
 
         private bool ContainsEmail()
         {
             bool containsMail = true;
-            if (TbEmail.Text.Contains("@"))
+            if (!TbEmail.Text.Contains("@"))
             {
                 containsMail = false;
                 MessageBox.Show("Your E-Mail Adress doesn't contain an @");
             }
 
-            if (TbEmail.Text.Contains("."))
+            if (!TbEmail.Text.Contains("."))
             {
                 containsMail = false;
                 MessageBox.Show("");
@@ -84,7 +105,7 @@ namespace ExecutableWindows.ListForms
             Process.Start(mailto);
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
+        private async void BtnDelete_Click(object sender, EventArgs e)
         {
             var email = _emails.FirstOrDefault(d => d.Id == _email.Id);
             if (email != null)
@@ -92,7 +113,14 @@ namespace ExecutableWindows.ListForms
                 email.Deleted = true;
                 TvEmails.DisableObject(email);
             }
+            if (_isOpenedByEditor)
+            {
+                return;
+            }
 
+            var db = new DataBase();
+            db.Entry(email).State = EntityState.Modified;
+            await db.SaveChangesAsync();
         }
     }
 }

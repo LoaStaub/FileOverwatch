@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
@@ -7,6 +8,7 @@ using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
 using DatabaseWindows.DatabaseModels.LinkingTables;
 using Executable.Classes;
+using ExecutableWindows.ListForms;
 
 namespace ExecutableWindows
 {
@@ -40,6 +42,53 @@ namespace ExecutableWindows
             else
             {
                 db.Entry(_group).State = EntityState.Modified;
+            }
+            if (_gotEmails)
+            {
+                foreach (var email in _emails)
+                {
+                    var emailToGroupNode = new EmailToGroup
+                    {
+                        EmailId = email.Id,
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        GroupId = _group.Id
+                    };
+                    db.EmailGroupNode.Add(emailToGroupNode);
+                }
+                db.Emails.AddRange(_emails);
+            }
+
+            if (_gotHomepage)
+            {
+                foreach (var homepage in _homepages)
+                {
+                    var homepageToGroupNode = new HomepageToGroup
+                    {
+                        HomepageId = homepage.Id,
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        GroupId = _group.Id
+                    };
+                    db.HomepageToGroupNode.Add(homepageToGroupNode);
+                }
+                db.Homepages.AddRange(_homepages);
+            }
+
+            if (_gotPhone)
+            {
+                foreach (var number in _phoneNumbers)
+                {
+                    var phoneToGroupNode = new PhoneToGroup
+                    {
+                        PhoneNumberId = number.Id,
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        GroupId = _group.Id
+                    };
+                    db.PhoneToGroupNode.Add(phoneToGroupNode);
+                }
+                db.PhoneNumbers.AddRange(_phoneNumbers);
             }
 
             await db.SaveChangesAsync();
@@ -92,14 +141,40 @@ namespace ExecutableWindows
 
         }
 
-        private void BtnEmails_Click(object sender, EventArgs e)
+        private static bool _gotEmails;
+        private static List<Email> _emails;
+        private async void BtnEmails_Click(object sender, EventArgs e)
         {
+            var db = new DataBase();
+            var emails = new List<Email>();
+            if (_group.Id != 0)
+            {
+                emails = await db.Emails.Where(d =>
+                    !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == _group.Id)).ToListAsync();
+            }
 
+            var emailForm = new Emails(ref emails, true);
+            emailForm.ShowDialog();
+            _gotEmails = true;
+            _emails = emails;
         }
 
-        private void BtnPhones_Click(object sender, EventArgs e)
+        private static bool _gotPhone;
+        private static List<PhoneNumber> _phoneNumbers;
+        private async void BtnPhones_Click(object sender, EventArgs e)
         {
+            var db = new DataBase();
+            var phoneNumbers = new List<PhoneNumber>();
+            if (_group.Id != 0)
+            {
+                phoneNumbers = await db.PhoneNumbers.Where(d =>
+                    !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == _group.Id)).ToListAsync();
+            }
 
+            var phoneForm = new Phones(ref phoneNumbers);
+            phoneForm.ShowDialog();
+            _gotPhone = true;
+            _phoneNumbers = phoneNumbers;
         }
 
         private void BtnMembers_Click(object sender, EventArgs e)
@@ -150,6 +225,24 @@ namespace ExecutableWindows
             TbName.Text = _group.Name;
             TbDescription.Text = _group.Description;
             PbImage.Image = ImageByteConverter.BytesToImage(_group.Picture);
+        }
+
+        private static bool _gotHomepage;
+        private static List<Homepage> _homepages;
+        private async void BtnHomepage_Click(object sender, EventArgs e)
+        {
+            var db = new DataBase();
+            var homepages = new List<Homepage>();
+            if (_group.Id != 0)
+            {
+                homepages = await db.Homepages.Where(d =>
+                    !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == _group.Id)).ToListAsync();
+            }
+
+            var homepageForm = new Homepages(ref homepages);
+            homepageForm.ShowDialog();
+            _gotHomepage = true;
+            _homepages = homepages;
         }
     }
 }

@@ -12,6 +12,7 @@ using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
 using DatabaseWindows.DatabaseModels.LinkingTables;
 using Executable.Classes;
+using ExecutableWindows.ListForms;
 
 namespace ExecutableWindows
 {
@@ -57,14 +58,40 @@ namespace ExecutableWindows
             PbImage.Image = null;
         }
 
-        private void BtnPhones_Click(object sender, EventArgs e)
+        private static bool _gotPhone;
+        private static List<PhoneNumber> _phoneNumbers;
+        private async void BtnPhones_Click(object sender, EventArgs e)
         {
+            var db = new DataBase();
+            var phoneNumbers = new List<PhoneNumber>();
+            if (_member.Id != 0)
+            {
+                phoneNumbers = await db.PhoneNumbers.Where(d =>
+                    !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == _member.Id)).ToListAsync();
+            }
 
+            var phoneForm = new Phones(ref phoneNumbers);
+            phoneForm.ShowDialog();
+            _gotPhone = true;
+            _phoneNumbers = phoneNumbers;
         }
 
-        private void BtnHomepages_Click(object sender, EventArgs e)
+        private static bool _gotHomepage;
+        private static List<Homepage> _homepages;
+        private async void BtnHomepages_Click(object sender, EventArgs e)
         {
+            var db = new DataBase();
+            var homepages = new List<Homepage>();
+            if (_member.Id != 0)
+            {
+                homepages = await db.Homepages.Where(d =>
+                    !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == _member.Id)).ToListAsync();
+            }
 
+            var homepageForm = new Homepages(ref homepages);
+            homepageForm.ShowDialog();
+            _gotHomepage = true;
+            _homepages = homepages;
         }
 
         private void BtnGroups_Click(object sender, EventArgs e)
@@ -72,9 +99,22 @@ namespace ExecutableWindows
 
         }
 
-        private void BtnEmails_Click(object sender, EventArgs e)
+        private static bool _gotEmails;
+        private static List<Email> _emails;
+        private async void BtnEmails_Click(object sender, EventArgs e)
         {
+            var db = new DataBase();
+            var emails = new List<Email>();
+            if (_member.Id != 0)
+            {
+                emails = await db.Emails.Where(d =>
+                    !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == _member.Id)).ToListAsync();
+            }
 
+            var emailForm = new Emails(ref emails, true);
+            emailForm.ShowDialog();
+            _gotEmails = true;
+            _emails = emails;
         }
 
         private async void BtnSave_Click(object sender, EventArgs e)
@@ -104,7 +144,53 @@ namespace ExecutableWindows
                 db.Members.Add(_member);
                 db.GroupToMemberNode.Add(node);
             }
+            if (_gotEmails)
+            {
+                foreach (var email in _emails)
+                {
+                    var emailToMemberNode = new EmailToMember
+                    {
+                        EmailId = email.Id,
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        MemberId = _member.Id
+                    };
+                    db.EmailToMemberNode.Add(emailToMemberNode);
+                }
+                db.Emails.AddRange(_emails);
+            }
 
+            if (_gotHomepage)
+            {
+                foreach (var homepage in _homepages)
+                {
+                    var homepageToMemberNode = new HomepageToMember
+                    {
+                        HomepageId = homepage.Id,
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        MemberId = _member.Id
+                    };
+                    db.HomepageToMemberNode.Add(homepageToMemberNode);
+                }
+                db.Homepages.AddRange(_homepages);
+            }
+
+            if (_gotPhone)
+            {
+                foreach (var number in _phoneNumbers)
+                {
+                    var phoneToMemberNode = new PhoneToMember
+                    {
+                        PhoneNumberId = number.Id,
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        MemberId = _member.Id
+                    };
+                    db.PhoneToMemberNode.Add(phoneToMemberNode);
+                }
+                db.PhoneNumbers.AddRange(_phoneNumbers);
+            }
             await db.SaveChangesAsync();
         }
 

@@ -1,6 +1,4 @@
-﻿using CommonTools;
-
-namespace ExecutableWindows
+﻿namespace ExecutableWindows
 {
     partial class OverlayForm
     {

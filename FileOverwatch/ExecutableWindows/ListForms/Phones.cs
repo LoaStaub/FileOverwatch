@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
 
 namespace ExecutableWindows.ListForms
@@ -16,9 +18,11 @@ namespace ExecutableWindows.ListForms
     {
         private static List<PhoneNumber> _numbers;
         private static PhoneNumber _number;
-        public Phones(ref List<PhoneNumber> numbers)
+        private static bool _isOpenedByEditor;
+        public Phones(ref List<PhoneNumber> numbers, bool isOpenedByEditor)
         {
             _numbers = numbers;
+            _isOpenedByEditor = isOpenedByEditor;
             InitializeComponent();
         }
 
@@ -28,13 +32,20 @@ namespace ExecutableWindows.ListForms
             Process.Start(phoner);
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
+        private async void BtnDelete_Click(object sender, EventArgs e)
         {
             var number = _numbers.FirstOrDefault(d => d.Id == _number.Id);
             if (number != null)
             {
                 number.Deleted = true;
                 TvPhonenumbers.DisableObject(number);
+                if (_isOpenedByEditor)
+                {
+                    return;
+                }
+                var db = new DataBase();
+                db.Entry(number).State = EntityState.Modified;
+                await db.SaveChangesAsync();
             }
         }
 
@@ -46,7 +57,7 @@ namespace ExecutableWindows.ListForms
             TbNumber.Text = _number.PhoneNr;
         }
 
-        private void BtnNew_Click(object sender, EventArgs e)
+        private async void BtnNew_Click(object sender, EventArgs e)
         {
             var number = new PhoneNumber
             {
@@ -58,9 +69,16 @@ namespace ExecutableWindows.ListForms
             };
             _numbers.Add(number);
             TvPhonenumbers.AddObject(number);
+            if (_isOpenedByEditor)
+            {
+                return;
+            }
+            var db = new DataBase();
+            db.PhoneNumbers.Add(number);
+            await db.SaveChangesAsync();
         }
 
-        private void BtnEdit_Click(object sender, EventArgs e)
+        private async void BtnEdit_Click(object sender, EventArgs e)
         {
             var number = _numbers.FirstOrDefault(d => d.Id == _number.Id);
             if (number != null)
@@ -69,6 +87,13 @@ namespace ExecutableWindows.ListForms
                 number.CountryFlag = TbCountryFlag.Text;
                 number.PhoneNr = TbNumber.Text;
                 TvPhonenumbers.RefreshObject(number);
+                if (_isOpenedByEditor)
+                {
+                    return;
+                }
+                var db = new DataBase();
+                db.Entry(number).State = EntityState.Modified;
+                await db.SaveChangesAsync();
             }
         }
     }

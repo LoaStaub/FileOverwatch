@@ -41,7 +41,7 @@ namespace ExecutableWindows.ListForms
                 case 2:
                     var emailList = await db.Emails.Where(d =>
                         !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == _group.Id)).ToListAsync();
-                    var emailForm = new Emails(ref emailList);
+                    var emailForm = new Emails(ref emailList, false);
                     emailForm.Show();
                     Close();
                     break;
@@ -71,7 +71,7 @@ namespace ExecutableWindows.ListForms
                 case 2:
                     var emailList = await db.Emails.Where(d =>
                         !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == _group.Id)).ToListAsync();
-                    var emailForm = new Emails(ref emailList);
+                    var emailForm = new Emails(ref emailList, false);
                     emailForm.Show();
                     Close();
                     break;

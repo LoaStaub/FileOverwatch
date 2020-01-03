@@ -46,6 +46,7 @@
             this.CbOrganizations = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.LblCounter = new System.Windows.Forms.Label();
+            this.BtnHomepage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PbImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -192,7 +193,7 @@
             // CbOrganizations
             // 
             this.CbOrganizations.FormattingEnabled = true;
-            this.CbOrganizations.Location = new System.Drawing.Point(93, 103);
+            this.CbOrganizations.Location = new System.Drawing.Point(90, 150);
             this.CbOrganizations.Name = "CbOrganizations";
             this.CbOrganizations.Size = new System.Drawing.Size(121, 21);
             this.CbOrganizations.TabIndex = 60;
@@ -200,26 +201,37 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 106);
+            this.label4.Location = new System.Drawing.Point(12, 153);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 13);
             this.label4.TabIndex = 61;
             this.label4.Text = "Organization:";
             // 
-            // label5
+            // LblCounter
             // 
             this.LblCounter.AutoSize = true;
-            this.LblCounter.Location = new System.Drawing.Point(220, 106);
+            this.LblCounter.Location = new System.Drawing.Point(217, 153);
             this.LblCounter.Name = "LblCounter";
             this.LblCounter.Size = new System.Drawing.Size(39, 13);
             this.LblCounter.TabIndex = 62;
             this.LblCounter.Text = "0 more";
+            // 
+            // BtnHomepage
+            // 
+            this.BtnHomepage.Location = new System.Drawing.Point(12, 103);
+            this.BtnHomepage.Name = "BtnHomepage";
+            this.BtnHomepage.Size = new System.Drawing.Size(86, 41);
+            this.BtnHomepage.TabIndex = 63;
+            this.BtnHomepage.Text = "Homepages";
+            this.BtnHomepage.UseVisualStyleBackColor = true;
+            this.BtnHomepage.Click += new System.EventHandler(this.BtnHomepage_Click);
             // 
             // CreateGroup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(550, 368);
+            this.Controls.Add(this.BtnHomepage);
             this.Controls.Add(this.LblCounter);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.CbOrganizations);
@@ -266,5 +278,6 @@
         private System.Windows.Forms.ComboBox CbOrganizations;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label LblCounter;
+        private System.Windows.Forms.Button BtnHomepage;
     }
 }

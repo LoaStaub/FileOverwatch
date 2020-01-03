@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
+using DatabaseWindows.DatabaseModels.LinkingTables;
 using Executable.Classes;
 using ExecutableWindows.ListForms;
 
@@ -44,22 +45,55 @@ namespace ExecutableWindows
 
             if (_gotEmails)
             {
+                foreach (var email in _emails)
+                {
+                    var emailToOrganizationNode = new EmailToOrganization
+                    {
+                        EmailId = email.Id,
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        OrganizationId = _organization.Id
+                    };
+                    db.EmailToOrganizationNode.Add(emailToOrganizationNode);
+                }
                 db.Emails.AddRange(_emails);
             }
 
             if (_gotHomepage)
             {
+                foreach (var homepage in _homepages)
+                {
+                    var homepageToOrganizationNode = new HomepageToOrganization
+                    {
+                        HomepageId = homepage.Id,
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        OrganizationId = _organization.Id
+                    };
+                    db.HomepageToOrganizationNode.Add(homepageToOrganizationNode);
+                }
                 db.Homepages.AddRange(_homepages);
             }
 
             if (_gotPhone)
             {
+                foreach (var number in _phoneNumbers)
+                {
+                    var phoneToOrganizationNode = new PhoneToOrganization
+                    {
+                        PhoneNumberId = number.Id,
+                        CreateDate = DateTime.Now,
+                        Deleted = false,
+                        OrganizationId = _organization.Id
+                    };
+                    db.PhoneToOrganizationNode.Add(phoneToOrganizationNode);
+                }
                 db.PhoneNumbers.AddRange(_phoneNumbers);
             }
             await db.SaveChangesAsync();
         }
 
-        private Organization _organization = new Organization();
+        private Organization _organization;
         private async void CreateOrganization_Load(object sender, EventArgs e)
         {
             if (_organization.Id == 0)
@@ -141,7 +175,7 @@ namespace ExecutableWindows
                     !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == _organization.Id)).ToListAsync();
             }
 
-            var emailForm = new Emails(ref emails);
+            var emailForm = new Emails(ref emails, true);
             emailForm.ShowDialog();
             _gotEmails = true;
             _emails = emails;

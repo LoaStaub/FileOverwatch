@@ -308,7 +308,7 @@ namespace ExecutableWindows
                 var db = new DataBase();
                 var emailList = await db.Emails.Where(d =>
                     !d.Deleted && d.OrganizationNode.Any(f => f.Organization.Id == orga.Id)).ToListAsync();
-                var emailForm = new Emails(ref emailList);
+                var emailForm = new Emails(ref emailList, false);
                 emailForm.Show();
             }
             else
