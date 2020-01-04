@@ -28,9 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.treeListView1 = new BrightIdeasSoftware.TreeListView();
+            this.TvFiles = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.BtnRefresh = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.TvOrganization = new BrightIdeasSoftware.ObjectListView();
@@ -94,7 +98,7 @@
             this.LblType = new System.Windows.Forms.Label();
             this.PbPicture = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TvFiles)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TvOrganization)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -106,7 +110,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.treeListView1);
+            this.panel1.Controls.Add(this.TvFiles);
             this.panel1.Controls.Add(this.BtnRefresh);
             this.panel1.Location = new System.Drawing.Point(486, 32);
             this.panel1.Name = "panel1";
@@ -114,18 +118,60 @@
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // treeListView1
+            // TvFiles
             // 
-            this.treeListView1.CellEditUseWholeCell = false;
-            this.treeListView1.HideSelection = false;
-            this.treeListView1.Location = new System.Drawing.Point(3, 29);
-            this.treeListView1.Name = "treeListView1";
-            this.treeListView1.ShowGroups = false;
-            this.treeListView1.Size = new System.Drawing.Size(611, 572);
-            this.treeListView1.TabIndex = 2;
-            this.treeListView1.UseCompatibleStateImageBehavior = false;
-            this.treeListView1.View = System.Windows.Forms.View.Details;
-            this.treeListView1.VirtualMode = true;
+            this.TvFiles.AllColumns.Add(this.olvColumn5);
+            this.TvFiles.AllColumns.Add(this.olvColumn6);
+            this.TvFiles.AllColumns.Add(this.olvColumn7);
+            this.TvFiles.AllColumns.Add(this.olvColumn8);
+            this.TvFiles.AllColumns.Add(this.olvColumn9);
+            this.TvFiles.CellEditUseWholeCell = false;
+            this.TvFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn5,
+            this.olvColumn6,
+            this.olvColumn7,
+            this.olvColumn8,
+            this.olvColumn9});
+            this.TvFiles.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TvFiles.HideSelection = false;
+            this.TvFiles.Location = new System.Drawing.Point(3, 29);
+            this.TvFiles.Name = "TvFiles";
+            this.TvFiles.Size = new System.Drawing.Size(611, 572);
+            this.TvFiles.TabIndex = 2;
+            this.TvFiles.UseCompatibleStateImageBehavior = false;
+            this.TvFiles.View = System.Windows.Forms.View.Details;
+            this.TvFiles.SelectionChanged += new System.EventHandler(this.TvFiles_SelectionChanged);
+            this.TvFiles.DoubleClick += new System.EventHandler(this.TvFiles_DoubleClick);
+            // 
+            // olvColumn5
+            // 
+            this.olvColumn5.AspectName = "GroupName";
+            this.olvColumn5.Text = "File Overhead";
+            this.olvColumn5.Width = 0;
+            // 
+            // olvColumn6
+            // 
+            this.olvColumn6.AspectName = "FileName";
+            this.olvColumn6.Text = "Filename";
+            this.olvColumn6.Width = 180;
+            // 
+            // olvColumn7
+            // 
+            this.olvColumn7.AspectName = "Directory";
+            this.olvColumn7.Text = "Directory";
+            this.olvColumn7.Width = 220;
+            // 
+            // olvColumn8
+            // 
+            this.olvColumn8.AspectName = "CreateDate";
+            this.olvColumn8.Text = "Create Date";
+            this.olvColumn8.Width = 90;
+            // 
+            // olvColumn9
+            // 
+            this.olvColumn9.AspectName = "LastAccess";
+            this.olvColumn9.Text = "Last Access";
+            this.olvColumn9.Width = 90;
             // 
             // BtnRefresh
             // 
@@ -208,7 +254,7 @@
             this.autoCleanUpToolStripMenuItem,
             this.databaseExportToolStripMenuItem});
             this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
-            this.executeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.executeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.executeToolStripMenuItem.Text = "Execute...";
             // 
             // autoCleanUpToolStripMenuItem
@@ -216,7 +262,7 @@
             this.autoCleanUpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BtnFullCleanUp});
             this.autoCleanUpToolStripMenuItem.Name = "autoCleanUpToolStripMenuItem";
-            this.autoCleanUpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.autoCleanUpToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.autoCleanUpToolStripMenuItem.Text = "Clean Up...";
             // 
             // BtnFullCleanUp
@@ -233,7 +279,7 @@
             this.mapDatabaseToolStripMenuItem,
             this.resetToolStripMenuItem});
             this.databaseExportToolStripMenuItem.Name = "databaseExportToolStripMenuItem";
-            this.databaseExportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.databaseExportToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.databaseExportToolStripMenuItem.Text = "Database...";
             // 
             // BtnBackup
@@ -258,7 +304,7 @@
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             // 
             // erstellenToolStripMenuItem
@@ -330,21 +376,21 @@
             // BtnEditOrganization
             // 
             this.BtnEditOrganization.Name = "BtnEditOrganization";
-            this.BtnEditOrganization.Size = new System.Drawing.Size(180, 22);
+            this.BtnEditOrganization.Size = new System.Drawing.Size(142, 22);
             this.BtnEditOrganization.Text = "Organization";
             this.BtnEditOrganization.Click += new System.EventHandler(this.BtnEditOrganization_Click);
             // 
             // BtnEditGroup
             // 
             this.BtnEditGroup.Name = "BtnEditGroup";
-            this.BtnEditGroup.Size = new System.Drawing.Size(180, 22);
+            this.BtnEditGroup.Size = new System.Drawing.Size(142, 22);
             this.BtnEditGroup.Text = "Group";
             this.BtnEditGroup.Click += new System.EventHandler(this.BtnEditGroup_Click);
             // 
             // BtnEditMember
             // 
             this.BtnEditMember.Name = "BtnEditMember";
-            this.BtnEditMember.Size = new System.Drawing.Size(180, 22);
+            this.BtnEditMember.Size = new System.Drawing.Size(142, 22);
             this.BtnEditMember.Text = "Member";
             // 
             // optionsToolStripMenuItem
@@ -358,7 +404,7 @@
             // BtnAddContextMenu
             // 
             this.BtnAddContextMenu.Name = "BtnAddContextMenu";
-            this.BtnAddContextMenu.Size = new System.Drawing.Size(180, 22);
+            this.BtnAddContextMenu.Size = new System.Drawing.Size(174, 22);
             this.BtnAddContextMenu.Text = "Add Context Menu";
             this.BtnAddContextMenu.Click += new System.EventHandler(this.BtnAddContextMenu_Click);
             // 
@@ -403,12 +449,14 @@
             this.olvColumn1.AspectName = "FirstName";
             this.olvColumn1.DisplayIndex = 0;
             this.olvColumn1.Text = "Firstname";
+            this.olvColumn1.Width = 90;
             // 
             // olvColumn3
             // 
             this.olvColumn3.AspectName = "LastName";
             this.olvColumn3.DisplayIndex = 1;
             this.olvColumn3.Text = "Lastname";
+            this.olvColumn3.Width = 90;
             // 
             // panel4
             // 
@@ -712,7 +760,7 @@
             this.Name = "OverlayForm";
             this.Text = "File Overwatch";
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TvFiles)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TvOrganization)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -742,7 +790,6 @@
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BtnAddContextMenu;
         private System.Windows.Forms.ToolStripMenuItem BtnLinkFile;
-        private BrightIdeasSoftware.TreeListView treeListView1;
         private BrightIdeasSoftware.ObjectListView TvOrganization;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private System.Windows.Forms.Panel panel3;
@@ -793,6 +840,12 @@
         private System.Windows.Forms.Button BtnHomepage;
         private System.Windows.Forms.Button BtnEmail;
         private System.Windows.Forms.Button BtnPhones;
+        private BrightIdeasSoftware.ObjectListView TvFiles;
+        private BrightIdeasSoftware.OLVColumn olvColumn5;
+        private BrightIdeasSoftware.OLVColumn olvColumn6;
+        private BrightIdeasSoftware.OLVColumn olvColumn7;
+        private BrightIdeasSoftware.OLVColumn olvColumn8;
+        private BrightIdeasSoftware.OLVColumn olvColumn9;
     }
 }
 

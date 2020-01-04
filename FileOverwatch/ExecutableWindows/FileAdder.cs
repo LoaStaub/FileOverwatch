@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
+using DatabaseWindows.DatabaseModels.LinkingTables;
 using ExecutableWindows.Models;
 
 namespace ExecutableWindows
@@ -22,8 +23,29 @@ namespace ExecutableWindows
             InitializeComponent();
         }
 
-        private void BtnAddFile_Click(object sender, EventArgs e)
+        private async void BtnAddFile_Click(object sender, EventArgs e)
         {
+            var fileOverhead = (FileOverhead) CbFileOverhead.SelectedItem;
+            var file = new LinkedFile
+            {
+                CreateDate = DateTime.Now,
+                Deleted = false,
+                Description = TbDescription.Text,
+                Directory = TbFilepath.Text,
+                FileName = TbFilename.Text,
+                LastAccess = DateTime.Now
+            };
+            var db = new DataBase();
+            db.LinkedFiles.Add(file);
+            var fileToOverhead = new FileToOverhead
+            {
+                Deleted = false,
+                CreateDate = DateTime.Now,
+                FileOverheadId = fileOverhead.Id,
+                LinkedFileId = file.Id
+            };
+            db.FileToOverheadNode.Add(fileToOverhead);
+            await db.SaveChangesAsync();
         }
 
         private async void CbOrganizations_SelectedIndexChanged(object sender, EventArgs e)
@@ -53,6 +75,13 @@ namespace ExecutableWindows
 
         private async void CbMember_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var db = new DataBase();
+            var fileOverheads = await db.FileOverheads.Where(d =>
+                !d.Deleted && d.MemberNode.Any(f =>
+                    !f.Deleted && f.MemberId == ((MemberForCombobox) CbMember.SelectedItem).Id)).ToListAsync();
+            CbFileOverhead.DataSource = fileOverheads;
+            CbFileOverhead.DisplayMember = "Name";
+            CbFileOverhead.ValueMember = "Id";
         }
 
         private async void FileAdder_Load(object sender, EventArgs e)

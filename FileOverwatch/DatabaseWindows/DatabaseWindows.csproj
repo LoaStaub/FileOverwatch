@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="DataBase.cs" />
     <Compile Include="DatabaseModels\Email.cs" />
-    <Compile Include="DatabaseModels\ExcelFile.cs" />
     <Compile Include="DatabaseModels\FileOverhead.cs" />
     <Compile Include="DatabaseModels\Group.cs" />
     <Compile Include="DatabaseModels\Homepage.cs" />
@@ -70,7 +69,6 @@
     <Compile Include="DatabaseModels\LinkingTables\EmailToGroup.cs" />
     <Compile Include="DatabaseModels\LinkingTables\EmailToMember.cs" />
     <Compile Include="DatabaseModels\LinkingTables\EmailToOrganization.cs" />
-    <Compile Include="DatabaseModels\LinkingTables\ExcelToOverhead.cs" />
     <Compile Include="DatabaseModels\LinkingTables\FileToOverhead.cs" />
     <Compile Include="DatabaseModels\LinkingTables\GroupToMember.cs" />
     <Compile Include="DatabaseModels\LinkingTables\GroupToOrganization.cs" />
@@ -83,16 +81,13 @@
     <Compile Include="DatabaseModels\LinkingTables\PhoneToGroup.cs" />
     <Compile Include="DatabaseModels\LinkingTables\PhoneToMember.cs" />
     <Compile Include="DatabaseModels\LinkingTables\PhoneToOrganization.cs" />
-    <Compile Include="DatabaseModels\LinkingTables\WordToOverhead.cs" />
     <Compile Include="DatabaseModels\Member.cs" />
     <Compile Include="DatabaseModels\Organization.cs" />
     <Compile Include="DatabaseModels\PhoneNumber.cs" />
-    <Compile Include="DatabaseModels\WordFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="FileOverwatch.db" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

@@ -140,6 +140,7 @@
     <Compile Include="ListForms\Phones.Designer.cs">
       <DependentUpon>Phones.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\FileWithOverhead.cs" />
     <Compile Include="Models\MemberForCombobox.cs" />
     <Compile Include="Models\MemberWithGroup.cs" />
     <Compile Include="Models\Tradeable.cs" />

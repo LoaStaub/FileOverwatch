@@ -69,7 +69,7 @@ namespace FileAdding
             var directory = _args[0];
             LblFilePath.Text = directory;
             var db = new DataBase();
-            if (await db.LinkedFiles.AnyAsync(d => d.Directory == directory) && await db.ExcelFiles.AnyAsync(d => d.Directory == directory) && await db.WordFiles.AnyAsync(d => d.Directory == directory))
+            if (await db.LinkedFiles.AnyAsync(d => d.Directory == directory))
             {
                 var option = MessageBox.Show("This File got linked, do you want to link it to another Entry?", "File already linked",
                     MessageBoxButtons.OKCancel);

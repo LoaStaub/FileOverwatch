@@ -24,23 +24,6 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExcelFiles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    FileName = table.Column<string>(nullable: true),
-                    Directory = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    LastAccess = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ExcelFiles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "FileOverheads",
                 columns: table => new
                 {
@@ -179,52 +162,6 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WordFiles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    FileName = table.Column<string>(nullable: true),
-                    Directory = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    LastAccess = table.Column<DateTime>(nullable: false),
-                    Deleted = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WordFiles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ExcelToOverhead",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    ExcelFileId = table.Column<int>(nullable: true),
-                    FileOverheadId = table.Column<int>(nullable: true),
-                    Deleted = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ExcelToOverhead", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ExcelToOverhead_ExcelFiles_ExcelFileId",
-                        column: x => x.ExcelFileId,
-                        principalTable: "ExcelFiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ExcelToOverhead_FileOverheads_FileOverheadId",
-                        column: x => x.FileOverheadId,
-                        principalTable: "FileOverheads",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "EmailToGroup",
                 columns: table => new
                 {
@@ -315,8 +252,8 @@ namespace Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    LinkedFileId = table.Column<int>(nullable: true),
-                    FileOverheadId = table.Column<int>(nullable: true),
+                    LinkedFileId = table.Column<int>(nullable: false),
+                    FileOverheadId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -327,13 +264,13 @@ namespace Database.Migrations
                         column: x => x.FileOverheadId,
                         principalTable: "FileOverheads",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_FileToOverhead_LinkedFiles_LinkedFileId",
                         column: x => x.LinkedFileId,
                         principalTable: "LinkedFiles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -427,8 +364,8 @@ namespace Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    FileOverheadId = table.Column<int>(nullable: true),
-                    MemberId = table.Column<int>(nullable: true),
+                    FileOverheadId = table.Column<int>(nullable: false),
+                    MemberId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -439,13 +376,13 @@ namespace Database.Migrations
                         column: x => x.FileOverheadId,
                         principalTable: "FileOverheads",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OverheadToMember_Members_MemberId",
                         column: x => x.MemberId,
                         principalTable: "Members",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -455,8 +392,8 @@ namespace Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    EmailId = table.Column<int>(nullable: true),
-                    OrganizationId = table.Column<int>(nullable: true),
+                    EmailId = table.Column<int>(nullable: false),
+                    OrganizationId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -467,13 +404,13 @@ namespace Database.Migrations
                         column: x => x.EmailId,
                         principalTable: "Emails",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EmailToOrganization_Organizations_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -511,8 +448,8 @@ namespace Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    HomepageId = table.Column<int>(nullable: true),
-                    OrganizationId = table.Column<int>(nullable: true),
+                    HomepageId = table.Column<int>(nullable: false),
+                    OrganizationId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -523,13 +460,13 @@ namespace Database.Migrations
                         column: x => x.HomepageId,
                         principalTable: "Homepages",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_HomepageToOrganization_Organizations_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -623,8 +560,8 @@ namespace Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    PhoneNumberId = table.Column<int>(nullable: true),
-                    OrganizationId = table.Column<int>(nullable: true),
+                    PhoneNumberId = table.Column<int>(nullable: false),
+                    OrganizationId = table.Column<int>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -635,41 +572,13 @@ namespace Database.Migrations
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PhoneToOrganization_PhoneNumbers_PhoneNumberId",
                         column: x => x.PhoneNumberId,
                         principalTable: "PhoneNumbers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WordToOverhead",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    WordFileId = table.Column<int>(nullable: true),
-                    FileOverheadId = table.Column<int>(nullable: true),
-                    Deleted = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WordToOverhead", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_WordToOverhead_FileOverheads_FileOverheadId",
-                        column: x => x.FileOverheadId,
-                        principalTable: "FileOverheads",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_WordToOverhead_WordFiles_WordFileId",
-                        column: x => x.WordFileId,
-                        principalTable: "WordFiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -701,16 +610,6 @@ namespace Database.Migrations
                 name: "IX_EmailToOrganization_OrganizationId",
                 table: "EmailToOrganization",
                 column: "OrganizationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ExcelToOverhead_ExcelFileId",
-                table: "ExcelToOverhead",
-                column: "ExcelFileId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ExcelToOverhead_FileOverheadId",
-                table: "ExcelToOverhead",
-                column: "FileOverheadId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FileToOverhead_FileOverheadId",
@@ -831,16 +730,6 @@ namespace Database.Migrations
                 name: "IX_PhoneToOrganization_PhoneNumberId",
                 table: "PhoneToOrganization",
                 column: "PhoneNumberId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WordToOverhead_FileOverheadId",
-                table: "WordToOverhead",
-                column: "FileOverheadId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WordToOverhead_WordFileId",
-                table: "WordToOverhead",
-                column: "WordFileId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -853,9 +742,6 @@ namespace Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "EmailToOrganization");
-
-            migrationBuilder.DropTable(
-                name: "ExcelToOverhead");
 
             migrationBuilder.DropTable(
                 name: "FileToOverhead");
@@ -894,19 +780,16 @@ namespace Database.Migrations
                 name: "PhoneToOrganization");
 
             migrationBuilder.DropTable(
-                name: "WordToOverhead");
-
-            migrationBuilder.DropTable(
                 name: "Emails");
-
-            migrationBuilder.DropTable(
-                name: "ExcelFiles");
 
             migrationBuilder.DropTable(
                 name: "LinkedFiles");
 
             migrationBuilder.DropTable(
                 name: "Homepages");
+
+            migrationBuilder.DropTable(
+                name: "FileOverheads");
 
             migrationBuilder.DropTable(
                 name: "Groups");
@@ -919,12 +802,6 @@ namespace Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "PhoneNumbers");
-
-            migrationBuilder.DropTable(
-                name: "FileOverheads");
-
-            migrationBuilder.DropTable(
-                name: "WordFiles");
         }
     }
 }

@@ -14,8 +14,6 @@ namespace DatabaseWindows.DatabaseModels
         public byte[] Icon { get; set; }
         public bool Deleted { get; set; }
         public ICollection<FileToOverhead> FileNode { get; set; }
-        public ICollection<ExcelToOverhead> ExcelNode { get; set; }
-        public ICollection<WordToOverhead> WordNode { get; set; }
         public ICollection<OverheadToMember> MemberNode { get; set; }
         public ICollection<OverheadToOrganization> OrganizationNode { get; set; }
     }

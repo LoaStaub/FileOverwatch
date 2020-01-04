@@ -12,6 +12,10 @@ namespace Database.DatabaseModels.LinkingTables
         public DateTime CreateDate { get; set; }
         public LinkedFile LinkedFile { get; set; }
         public FileOverhead FileOverhead { get; set; }
+        [ForeignKey("LinkedFile")]
+        public int LinkedFileId { get; set; }
+        [ForeignKey("FileOverhead")]
+        public int FileOverheadId { get; set; }
         public bool Deleted { get; set; }
     }
 }

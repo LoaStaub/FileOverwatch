@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -197,14 +199,45 @@ namespace ExecutableWindows
             _isItOrganization = false;
 
             ClearAllLabels();
+            if ((MemberWithGroup) TvGroupsMembers.SelectedObject == null)
+            {
+                return;
+            }
             var memberWithGroup = (MemberWithGroup) TvGroupsMembers.SelectedObject;
 
             MemberLabels(ref memberWithGroup, ((Organization) TvOrganization.SelectedObject).Name);
             var db = new DataBase();
-            var fileOverheads = db.FileOverheads
+            var fileOverheads = await db.FileOverheads
                 .Where(d => !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == memberWithGroup.Id))
                 .ToListAsync();
-            var files = new LinkedFile();
+
+            var fileList = new List<FileWithOverhead>();
+            foreach (var fileOverhead in fileOverheads)
+            {
+                var files = await db.LinkedFiles.Where(d =>
+                    !d.Deleted && d.OverheadNode.Any(f =>
+                        !f.Deleted && !f.FileOverhead.Deleted && f.FileOverhead.Id == fileOverhead.Id)).ToListAsync();
+                foreach (var file in files)
+                {
+                    var fileWithOverhead = new FileWithOverhead
+                    {
+                        CreateDate = file.CreateDate,
+                        Deleted = file.Deleted,
+                        Description = file.Description,
+                        Directory = file.Directory,
+                        FileName = file.FileName,
+                        FileOverhead = fileOverhead,
+                        GroupName = fileOverhead.Name,
+                        Icon = file.Icon,
+                        Id = file.Id,
+                        LastAccess = file.LastAccess,
+                        LinkedFile = file
+                    };
+                    fileList.Add(fileWithOverhead);
+                }
+            }
+
+            TvFiles.AddObjects(fileList);
         }
 
         private void BtnEditOrganization_Click(object sender, EventArgs e)
@@ -274,6 +307,14 @@ namespace ExecutableWindows
             LblState.Text = member?.State;
             LblStreet.Text = member?.Street;
             PbPicture.Image = ImageByteConverter.BytesToImage(member?.Picture);
+        }
+
+        private void FileLabels(ref FileWithOverhead file, string path)
+        {
+            LblType.Text = @"File";
+            LblPath.Text = $@"{path}/{file?.GroupName}/{file?.FileName}";
+            LblName.Text = file?.FileName;
+            LblBirthdate.Text = file?.CreateDate.ToShortDateString();
         }
 
         private void BtnEditGroup_Click(object sender, EventArgs e)
@@ -353,6 +394,31 @@ namespace ExecutableWindows
         private void BtnFullCleanUp_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void TvFiles_DoubleClick(object sender, EventArgs e)
+        {
+            var file = (FileWithOverhead) TvFiles.SelectedObject;
+            if (Directory.Exists(file.Directory))
+            {
+                Process.Start(file.Directory);
+            }
+            else
+            {
+                MessageBox.Show("File doesn't exist anymore");
+            }
+        }
+
+        private void TvFiles_SelectionChanged(object sender, EventArgs e)
+        {
+            var path = LblPath.Text;
+            var file = (FileWithOverhead) TvFiles.SelectedObject;
+            if (file == null)
+            {
+                return;
+            }
+            ClearAllLabels();
+            FileLabels(ref file, path);
         }
     }
 }

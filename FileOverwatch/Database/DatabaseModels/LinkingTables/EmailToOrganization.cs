@@ -12,6 +12,10 @@ namespace Database.DatabaseModels.LinkingTables
         public DateTime CreateDate { get; set; }
         public Email Email { get; set; }
         public Organization Organization { get; set; }
+        [ForeignKey("Email")]
+        public int EmailId { get; set; }
+        [ForeignKey("Organization")]
+        public int OrganizationId { get; set; }
         public bool Deleted { get; set; }
     }
 }
