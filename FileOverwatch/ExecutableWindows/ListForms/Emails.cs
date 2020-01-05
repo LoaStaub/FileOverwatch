@@ -113,7 +113,7 @@ namespace ExecutableWindows.ListForms
 
         private bool ContainsEmail()
         {
-            bool containsMail = true;
+            var containsMail = true;
             if (!TbEmail.Text.Contains("@"))
             {
                 containsMail = false;
@@ -123,7 +123,7 @@ namespace ExecutableWindows.ListForms
             if (!TbEmail.Text.Contains("."))
             {
                 containsMail = false;
-                MessageBox.Show("");
+                MessageBox.Show("Your E-Mail Adress doesn't contain a '.' ");
             }
 
             return containsMail;
@@ -150,10 +150,6 @@ namespace ExecutableWindows.ListForms
                 email.Deleted = true;
                 TvEmails.DisableObject(email);
             }
-            if (_isOpenedByEditor)
-            {
-                return;
-            }
 
             var db = new DataBase();
             db.Entry(email).State = EntityState.Modified;
@@ -164,6 +160,7 @@ namespace ExecutableWindows.ListForms
         {
             TvEmails.ClearObjects();
             TvEmails.AddObjects(_emails);
+            if(_isOpenedByEditor) BtnDelete.Visible = false;
         }
     }
 }

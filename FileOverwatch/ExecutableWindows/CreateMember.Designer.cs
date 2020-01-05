@@ -31,7 +31,6 @@
             this.BtnPhones = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.BtnHomepages = new System.Windows.Forms.Button();
-            this.BtnGroups = new System.Windows.Forms.Button();
             this.BtnEmails = new System.Windows.Forms.Button();
             this.DtpBirthdate = new System.Windows.Forms.DateTimePicker();
             this.BtnSave = new System.Windows.Forms.Button();
@@ -67,13 +66,14 @@
             this.label15 = new System.Windows.Forms.Label();
             this.CbOrganizations = new System.Windows.Forms.ComboBox();
             this.CbGroups = new System.Windows.Forms.ComboBox();
+            this.CheckOldLink = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PbImage)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnPhones
             // 
             this.BtnPhones.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BtnPhones.Location = new System.Drawing.Point(265, 187);
+            this.BtnPhones.Location = new System.Drawing.Point(206, 187);
             this.BtnPhones.Name = "BtnPhones";
             this.BtnPhones.Size = new System.Drawing.Size(59, 23);
             this.BtnPhones.TabIndex = 65;
@@ -94,24 +94,13 @@
             // BtnHomepages
             // 
             this.BtnHomepages.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BtnHomepages.Location = new System.Drawing.Point(185, 187);
+            this.BtnHomepages.Location = new System.Drawing.Point(126, 187);
             this.BtnHomepages.Name = "BtnHomepages";
             this.BtnHomepages.Size = new System.Drawing.Size(74, 23);
             this.BtnHomepages.TabIndex = 63;
             this.BtnHomepages.Text = "Homepages";
             this.BtnHomepages.UseVisualStyleBackColor = true;
             this.BtnHomepages.Click += new System.EventHandler(this.BtnHomepages_Click);
-            // 
-            // BtnGroups
-            // 
-            this.BtnGroups.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BtnGroups.Location = new System.Drawing.Point(127, 187);
-            this.BtnGroups.Name = "BtnGroups";
-            this.BtnGroups.Size = new System.Drawing.Size(52, 23);
-            this.BtnGroups.TabIndex = 62;
-            this.BtnGroups.Text = "Groups";
-            this.BtnGroups.UseVisualStyleBackColor = true;
-            this.BtnGroups.Click += new System.EventHandler(this.BtnGroups_Click);
             // 
             // BtnEmails
             // 
@@ -406,7 +395,7 @@
             // 
             this.CbOrganizations.FormattingEnabled = true;
             this.CbOrganizations.Location = new System.Drawing.Point(83, 159);
-            this.CbOrganizations.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CbOrganizations.Margin = new System.Windows.Forms.Padding(2);
             this.CbOrganizations.Name = "CbOrganizations";
             this.CbOrganizations.Size = new System.Drawing.Size(117, 21);
             this.CbOrganizations.TabIndex = 72;
@@ -416,16 +405,27 @@
             // 
             this.CbGroups.FormattingEnabled = true;
             this.CbGroups.Location = new System.Drawing.Point(244, 159);
-            this.CbGroups.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CbGroups.Margin = new System.Windows.Forms.Padding(2);
             this.CbGroups.Name = "CbGroups";
             this.CbGroups.Size = new System.Drawing.Size(101, 21);
             this.CbGroups.TabIndex = 73;
+            // 
+            // CheckOldLink
+            // 
+            this.CheckOldLink.AutoSize = true;
+            this.CheckOldLink.Location = new System.Drawing.Point(222, 138);
+            this.CheckOldLink.Name = "CheckOldLink";
+            this.CheckOldLink.Size = new System.Drawing.Size(111, 17);
+            this.CheckOldLink.TabIndex = 74;
+            this.CheckOldLink.Text = "Delete old Linking";
+            this.CheckOldLink.UseVisualStyleBackColor = true;
             // 
             // CreateMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(550, 406);
+            this.Controls.Add(this.CheckOldLink);
             this.Controls.Add(this.CbGroups);
             this.Controls.Add(this.CbOrganizations);
             this.Controls.Add(this.label15);
@@ -437,7 +437,6 @@
             this.Controls.Add(this.BtnPhones);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.BtnHomepages);
-            this.Controls.Add(this.BtnGroups);
             this.Controls.Add(this.BtnEmails);
             this.Controls.Add(this.DtpBirthdate);
             this.Controls.Add(this.BtnSave);
@@ -479,7 +478,6 @@
         private System.Windows.Forms.Button BtnPhones;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button BtnHomepages;
-        private System.Windows.Forms.Button BtnGroups;
         private System.Windows.Forms.Button BtnEmails;
         private System.Windows.Forms.DateTimePicker DtpBirthdate;
         private System.Windows.Forms.Button BtnSave;
@@ -515,5 +513,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox CbOrganizations;
         private System.Windows.Forms.ComboBox CbGroups;
+        private System.Windows.Forms.CheckBox CheckOldLink;
     }
 }

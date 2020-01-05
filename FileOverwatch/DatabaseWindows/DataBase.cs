@@ -31,8 +31,6 @@ namespace DatabaseWindows
         public virtual DbSet<HomepageToGroup> HomepageToGroupNode { get; set; }
         public virtual DbSet<HomepageToOrganization> HomepageToOrganizationNode { get; set; }
         public virtual DbSet<OverheadToMember> OverheadToMemberNode { get; set; }
-        public virtual DbSet<OverheadToOrganization> OverheadToOrganizationNode { get; set; }
-        public virtual DbSet<OverheadToGroup> OverheadToGroupNode { get; set; }
         public virtual DbSet<GroupToOrganization> GroupToOrganizationNode { get; set; }
         public virtual DbSet<GroupToMember> GroupToMemberNode { get; set; }
         public virtual DbSet<PhoneToOrganization> PhoneToOrganizationNode { get; set; }

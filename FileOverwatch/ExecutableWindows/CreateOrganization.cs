@@ -7,13 +7,14 @@ using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
 using DatabaseWindows.DatabaseModels.LinkingTables;
-using Executable.Classes;
+using ExecutableWindows.Classes;
 using ExecutableWindows.ListForms;
 
 namespace ExecutableWindows
 {
     public partial class CreateOrganization : Form
     {
+        private Organization _organization;
         public CreateOrganization(ref Organization organization)
         {
             _organization = organization;
@@ -35,7 +36,7 @@ namespace ExecutableWindows
             var db = new DataBase();
             if (_organization.Id == 0)
             {
-                _organization.CreateDate = DateTime.UtcNow;
+                _organization.CreateDate = DateTime.Now;
                 db.Organizations.Add(_organization);
             }
             else
@@ -47,6 +48,8 @@ namespace ExecutableWindows
             {
                 foreach (var email in _emails)
                 {
+                    var organizationNode = await db.EmailToOrganizationNode.FirstOrDefaultAsync(d => d.OrganizationId == _organization.Id && d.EmailId == email.Id);
+                    if (organizationNode != null) continue;
                     var emailToOrganizationNode = new EmailToOrganization
                     {
                         EmailId = email.Id,
@@ -63,6 +66,9 @@ namespace ExecutableWindows
             {
                 foreach (var homepage in _homepages)
                 {
+                    var organizationNode = await db.HomepageToOrganizationNode.FirstOrDefaultAsync(d => d.OrganizationId == _organization.Id && d.HomepageId == homepage.Id);
+                    if (organizationNode != null) continue;
+
                     var homepageToOrganizationNode = new HomepageToOrganization
                     {
                         HomepageId = homepage.Id,
@@ -79,6 +85,8 @@ namespace ExecutableWindows
             {
                 foreach (var number in _phoneNumbers)
                 {
+                    var organizationNode = await db.PhoneToOrganizationNode.FirstOrDefaultAsync(d => d.OrganizationId == _organization.Id && d.PhoneNumberId == number.Id);
+                    if (organizationNode != null) continue;
                     var phoneToOrganizationNode = new PhoneToOrganization
                     {
                         PhoneNumberId = number.Id,
@@ -91,10 +99,10 @@ namespace ExecutableWindows
                 db.PhoneNumbers.AddRange(_phoneNumbers);
             }
             await db.SaveChangesAsync();
+            Close();
         }
 
-        private Organization _organization;
-        private async void CreateOrganization_Load(object sender, EventArgs e)
+        private void CreateOrganization_Load(object sender, EventArgs e)
         {
             if (_organization.Id == 0)
             {
@@ -167,23 +175,19 @@ namespace ExecutableWindows
         private static List<Email> _emails;
         private async void BtnEmails_Click(object sender, EventArgs e)
         {
-            var db = new DataBase();
             var emails = new List<Email>();
             if (_organization.Id != 0)
             {
+                var db = new DataBase();
                 emails = await db.Emails.Where(d =>
-                    !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == _organization.Id)).ToListAsync();
+                    !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == _organization.Id))
+                    .ToListAsync();
             }
 
             var emailForm = new Emails(ref emails, 0, 0, true);
             emailForm.ShowDialog();
             _gotEmails = true;
             _emails = emails;
-        }
-
-        private void BtnGroups_Click(object sender, EventArgs e)
-        {
-
         }
 
         private static bool _gotHomepage;
@@ -195,18 +199,14 @@ namespace ExecutableWindows
             if (_organization.Id != 0)
             {
                 homepages = await db.Homepages.Where(d =>
-                    !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == _organization.Id)).ToListAsync();
+                    !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == _organization.Id))
+                    .ToListAsync();
             }
 
             var homepageForm = new Homepages(ref homepages, 0, 0, true);
             homepageForm.ShowDialog();
             _gotHomepage = true;
             _homepages = homepages;
-        }
-
-        private void BtnMembers_Click(object sender, EventArgs e)
-        {
-
         }
 
         private static bool _gotPhone;
@@ -218,7 +218,8 @@ namespace ExecutableWindows
             if (_organization.Id != 0)
             {
                 phoneNumbers = await db.PhoneNumbers.Where(d =>
-                    !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == _organization.Id)).ToListAsync();
+                    !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == _organization.Id))
+                    .ToListAsync();
             }
 
             var phoneForm = new Phones(ref phoneNumbers, 0, 0, true);

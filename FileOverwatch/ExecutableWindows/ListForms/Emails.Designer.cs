@@ -46,16 +46,16 @@
             // 
             // TvEmails
             // 
-            this.TvEmails.AllColumns.Add(this.olvColumn1);
             this.TvEmails.AllColumns.Add(this.olvColumn2);
             this.TvEmails.AllColumns.Add(this.olvColumn3);
             this.TvEmails.AllColumns.Add(this.olvColumn4);
+            this.TvEmails.AllColumns.Add(this.olvColumn1);
             this.TvEmails.CellEditUseWholeCell = false;
             this.TvEmails.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn1,
             this.olvColumn2,
             this.olvColumn3,
-            this.olvColumn4});
+            this.olvColumn4,
+            this.olvColumn1});
             this.TvEmails.Cursor = System.Windows.Forms.Cursors.Default;
             this.TvEmails.HideSelection = false;
             this.TvEmails.Location = new System.Drawing.Point(12, 49);
@@ -71,24 +71,30 @@
             this.olvColumn1.AspectName = "Id";
             this.olvColumn1.Text = "Id";
             this.olvColumn1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn1.Width = 30;
             // 
             // olvColumn2
             // 
             this.olvColumn2.AspectName = "Mail";
             this.olvColumn2.Text = "MailAdress";
             this.olvColumn2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn2.Width = 300;
             // 
             // olvColumn3
             // 
             this.olvColumn3.AspectName = "CreateDate";
+            this.olvColumn3.DisplayIndex = 2;
             this.olvColumn3.Text = "Create Date";
             this.olvColumn3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn3.Width = 120;
             // 
             // olvColumn4
             // 
             this.olvColumn4.AspectName = "Description";
+            this.olvColumn4.DisplayIndex = 1;
             this.olvColumn4.Text = "Description";
             this.olvColumn4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn4.Width = 190;
             // 
             // TbEmail
             // 

@@ -43,10 +43,7 @@ namespace ExecutableWindows.ListForms
             {
                 number.Deleted = true;
                 TvPhonenumbers.DisableObject(number);
-                if (_isOpenedByEditor)
-                {
-                    return;
-                }
+                
                 var db = new DataBase();
                 db.Entry(number).State = EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -120,6 +117,7 @@ namespace ExecutableWindows.ListForms
             TvPhonenumbers.ShowGroups = false;
             TvPhonenumbers.ClearObjects();
             TvPhonenumbers.AddObjects(_numbers);
+            if (_isOpenedByEditor) BtnDelete.Visible = false;
         }
 
         private async void BtnEdit_Click(object sender, EventArgs e)

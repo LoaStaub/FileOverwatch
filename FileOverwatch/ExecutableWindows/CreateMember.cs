@@ -1,29 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
 using DatabaseWindows.DatabaseModels.LinkingTables;
-using Executable.Classes;
+using ExecutableWindows.Classes;
 using ExecutableWindows.ListForms;
 
 namespace ExecutableWindows
 {
     public partial class CreateMember : Form
     {
-        private int _memberId;
-        private Member _member = new Member();
-        private Image _image;
-        public CreateMember(ref int memberId)
+        private Member _member;
+        public CreateMember(ref Member member)
         {
-            _memberId = memberId;
+            _member = member;
             InitializeComponent();
         }
 
@@ -47,14 +41,12 @@ namespace ExecutableWindows
             var pathToPic = openFileDialog.FileName;
             var image = Image.FromFile(pathToPic);
             PbImage.Image = image;
-            _image = image;
             _member.Picture = ImageByteConverter.ImageToBytes(image);
         }
 
         private void BtnDeletePicture_Click(object sender, EventArgs e)
         {
             _member.Picture = null;
-            _image = null;
             PbImage.Image = null;
         }
 
@@ -94,11 +86,6 @@ namespace ExecutableWindows
             _homepages = homepages;
         }
 
-        private void BtnGroups_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private static bool _gotEmails;
         private static List<Email> _emails;
         private async void BtnEmails_Click(object sender, EventArgs e)
@@ -130,9 +117,9 @@ namespace ExecutableWindows
             _member.Gender = TbGender.Text;
             _member.ZipCode = TbZipCode.Text;
             _member.Birthdate = DtpBirthdate.Value;
-            _member.CreateDate = DateTime.UtcNow;
+            _member.CreateDate = DateTime.Now;
             var db = new DataBase();
-            if (_memberId == 0)
+            if (_member.Id == 0)
             {
                 var node = new GroupToMember
                 {
@@ -144,10 +131,29 @@ namespace ExecutableWindows
                 db.Members.Add(_member);
                 db.GroupToMemberNode.Add(node);
             }
+            else
+            {
+                db.Entry(_member).State = EntityState.Modified;
+                var oldMemberNode = await db.GroupToMemberNode.FirstOrDefaultAsync(d =>
+                    !d.Deleted && d.MemberId == _member.Id && d.GroupId == ((Group) CbGroups.SelectedItem).Id);
+                if (oldMemberNode != null)
+                {
+                    oldMemberNode.Deleted = CheckOldLink.Checked;
+                    var newMemberNode = new GroupToMember
+                    {
+                        CreateDate = DateTime.Now,
+                        GroupId = ((Group)CbGroups.SelectedItem).Id,
+                        Deleted = false,
+                        MemberId = _member.Id
+                    };
+                    db.GroupToMemberNode.Add(newMemberNode);
+                }
+            }
             if (_gotEmails)
             {
                 foreach (var email in _emails)
                 {
+                    if (email.MemberNode.Any(d => !d.Deleted && d.MemberId == _member.Id)) continue;
                     var emailToMemberNode = new EmailToMember
                     {
                         EmailId = email.Id,
@@ -164,6 +170,7 @@ namespace ExecutableWindows
             {
                 foreach (var homepage in _homepages)
                 {
+                    if (homepage.MemberNode.Any(d => !d.Deleted && d.MemberId == _member.Id)) continue;
                     var homepageToMemberNode = new HomepageToMember
                     {
                         HomepageId = homepage.Id,
@@ -180,6 +187,7 @@ namespace ExecutableWindows
             {
                 foreach (var number in _phoneNumbers)
                 {
+                    if (number.MemberNode.Any(d => !d.Deleted && d.MemberId == _member.Id)) continue;
                     var phoneToMemberNode = new PhoneToMember
                     {
                         PhoneNumberId = number.Id,
@@ -216,14 +224,15 @@ namespace ExecutableWindows
             CbOrganizations.DisplayMember = "Name";
             CbOrganizations.ValueMember = "Id";
 
-            if (_memberId == 0)
+            if (_member.Id == 0)
             {
+                CheckOldLink.Visible = false;
                 BtnDelete.Visible = false;
                 return;
             }
 
             
-            _member = db.Members.FirstOrDefault(member => member.Id == _memberId);
+            _member = db.Members.FirstOrDefault(member => member.Id == _member.Id);
             FillElements();
         }
 
@@ -248,12 +257,18 @@ namespace ExecutableWindows
             var db = new DataBase();
             var groups = await db.Groups.Where(d =>
                 !d.Deleted &&
-                d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == ((Organization) CbOrganizations.SelectedItem).Id)).ToListAsync();
+                d.OrganizationNode.Any(f => !f.Deleted &&
+                                            f.OrganizationId == ((Organization) CbOrganizations.SelectedItem).Id))
+                                            .ToListAsync();
             if (groups.Count != 0)
             {
                 CbGroups.DataSource = groups;
                 CbGroups.DisplayMember = "Name";
                 CbGroups.ValueMember = "Id";
+            }
+            else
+            {
+                CbGroups.Items.Clear();
             }
         }
     }

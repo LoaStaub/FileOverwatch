@@ -7,13 +7,14 @@ using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
 using DatabaseWindows.DatabaseModels.LinkingTables;
-using Executable.Classes;
+using ExecutableWindows.Classes;
 using ExecutableWindows.ListForms;
 
 namespace ExecutableWindows
 {
     public partial class CreateGroup : Form
     {
+        private Group _group;
         public CreateGroup(ref Group group)
         {
             _group = group;
@@ -25,7 +26,7 @@ namespace ExecutableWindows
             _group.Picture = ImageByteConverter.ImageToBytes(PbImage.Image);
             _group.Description = TbDescription.Text;
             _group.Name = TbName.Text;
-            _group.CreateDate = DateTime.UtcNow;
+            _group.CreateDate = DateTime.Now;
             var db = new DataBase();
             if (_group.Id == 0)
             {
@@ -42,11 +43,29 @@ namespace ExecutableWindows
             else
             {
                 db.Entry(_group).State = EntityState.Modified;
+                var oldGroupNode =
+                    await db.GroupToOrganizationNode
+                        .FirstOrDefaultAsync(d => !d.Deleted &&
+                                                  d.GroupId == _group.Id &&
+                                                  d.OrganizationId == ((Organization)CbOrganizations.SelectedItem).Id);
+                if (oldGroupNode != null)
+                {
+                    oldGroupNode.Deleted = CheckOldLink.Checked;
+                    var newGroupNode = new GroupToOrganization
+                    {
+                        CreateDate = DateTime.Now,
+                        GroupId = _group.Id,
+                        Deleted = false,
+                        OrganizationId = ((Organization)CbOrganizations.SelectedItem).Id
+                    }; 
+                    db.GroupToOrganizationNode.Add(newGroupNode);
+                }
             }
             if (_gotEmails)
             {
                 foreach (var email in _emails)
                 {
+                    if (email.GroupNode.Any(d => !d.Deleted && d.GroupId == _group.Id)) continue;
                     var emailToGroupNode = new EmailToGroup
                     {
                         EmailId = email.Id,
@@ -63,6 +82,7 @@ namespace ExecutableWindows
             {
                 foreach (var homepage in _homepages)
                 {
+                    if (homepage.GroupNode.Any(d => !d.Deleted && d.GroupId == _group.Id)) continue;
                     var homepageToGroupNode = new HomepageToGroup
                     {
                         HomepageId = homepage.Id,
@@ -79,6 +99,7 @@ namespace ExecutableWindows
             {
                 foreach (var number in _phoneNumbers)
                 {
+                    if (number.GroupNode.Any(d => !d.Deleted && d.GroupId == _group.Id)) continue;
                     var phoneToGroupNode = new PhoneToGroup
                     {
                         PhoneNumberId = number.Id,
@@ -136,11 +157,6 @@ namespace ExecutableWindows
             PbImage.Image = null;
         }
 
-        private void BtnOrganizations_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private static bool _gotEmails;
         private static List<Email> _emails;
         private async void BtnEmails_Click(object sender, EventArgs e)
@@ -177,51 +193,30 @@ namespace ExecutableWindows
             _phoneNumbers = phoneNumbers;
         }
 
-        private void BtnMembers_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private Group _group = new Group();
-        private void CreateGroup_Load(object sender, EventArgs e)
+        private async void CreateGroup_Load(object sender, EventArgs e)
         {
             var db = new DataBase();
-            var organizations = db.Organizations.Where(orga => !orga.Deleted).ToList();
+            var organizations = await db.Organizations.Where(orga => !orga.Deleted).ToListAsync();
             CbOrganizations.DataSource = organizations;
             CbOrganizations.DisplayMember = "Name";
             CbOrganizations.ValueMember = "Id";
             if (_group.Id == 0)
             {
                 BtnDelete.Visible = false;
+                CheckOldLink.Visible = false;
                 return;
             }
 
-            _group = db.Groups.FirstOrDefault(group => group.Id == _group.Id);
+            var usedOrganizations = await db.Organizations
+                .Where(d => !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == _group.Id)).ToListAsync();
+            CbOrganizations.SelectedItem = usedOrganizations[0];
+            LblCounter.Text = $@"{usedOrganizations.Count - 1} more";
+
             FillElements();
         }
 
         private void FillElements()
         {
-            var selected = false;
-            var counter = 0;
-            foreach (var organization in _group.OrganizationNode)
-            {
-                if(!organization.Organization.Deleted)
-                {
-                    if (!selected)
-                    {
-                        CbOrganizations.SelectedItem = organization.Organization.Name;
-                    }
-                    selected = true;
-                    counter++;
-                }
-            }
-
-            if (counter != 0)
-            {
-                counter--;
-            }
-            LblCounter.Text = $@"{counter} more";
             TbName.Text = _group.Name;
             TbDescription.Text = _group.Description;
             PbImage.Image = ImageByteConverter.BytesToImage(_group.Picture);

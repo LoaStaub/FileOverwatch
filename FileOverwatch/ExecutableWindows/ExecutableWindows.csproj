@@ -110,29 +110,11 @@
     <Compile Include="FileAdder.Designer.cs">
       <DependentUpon>FileAdder.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListForms\Groups.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListForms\Groups.Designer.cs">
-      <DependentUpon>Groups.cs</DependentUpon>
-    </Compile>
     <Compile Include="ListForms\Homepages.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ListForms\Homepages.Designer.cs">
       <DependentUpon>Homepages.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ListForms\Members.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListForms\Members.Designer.cs">
-      <DependentUpon>Members.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ListForms\Organizations.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListForms\Organizations.Designer.cs">
-      <DependentUpon>Organizations.cs</DependentUpon>
     </Compile>
     <Compile Include="ListForms\Phones.cs">
       <SubType>Form</SubType>
@@ -185,17 +167,8 @@
     <EmbeddedResource Include="FileAdder.resx">
       <DependentUpon>FileAdder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListForms\Groups.resx">
-      <DependentUpon>Groups.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ListForms\Homepages.resx">
       <DependentUpon>Homepages.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListForms\Members.resx">
-      <DependentUpon>Members.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListForms\Organizations.resx">
-      <DependentUpon>Organizations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListForms\Phones.resx">
       <DependentUpon>Phones.cs</DependentUpon>

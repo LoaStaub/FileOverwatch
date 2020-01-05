@@ -37,12 +37,25 @@
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnOpenPage = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.TvPages)).BeginInit();
             this.SuspendLayout();
             // 
             // TvPages
             // 
+            this.TvPages.AllColumns.Add(this.olvColumn1);
+            this.TvPages.AllColumns.Add(this.olvColumn2);
+            this.TvPages.AllColumns.Add(this.olvColumn3);
+            this.TvPages.AllColumns.Add(this.olvColumn4);
             this.TvPages.CellEditUseWholeCell = false;
+            this.TvPages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn2,
+            this.olvColumn3,
+            this.olvColumn4});
             this.TvPages.Cursor = System.Windows.Forms.Cursors.Default;
             this.TvPages.HideSelection = false;
             this.TvPages.Location = new System.Drawing.Point(12, 41);
@@ -125,6 +138,30 @@
             this.BtnDelete.UseVisualStyleBackColor = true;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
+            // olvColumn1
+            // 
+            this.olvColumn1.AspectName = "Link";
+            this.olvColumn1.Text = "Link";
+            this.olvColumn1.Width = 230;
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "Description";
+            this.olvColumn2.Text = "Description";
+            this.olvColumn2.Width = 290;
+            // 
+            // olvColumn3
+            // 
+            this.olvColumn3.AspectName = "CreateDate";
+            this.olvColumn3.Text = "Create Date";
+            this.olvColumn3.Width = 100;
+            // 
+            // olvColumn4
+            // 
+            this.olvColumn4.AspectName = "Id";
+            this.olvColumn4.Text = "Id";
+            this.olvColumn4.Width = 30;
+            // 
             // Homepages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -159,5 +196,9 @@
         private System.Windows.Forms.Button BtnEdit;
         private System.Windows.Forms.Button BtnOpenPage;
         private System.Windows.Forms.Button BtnDelete;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn olvColumn4;
     }
 }

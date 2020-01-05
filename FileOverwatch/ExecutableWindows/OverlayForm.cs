@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseWindows.DatabaseModels;
-using Executable.Classes;
+using ExecutableWindows.Classes;
 using ExecutableWindows.ListForms;
 using ExecutableWindows.Models;
 using Microsoft.Win32;
@@ -76,8 +76,8 @@ namespace ExecutableWindows
 
         private void AddMember()
         {
-            var id = 0;
-            var memberForm = new CreateMember(ref id);
+            var member = new Member();
+            var memberForm = new CreateMember(ref member);
             memberForm.ShowDialog();
         }
 

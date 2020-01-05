@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 
-namespace Executable.Classes
+namespace ExecutableWindows.Classes
 {
     class ImageByteConverter
     {

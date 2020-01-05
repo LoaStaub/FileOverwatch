@@ -113,6 +113,7 @@ namespace ExecutableWindows.ListForms
             TvPages.ShowGroups = false;
             TvPages.ClearObjects();
             TvPages.AddObjects(_pages);
+            if (_isOpenedByEditor) BtnDelete.Visible = false;
         }
 
         private void BtnOpenPage_Click(object sender, EventArgs e)
@@ -127,10 +128,6 @@ namespace ExecutableWindows.ListForms
             {
                 page.Deleted = true;
                 TvPages.DisableObject(page);
-                if (_isOpenedByEditor)
-                {
-                    return;
-                }
                 var db = new DataBase();
                 db.Entry(page).State = EntityState.Modified;
                 await db.SaveChangesAsync();
