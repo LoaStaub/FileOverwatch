@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseWindows;
 using DatabaseWindows.DatabaseModels;
@@ -18,11 +12,9 @@ namespace ExecutableWindows
     public partial class CreateFilegroup : Form
     {
         private FileOverhead _fileOverhead;
-        private static bool _edit;
-        public CreateFilegroup(ref FileOverhead fileOverhead, bool edit)
+        public CreateFilegroup(ref FileOverhead fileOverhead)
         {
             _fileOverhead = fileOverhead;
-            _edit = edit;
             InitializeComponent();
         }
 
@@ -35,6 +27,7 @@ namespace ExecutableWindows
         {
             var db = new DataBase();
             _fileOverhead.Deleted = true;
+            db.Entry(_fileOverhead).State = EntityState.Modified;
             await db.SaveChangesAsync();
         }
 
@@ -90,9 +83,12 @@ namespace ExecutableWindows
         {
             var db = new DataBase();
             var members = await db.Members
-                .Where(d => !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == ((Group)CbGroups.SelectedItem).Id))
+                .Where(d => !d.Deleted && d.GroupNode.Any(f => !f.Deleted 
+                                                               && f.GroupId == ((Group)CbGroups.SelectedItem).Id))
                 .ToListAsync();
-            var memberForCbList = members.Select(member => new MemberForCombobox { Id = member.Id, Member = member, Name = $"{member.FirstName} {member.LastName}" }).ToList();
+            var memberForCbList = members.Select(member => 
+                new MemberForCombobox { Id = member.Id, Member = member, 
+                    Name = $"{member.FirstName} {member.LastName}" }).ToList();
 
             CbMembers.DataSource = memberForCbList;
             CbMembers.DisplayMember = "Name";

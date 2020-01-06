@@ -17,14 +17,39 @@ namespace ExecutableWindows
 {
     public partial class FileAdder : Form
     {
-        private static string _pathToFile;
-        public FileAdder()
+        private LinkedFile _linkedFile;
+        public FileAdder(ref LinkedFile linkedFile)
         {
+            _linkedFile = linkedFile;
             InitializeComponent();
         }
 
         private async void BtnAddFile_Click(object sender, EventArgs e)
         {
+            var db = new DataBase();
+            if (_linkedFile.Id != 0)
+            {
+                _linkedFile.Description = TbDescription.Text;
+                _linkedFile.Directory = TbFilepath.Text;
+                _linkedFile.FileName = TbFilename.Text;
+                db.Entry(_linkedFile).State = EntityState.Modified;
+                var containsConnection = db.FileToOverheadNode.Any(d =>
+                    !d.Deleted && d.FileOverheadId == ((FileOverhead) CbFileOverhead.SelectedItem).Id &&
+                    d.LinkedFileId == _linkedFile.Id);
+                if (!containsConnection)
+                {
+                    var fileToOverheadNode = new FileToOverhead
+                    {
+                        Deleted = false,
+                        CreateDate = DateTime.Now,
+                        FileOverheadId = ((FileOverhead)CbFileOverhead.SelectedItem).Id,
+                        LinkedFileId = _linkedFile.Id
+                    };
+                    db.FileToOverheadNode.Add(fileToOverheadNode);
+                }
+                await db.SaveChangesAsync();
+                return;
+            }
             var fileOverhead = (FileOverhead) CbFileOverhead.SelectedItem;
             var file = new LinkedFile
             {
@@ -35,7 +60,7 @@ namespace ExecutableWindows
                 FileName = TbFilename.Text,
                 LastAccess = DateTime.Now
             };
-            var db = new DataBase();
+            
             db.LinkedFiles.Add(file);
             var fileToOverhead = new FileToOverhead
             {
@@ -53,7 +78,9 @@ namespace ExecutableWindows
             var db = new DataBase();
             var groups = await db.Groups.Where(d =>
                 !d.Deleted &&
-                d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == ((Organization)CbOrganizations.SelectedItem).Id)).ToListAsync();
+                d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == 
+                                            ((Organization)CbOrganizations.SelectedItem).Id))
+                                            .ToListAsync();
 
             CbGroups.DataSource = groups;
             CbGroups.DisplayMember = "Name";
@@ -97,19 +124,13 @@ namespace ExecutableWindows
         {
             var openFileDialog = new OpenFileDialog();
             openFileDialog.ShowDialog();
-            _pathToFile = openFileDialog.FileName;
-            TbFilepath.Text = _pathToFile;
-        }
-
-        private void TbFilepath_TextChanged(object sender, EventArgs e)
-        {
-            _pathToFile = TbFilepath.Text;
+            TbFilepath.Text = openFileDialog.FileName;
         }
 
         private void BtnNewFilegroup_Click(object sender, EventArgs e)
         {
             var fileHead = new FileOverhead();
-            var createFileGroup = new CreateFilegroup(ref fileHead, false);
+            var createFileGroup = new CreateFilegroup(ref fileHead);
             createFileGroup.ShowDialog();
         }
     }

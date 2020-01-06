@@ -1,77 +1,24 @@
 ﻿using DatabaseWindows;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseWindows.DatabaseModels;
 using ExecutableWindows.Classes;
 using ExecutableWindows.ListForms;
 using ExecutableWindows.Models;
-using Microsoft.Win32;
 
 namespace ExecutableWindows
 {
     public partial class OverlayForm : Form
     {
-        private static bool _isItOrganization;
         public OverlayForm()
         {
             InitializeComponent();
-        }
-
-        private void BtnRefresh_Click(object sender, EventArgs e)
-        {
-            OrgaHead();
-        }
-
-        private void OrgaHead()
-        {
-            ClearAllLabels();
-            var db = new DataBase();
-            var orgaList = db.Organizations.Where(d => !d.Deleted).OrderByDescending(d => d.Name).ToList();
-            //var OrgaOverheadNode = new TreeNode();
-            foreach (var organization in orgaList)
-            {
-                var orgaTreeNode = new TreeNode
-                {
-                    Text = organization.Name,
-                    Name = "Organization"
-                };
-                if (organization.GroupNode != null)
-                {
-                    foreach (var groupNode in organization.GroupNode)
-                    {
-                        if (!groupNode.Deleted)
-                        {
-                            var groupTreeNode = new TreeNode
-                            {
-                                Text = groupNode.Group.Name,
-                                Name = "Gruppe"
-                            };
-                            foreach (var groupNode2 in groupNode.Group.MemberNode)
-                            {
-                                if (!groupNode2.Deleted)
-                                {
-                                    var employeeTreeNode = new TreeNode
-                                    {
-                                        Text = groupNode2.Member.FirstName + " " + groupNode2.Member.LastName,
-                                        Name = "Employee"
-                                    };
-                                    groupTreeNode.Nodes.Add(employeeTreeNode);
-                                }
-                            }
-
-                            orgaTreeNode.Nodes.Add(groupTreeNode);
-                        }
-                    }
-                }
-            }
         }
 
         private void AddMember()
@@ -95,7 +42,7 @@ namespace ExecutableWindows
             organizationForm.ShowDialog();
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private async void BtnRefresh_Click(object sender, EventArgs e)
         {
             TvOrganization.Items.Clear();
             var db = new DataBase();
@@ -116,11 +63,7 @@ namespace ExecutableWindows
 
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        private static bool _isItOrganization;
         private async void TvOrganization_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             _isItOrganization = true;
@@ -168,14 +111,15 @@ namespace ExecutableWindows
 
         private void BtnFileLinking_Click(object sender, EventArgs e)
         {
-            var newFileLinking = new FileAdder();
+            var newLinkedFile = new LinkedFile();
+            var newFileLinking = new FileAdder(ref newLinkedFile);
             newFileLinking.ShowDialog();
         }
 
         private void BtnFileGroup_Click(object sender, EventArgs e)
         {
             var fileHead = new FileOverhead();
-            var createFileGroup = new CreateFilegroup(ref fileHead, false);
+            var createFileGroup = new CreateFilegroup(ref fileHead);
             createFileGroup.ShowDialog();
         }
 
@@ -271,6 +215,7 @@ namespace ExecutableWindows
             LblBirthDateDesc.Text = @"Birthdate:";
             LblGenderDesc.Text = @"Gender:";
             PbPicture.Image = null;
+            TbDescription.Text = string.Empty;
         }
 
         private void OrganizationLabels(ref Organization organization)
@@ -289,6 +234,7 @@ namespace ExecutableWindows
             LblState.Text = string.Empty;
             LblStreet.Text = string.Empty;
             PbPicture.Image = ImageByteConverter.BytesToImage(organization.Picture);
+            TbDescription.Text = organization.Description;
         }
 
         private void MemberLabels(ref MemberWithGroup member, string orgaName)
@@ -307,6 +253,7 @@ namespace ExecutableWindows
             LblState.Text = member?.State;
             LblStreet.Text = member?.Street;
             PbPicture.Image = ImageByteConverter.BytesToImage(member?.Picture);
+            TbDescription.Text = member?.Description;
         }
 
         private void FileLabels(ref FileWithOverhead file, string path)
@@ -315,6 +262,7 @@ namespace ExecutableWindows
             LblPath.Text = $@"{path}/{file?.GroupName}/{file?.FileName}";
             LblName.Text = file?.FileName;
             LblBirthdate.Text = file?.CreateDate.ToShortDateString();
+            TbDescription.Text = file?.Description;
         }
 
         private void BtnEditGroup_Click(object sender, EventArgs e)
@@ -386,16 +334,6 @@ namespace ExecutableWindows
             }
         }
 
-        private void BtnBackup_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnFullCleanUp_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void TvFiles_DoubleClick(object sender, EventArgs e)
         {
             var file = (FileWithOverhead) TvFiles.SelectedObject;
@@ -419,6 +357,20 @@ namespace ExecutableWindows
             }
             ClearAllLabels();
             FileLabels(ref file, path);
+        }
+
+        private async void OverlayForm_Load(object sender, EventArgs e)
+        {
+            TvOrganization.Items.Clear();
+            var db = new DataBase();
+            var organizations = await db.Organizations.Where(d => !d.Deleted).AsNoTracking().ToListAsync();
+            TvOrganization.ShowGroups = false;
+            TvOrganization.AddObjects(organizations);
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

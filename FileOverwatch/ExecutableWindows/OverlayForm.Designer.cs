@@ -35,20 +35,15 @@
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.BtnRefresh = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.TvOrganization = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnRefresh = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoCleanUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnFullCleanUp = new System.Windows.Forms.ToolStripMenuItem();
             this.databaseExportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnBackup = new System.Windows.Forms.ToolStripMenuItem();
-            this.mapDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.erstellenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.organizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,12 +106,10 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.TvFiles);
-            this.panel1.Controls.Add(this.BtnRefresh);
             this.panel1.Location = new System.Drawing.Point(486, 32);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(617, 604);
             this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // TvFiles
             // 
@@ -173,20 +166,10 @@
             this.olvColumn9.Text = "Last Access";
             this.olvColumn9.Width = 90;
             // 
-            // BtnRefresh
-            // 
-            this.BtnRefresh.Location = new System.Drawing.Point(752, 3);
-            this.BtnRefresh.Name = "BtnRefresh";
-            this.BtnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.BtnRefresh.TabIndex = 1;
-            this.BtnRefresh.Text = "Refresh";
-            this.BtnRefresh.UseVisualStyleBackColor = true;
-            this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.TvOrganization);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.BtnRefresh);
             this.panel2.Location = new System.Drawing.Point(12, 32);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(256, 604);
@@ -214,15 +197,15 @@
             this.olvColumn2.Text = "Name";
             this.olvColumn2.Width = 100;
             // 
-            // button1
+            // BtnRefresh
             // 
-            this.button1.Location = new System.Drawing.Point(177, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Refresh";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.BtnRefresh.Location = new System.Drawing.Point(177, 3);
+            this.BtnRefresh.Name = "BtnRefresh";
+            this.BtnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.BtnRefresh.TabIndex = 3;
+            this.BtnRefresh.Text = "Refresh";
+            this.BtnRefresh.UseVisualStyleBackColor = true;
+            this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
             // 
             // menuStrip1
             // 
@@ -254,58 +237,27 @@
             this.autoCleanUpToolStripMenuItem,
             this.databaseExportToolStripMenuItem});
             this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
-            this.executeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.executeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.executeToolStripMenuItem.Text = "Execute...";
             // 
             // autoCleanUpToolStripMenuItem
             // 
-            this.autoCleanUpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BtnFullCleanUp});
             this.autoCleanUpToolStripMenuItem.Name = "autoCleanUpToolStripMenuItem";
-            this.autoCleanUpToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.autoCleanUpToolStripMenuItem.Text = "Clean Up...";
-            // 
-            // BtnFullCleanUp
-            // 
-            this.BtnFullCleanUp.Name = "BtnFullCleanUp";
-            this.BtnFullCleanUp.Size = new System.Drawing.Size(190, 22);
-            this.BtnFullCleanUp.Text = "Perform Full Clean Up";
-            this.BtnFullCleanUp.Click += new System.EventHandler(this.BtnFullCleanUp_Click);
+            this.autoCleanUpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.autoCleanUpToolStripMenuItem.Text = "Clean Up Database";
             // 
             // databaseExportToolStripMenuItem
             // 
-            this.databaseExportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BtnBackup,
-            this.mapDatabaseToolStripMenuItem,
-            this.resetToolStripMenuItem});
             this.databaseExportToolStripMenuItem.Name = "databaseExportToolStripMenuItem";
-            this.databaseExportToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.databaseExportToolStripMenuItem.Text = "Database...";
-            // 
-            // BtnBackup
-            // 
-            this.BtnBackup.Name = "BtnBackup";
-            this.BtnBackup.Size = new System.Drawing.Size(116, 22);
-            this.BtnBackup.Text = "Backup";
-            this.BtnBackup.Click += new System.EventHandler(this.BtnBackup_Click);
-            // 
-            // mapDatabaseToolStripMenuItem
-            // 
-            this.mapDatabaseToolStripMenuItem.Name = "mapDatabaseToolStripMenuItem";
-            this.mapDatabaseToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.mapDatabaseToolStripMenuItem.Text = "Re-Map";
-            // 
-            // resetToolStripMenuItem
-            // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.resetToolStripMenuItem.Text = "Reset";
+            this.databaseExportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.databaseExportToolStripMenuItem.Text = "Database Settings";
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
             // erstellenToolStripMenuItem
             // 
@@ -315,8 +267,8 @@
             this.employeeToolStripMenuItem,
             this.BtnLinkFile});
             this.erstellenToolStripMenuItem.Name = "erstellenToolStripMenuItem";
-            this.erstellenToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
-            this.erstellenToolStripMenuItem.Text = "Erstellen...";
+            this.erstellenToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.erstellenToolStripMenuItem.Text = "Create...";
             // 
             // organizationToolStripMenuItem
             // 
@@ -336,7 +288,7 @@
             // 
             this.employeeToolStripMenuItem.Name = "employeeToolStripMenuItem";
             this.employeeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.employeeToolStripMenuItem.Text = "Employee";
+            this.employeeToolStripMenuItem.Text = "Member";
             this.employeeToolStripMenuItem.Click += new System.EventHandler(this.memberToolStripMenuItem_Click);
             // 
             // BtnLinkFile
@@ -759,6 +711,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "OverlayForm";
             this.Text = "File Overwatch";
+            this.Load += new System.EventHandler(this.OverlayForm_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TvFiles)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -777,9 +730,8 @@
 
         #endregion
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button BtnRefresh;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnRefresh;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem erstellenToolStripMenuItem;
@@ -818,10 +770,7 @@
         private System.Windows.Forms.ToolStripMenuItem executeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoCleanUpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem databaseExportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem BtnBackup;
-        private System.Windows.Forms.ToolStripMenuItem mapDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem BtnFullCleanUp;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label LblMemberOf;
         private System.Windows.Forms.Label LblCreateDate;
@@ -833,7 +782,6 @@
         private System.Windows.Forms.Label LblNumber;
         private System.Windows.Forms.Label LblStreet;
         private System.Windows.Forms.Label LblBirthdate;
-        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BtnEditOrganization;
         private System.Windows.Forms.ToolStripMenuItem BtnEditGroup;
         private System.Windows.Forms.ToolStripMenuItem BtnEditMember;

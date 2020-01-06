@@ -153,7 +153,6 @@
             this.TbFilepath.Name = "TbFilepath";
             this.TbFilepath.Size = new System.Drawing.Size(312, 20);
             this.TbFilepath.TabIndex = 15;
-            this.TbFilepath.TextChanged += new System.EventHandler(this.TbFilepath_TextChanged);
             // 
             // BtnNewFilegroup
             // 

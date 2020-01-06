@@ -51,19 +51,19 @@
             // 
             // TvPhonenumbers
             // 
-            this.TvPhonenumbers.AllColumns.Add(this.olvColumn1);
             this.TvPhonenumbers.AllColumns.Add(this.olvColumn2);
             this.TvPhonenumbers.AllColumns.Add(this.olvColumn3);
             this.TvPhonenumbers.AllColumns.Add(this.olvColumn4);
             this.TvPhonenumbers.AllColumns.Add(this.olvColumn5);
+            this.TvPhonenumbers.AllColumns.Add(this.olvColumn1);
             this.TvPhonenumbers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.TvPhonenumbers.CellEditUseWholeCell = false;
             this.TvPhonenumbers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn1,
             this.olvColumn2,
             this.olvColumn3,
             this.olvColumn4,
-            this.olvColumn5});
+            this.olvColumn5,
+            this.olvColumn1});
             this.TvPhonenumbers.Cursor = System.Windows.Forms.Cursors.Default;
             this.TvPhonenumbers.HideSelection = false;
             this.TvPhonenumbers.Location = new System.Drawing.Point(12, 56);
@@ -88,16 +88,19 @@
             // 
             this.olvColumn3.AspectName = "PhoneNr";
             this.olvColumn3.Text = "Phone Nr";
+            this.olvColumn3.Width = 150;
             // 
             // olvColumn4
             // 
             this.olvColumn4.AspectName = "Description";
             this.olvColumn4.Text = "Description";
+            this.olvColumn4.Width = 290;
             // 
             // olvColumn5
             // 
             this.olvColumn5.AspectName = "CreateDate";
             this.olvColumn5.Text = "Create Date";
+            this.olvColumn5.Width = 90;
             // 
             // BtnCall
             // 
