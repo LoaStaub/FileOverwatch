@@ -68,7 +68,7 @@ namespace ExecutableWindows
         {
             _isItOrganization = true;
             ClearAllLabels();
-            TvGroupsMembers.Items.Clear();
+            TvGroupsMembers.ClearObjects();
             if (TvOrganization.SelectedObject != null)
             {
                 var organization = (Organization) TvOrganization.SelectedObject;
@@ -104,8 +104,8 @@ namespace ExecutableWindows
                         })
                         .ToList();
                     TvGroupsMembers.AddObjects(membersWithGroupList);
-                    OrganizationLabels(ref organization);
                 }
+                OrganizationLabels(ref organization);
             }
         }
 
@@ -337,7 +337,7 @@ namespace ExecutableWindows
         private void TvFiles_DoubleClick(object sender, EventArgs e)
         {
             var file = (FileWithOverhead) TvFiles.SelectedObject;
-            if (Directory.Exists(file.Directory))
+            if (File.Exists(file.Directory))
             {
                 Process.Start(file.Directory);
             }

@@ -268,6 +268,7 @@ namespace ExecutableWindows
             }
             else
             {
+                CbGroups.DataSource = null;
                 CbGroups.Items.Clear();
             }
         }

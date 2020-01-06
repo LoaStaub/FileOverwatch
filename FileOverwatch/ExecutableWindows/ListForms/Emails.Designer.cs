@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.TvEmails = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.TbEmail = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TbDescription = new System.Windows.Forms.TextBox();
@@ -66,13 +66,6 @@
             this.TvEmails.View = System.Windows.Forms.View.Details;
             this.TvEmails.SelectionChanged += new System.EventHandler(this.TvEmails_SelectionChanged);
             // 
-            // olvColumn1
-            // 
-            this.olvColumn1.AspectName = "Id";
-            this.olvColumn1.Text = "Id";
-            this.olvColumn1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn1.Width = 30;
-            // 
             // olvColumn2
             // 
             this.olvColumn2.AspectName = "Mail";
@@ -95,6 +88,13 @@
             this.olvColumn4.Text = "Description";
             this.olvColumn4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvColumn4.Width = 190;
+            // 
+            // olvColumn1
+            // 
+            this.olvColumn1.AspectName = "Id";
+            this.olvColumn1.Text = "Id";
+            this.olvColumn1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn1.Width = 30;
             // 
             // TbEmail
             // 

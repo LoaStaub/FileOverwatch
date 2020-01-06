@@ -1,5 +1,4 @@
-﻿using System;
-using Database.DatabaseModels;
+﻿using Database.DatabaseModels;
 using Database.DatabaseModels.LinkingTables;
 using Microsoft.EntityFrameworkCore;
 

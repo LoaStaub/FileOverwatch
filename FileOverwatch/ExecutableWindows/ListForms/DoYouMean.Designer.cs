@@ -48,7 +48,7 @@
             this.BtnGroup.Name = "BtnGroup";
             this.BtnGroup.Size = new System.Drawing.Size(123, 23);
             this.BtnGroup.TabIndex = 1;
-            this.BtnGroup.Text = "button1";
+            this.BtnGroup.Text = "Group";
             this.BtnGroup.UseVisualStyleBackColor = true;
             this.BtnGroup.Click += new System.EventHandler(this.BtnGroup_Click);
             // 
@@ -58,7 +58,7 @@
             this.BtnMember.Name = "BtnMember";
             this.BtnMember.Size = new System.Drawing.Size(123, 23);
             this.BtnMember.TabIndex = 2;
-            this.BtnMember.Text = "button2";
+            this.BtnMember.Text = "Member";
             this.BtnMember.UseVisualStyleBackColor = true;
             this.BtnMember.Click += new System.EventHandler(this.BtnMember_Click);
             // 
