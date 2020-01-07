@@ -390,10 +390,5 @@ namespace ExecutableWindows
             var databaseSettings = new DatabaseSettings();
             databaseSettings.ShowDialog();
         }
-
-        private void autoCleanUpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

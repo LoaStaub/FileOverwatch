@@ -42,7 +42,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.autoCleanUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.databaseExportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.erstellenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -234,18 +233,10 @@
             // executeToolStripMenuItem
             // 
             this.executeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.autoCleanUpToolStripMenuItem,
             this.databaseExportToolStripMenuItem});
             this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
             this.executeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.executeToolStripMenuItem.Text = "Execute...";
-            // 
-            // autoCleanUpToolStripMenuItem
-            // 
-            this.autoCleanUpToolStripMenuItem.Name = "autoCleanUpToolStripMenuItem";
-            this.autoCleanUpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.autoCleanUpToolStripMenuItem.Text = "Clean Up Database";
-            this.autoCleanUpToolStripMenuItem.Click += new System.EventHandler(this.autoCleanUpToolStripMenuItem_Click);
             // 
             // databaseExportToolStripMenuItem
             // 
@@ -770,7 +761,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label LblGenderDesc;
         private System.Windows.Forms.ToolStripMenuItem executeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem autoCleanUpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem databaseExportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.Label label11;

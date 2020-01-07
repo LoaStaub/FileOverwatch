@@ -7,12 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Executable", "Executable\Ex
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{6C278A03-29D6-48B8-AF0B-94512B6C3B56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Preview", "Preview\Preview.csproj", "{94391CA9-1ABF-461B-B0EF-1B381D409FFE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{16CA9FE3-85F7-4542-B05C-C9933E245DE3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWpf", "TestWpf\TestWpf.csproj", "{99777D6D-2FB3-4A89-92D8-0E7DD1E7328C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExecutableWindows", "ExecutableWindows\ExecutableWindows.csproj", "{72EF5007-631D-4279-9289-616E3F7449CB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{18FEDA0C-D147-4286-B39A-01204808106A} = {18FEDA0C-D147-4286-B39A-01204808106A}
@@ -20,11 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExecutableWindows", "Execut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseWindows", "DatabaseWindows\DatabaseWindows.csproj", "{E07AAFD7-C0AF-4DF4-B145-D458775AF0B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileAdding", "FileAdding\FileAdding.csproj", "{D35D4985-435E-499B-8F0F-1BABA3E35FF6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectListView2012", "ObjectListView\ObjectListView2012.csproj", "{18FEDA0C-D147-4286-B39A-01204808106A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseCreator", "DatabaseCreator\DatabaseCreator.csproj", "{735ED0BD-C568-4C48-97A6-B26D32FDAED5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseCreator", "DatabaseCreator\DatabaseCreator.csproj", "{735ED0BD-C568-4C48-97A6-B26D32FDAED5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,18 +32,6 @@ Global
 		{6C278A03-29D6-48B8-AF0B-94512B6C3B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C278A03-29D6-48B8-AF0B-94512B6C3B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C278A03-29D6-48B8-AF0B-94512B6C3B56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{94391CA9-1ABF-461B-B0EF-1B381D409FFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94391CA9-1ABF-461B-B0EF-1B381D409FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94391CA9-1ABF-461B-B0EF-1B381D409FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94391CA9-1ABF-461B-B0EF-1B381D409FFE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16CA9FE3-85F7-4542-B05C-C9933E245DE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16CA9FE3-85F7-4542-B05C-C9933E245DE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16CA9FE3-85F7-4542-B05C-C9933E245DE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16CA9FE3-85F7-4542-B05C-C9933E245DE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99777D6D-2FB3-4A89-92D8-0E7DD1E7328C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99777D6D-2FB3-4A89-92D8-0E7DD1E7328C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99777D6D-2FB3-4A89-92D8-0E7DD1E7328C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99777D6D-2FB3-4A89-92D8-0E7DD1E7328C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{72EF5007-631D-4279-9289-616E3F7449CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{72EF5007-631D-4279-9289-616E3F7449CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72EF5007-631D-4279-9289-616E3F7449CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,10 +40,6 @@ Global
 		{E07AAFD7-C0AF-4DF4-B145-D458775AF0B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E07AAFD7-C0AF-4DF4-B145-D458775AF0B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E07AAFD7-C0AF-4DF4-B145-D458775AF0B7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D35D4985-435E-499B-8F0F-1BABA3E35FF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D35D4985-435E-499B-8F0F-1BABA3E35FF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D35D4985-435E-499B-8F0F-1BABA3E35FF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D35D4985-435E-499B-8F0F-1BABA3E35FF6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18FEDA0C-D147-4286-B39A-01204808106A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{18FEDA0C-D147-4286-B39A-01204808106A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18FEDA0C-D147-4286-B39A-01204808106A}.Release|Any CPU.ActiveCfg = Release|Any CPU
