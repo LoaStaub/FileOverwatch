@@ -6,17 +6,17 @@ namespace Database
 {
     public partial class DataBase : DbContext
     {
-        private static bool _created = false;
-        public DataBase()
+        private static string _path;
+        public DataBase(string path)
         {
-            if (!_created)
-            {
-                _created = true;
-                //Database.EnsureDeleted();
-                //Database.EnsureCreated();
-            }
+            _path = path;
         }
-        
+
+        public void EnsureCreated()
+        {
+            Database.EnsureCreated();
+        }
+
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Email> Emails { get; set; }
         public virtual DbSet<FileOverhead> FileOverheads { get; set; }
@@ -46,6 +46,6 @@ namespace Database
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite(@"Data Source=C:\Users\a-p-i\source\repos\FileOverwatch\FileOverwatch\DatabaseWindows\FileOverwatch.db");
+            => options.UseSqlite(_path);
     }
 }

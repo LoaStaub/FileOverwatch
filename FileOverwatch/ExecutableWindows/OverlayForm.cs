@@ -11,6 +11,7 @@ using DatabaseWindows.DatabaseModels;
 using ExecutableWindows.Classes;
 using ExecutableWindows.ListForms;
 using ExecutableWindows.Models;
+using ExecutableWindows.Properties;
 
 namespace ExecutableWindows
 {
@@ -361,8 +362,19 @@ namespace ExecutableWindows
 
         private async void OverlayForm_Load(object sender, EventArgs e)
         {
+            var setting = Settings.Default.PathToDatabase;
+            if (string.IsNullOrEmpty(setting))
+            {
+                setting = Directory.GetCurrentDirectory() + "/FileOverwatch.db";
+                Settings.Default.PathToDatabase = setting;
+                Settings.Default.Save();
+            }
+            var process = Process.Start(Directory.GetCurrentDirectory() + "/DatabaseCreator.exe", setting);
+            process?.WaitForExit();
+
             TvOrganization.Items.Clear();
             var db = new DataBase();
+            db.ChangeDataBasePath(setting);
             var organizations = await db.Organizations.Where(d => !d.Deleted).AsNoTracking().ToListAsync();
             TvOrganization.ShowGroups = false;
             TvOrganization.AddObjects(organizations);
@@ -371,6 +383,17 @@ namespace ExecutableWindows
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void databaseExportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var databaseSettings = new DatabaseSettings();
+            databaseSettings.ShowDialog();
+        }
+
+        private void autoCleanUpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

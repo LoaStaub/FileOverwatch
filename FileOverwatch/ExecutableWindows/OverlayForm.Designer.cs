@@ -245,12 +245,14 @@
             this.autoCleanUpToolStripMenuItem.Name = "autoCleanUpToolStripMenuItem";
             this.autoCleanUpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.autoCleanUpToolStripMenuItem.Text = "Clean Up Database";
+            this.autoCleanUpToolStripMenuItem.Click += new System.EventHandler(this.autoCleanUpToolStripMenuItem_Click);
             // 
             // databaseExportToolStripMenuItem
             // 
             this.databaseExportToolStripMenuItem.Name = "databaseExportToolStripMenuItem";
             this.databaseExportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.databaseExportToolStripMenuItem.Text = "Database Settings";
+            this.databaseExportToolStripMenuItem.Click += new System.EventHandler(this.databaseExportToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 

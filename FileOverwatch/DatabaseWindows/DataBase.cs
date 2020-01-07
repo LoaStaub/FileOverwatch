@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Configuration;
+using System.Data.Entity;
 using DatabaseWindows.DatabaseModels;
 using DatabaseWindows.DatabaseModels.LinkingTables;
 
@@ -9,6 +10,11 @@ namespace DatabaseWindows
         public DataBase(): base("name=DataBase")
         {
 
+        }
+
+        public void ChangeDataBasePath(string path)
+        {
+            ConfigurationManager.ConnectionStrings["DataBase"].ConnectionString = path;
         }
         
         public virtual DbSet<Member> Members { get; set; }
