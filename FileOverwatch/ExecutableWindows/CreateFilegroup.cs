@@ -57,6 +57,7 @@ namespace ExecutableWindows
             }
 
             await db.SaveChangesAsync();
+            Close();
         }
 
         private async void CreateFilegroup_Load(object sender, EventArgs e)
@@ -66,6 +67,20 @@ namespace ExecutableWindows
             CbOrganizations.DataSource = orgas;
             CbOrganizations.DisplayMember = "Name";
             CbOrganizations.ValueMember = "Id";
+            if (_fileOverhead.Id != 0)
+            {
+                TbDescription.Text = _fileOverhead.Description;
+                TbName.Text = _fileOverhead.Name;
+                var member = await db.Members.FirstOrDefaultAsync(d =>
+                    !d.Deleted && d.OverheadNode.Any(f => !f.Deleted && f.FileOverheadId == _fileOverhead.Id));
+                var group = await db.Groups.FirstOrDefaultAsync(d =>
+                    !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == member.Id));
+                var organization = await db.Organizations.FirstOrDefaultAsync(d =>
+                    !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == group.Id));
+                CbOrganizations.SelectedItem = organization;
+                CbGroups.SelectedItem = group;
+                CbMembers.SelectedItem = member;
+            }
         }
 
         private async void CbOrganizations_SelectedIndexChanged(object sender, EventArgs e)

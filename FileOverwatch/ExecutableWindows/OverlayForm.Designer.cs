@@ -29,15 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.TvFiles = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel2 = new System.Windows.Forms.Panel();
-            this.TvOrganization = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.BtnRefresh = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,10 +48,6 @@
             this.BtnEditGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnEditMember = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.TvGroupsMembers = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.BtnHomepage = new System.Windows.Forms.Button();
             this.BtnEmail = new System.Windows.Forms.Button();
@@ -89,15 +77,29 @@
             this.LblName = new System.Windows.Forms.Label();
             this.LblType = new System.Windows.Forms.Label();
             this.PbPicture = new System.Windows.Forms.PictureBox();
+            this.TvGroupsMembers = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.TvOrganization = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.TvFiles = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.filegroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TvFiles)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TvOrganization)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TvGroupsMembers)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TvGroupsMembers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TvOrganization)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TvFiles)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -108,61 +110,6 @@
             this.panel1.Size = new System.Drawing.Size(617, 604);
             this.panel1.TabIndex = 1;
             // 
-            // TvFiles
-            // 
-            this.TvFiles.AllColumns.Add(this.olvColumn6);
-            this.TvFiles.AllColumns.Add(this.olvColumn7);
-            this.TvFiles.AllColumns.Add(this.olvColumn8);
-            this.TvFiles.AllColumns.Add(this.olvColumn9);
-            this.TvFiles.AllColumns.Add(this.olvColumn5);
-            this.TvFiles.CellEditUseWholeCell = false;
-            this.TvFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn6,
-            this.olvColumn7,
-            this.olvColumn8,
-            this.olvColumn9,
-            this.olvColumn5});
-            this.TvFiles.Cursor = System.Windows.Forms.Cursors.Default;
-            this.TvFiles.HideSelection = false;
-            this.TvFiles.Location = new System.Drawing.Point(3, 29);
-            this.TvFiles.Name = "TvFiles";
-            this.TvFiles.Size = new System.Drawing.Size(611, 572);
-            this.TvFiles.TabIndex = 2;
-            this.TvFiles.UseCompatibleStateImageBehavior = false;
-            this.TvFiles.View = System.Windows.Forms.View.Details;
-            this.TvFiles.SelectionChanged += new System.EventHandler(this.TvFiles_SelectionChanged);
-            this.TvFiles.DoubleClick += new System.EventHandler(this.TvFiles_DoubleClick);
-            // 
-            // olvColumn5
-            // 
-            this.olvColumn5.AspectName = "GroupName";
-            this.olvColumn5.Text = "File Overhead";
-            this.olvColumn5.Width = 0;
-            // 
-            // olvColumn6
-            // 
-            this.olvColumn6.AspectName = "FileName";
-            this.olvColumn6.Text = "Filename";
-            this.olvColumn6.Width = 180;
-            // 
-            // olvColumn7
-            // 
-            this.olvColumn7.AspectName = "Directory";
-            this.olvColumn7.Text = "Directory";
-            this.olvColumn7.Width = 220;
-            // 
-            // olvColumn8
-            // 
-            this.olvColumn8.AspectName = "CreateDate";
-            this.olvColumn8.Text = "Create Date";
-            this.olvColumn8.Width = 90;
-            // 
-            // olvColumn9
-            // 
-            this.olvColumn9.AspectName = "LastAccess";
-            this.olvColumn9.Text = "Last Access";
-            this.olvColumn9.Width = 90;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.TvOrganization);
@@ -171,28 +118,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(256, 604);
             this.panel2.TabIndex = 2;
-            // 
-            // TvOrganization
-            // 
-            this.TvOrganization.AllColumns.Add(this.olvColumn2);
-            this.TvOrganization.CellEditUseWholeCell = false;
-            this.TvOrganization.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn2});
-            this.TvOrganization.Cursor = System.Windows.Forms.Cursors.Default;
-            this.TvOrganization.HideSelection = false;
-            this.TvOrganization.Location = new System.Drawing.Point(4, 29);
-            this.TvOrganization.Name = "TvOrganization";
-            this.TvOrganization.Size = new System.Drawing.Size(248, 572);
-            this.TvOrganization.TabIndex = 4;
-            this.TvOrganization.UseCompatibleStateImageBehavior = false;
-            this.TvOrganization.View = System.Windows.Forms.View.Details;
-            this.TvOrganization.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.TvOrganization_ItemSelectionChanged);
-            // 
-            // olvColumn2
-            // 
-            this.olvColumn2.AspectName = "Name";
-            this.olvColumn2.Text = "Name";
-            this.olvColumn2.Width = 100;
             // 
             // BtnRefresh
             // 
@@ -310,7 +235,9 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BtnEditOrganization,
             this.BtnEditGroup,
-            this.BtnEditMember});
+            this.BtnEditMember,
+            this.filegroupToolStripMenuItem,
+            this.fileToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.editToolStripMenuItem.Text = "Edit...";
@@ -318,14 +245,14 @@
             // BtnEditOrganization
             // 
             this.BtnEditOrganization.Name = "BtnEditOrganization";
-            this.BtnEditOrganization.Size = new System.Drawing.Size(142, 22);
+            this.BtnEditOrganization.Size = new System.Drawing.Size(180, 22);
             this.BtnEditOrganization.Text = "Organization";
             this.BtnEditOrganization.Click += new System.EventHandler(this.BtnEditOrganization_Click);
             // 
             // BtnEditGroup
             // 
             this.BtnEditGroup.Name = "BtnEditGroup";
-            this.BtnEditGroup.Size = new System.Drawing.Size(142, 22);
+            this.BtnEditGroup.Size = new System.Drawing.Size(180, 22);
             this.BtnEditGroup.Text = "Group";
             this.BtnEditGroup.Click += new System.EventHandler(this.BtnEditGroup_Click);
             // 
@@ -343,47 +270,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(206, 604);
             this.panel3.TabIndex = 4;
-            // 
-            // TvGroupsMembers
-            // 
-            this.TvGroupsMembers.AllColumns.Add(this.olvColumn1);
-            this.TvGroupsMembers.AllColumns.Add(this.olvColumn3);
-            this.TvGroupsMembers.AllColumns.Add(this.olvColumn4);
-            this.TvGroupsMembers.CellEditUseWholeCell = false;
-            this.TvGroupsMembers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn1,
-            this.olvColumn3});
-            this.TvGroupsMembers.Cursor = System.Windows.Forms.Cursors.Default;
-            this.TvGroupsMembers.HideSelection = false;
-            this.TvGroupsMembers.Location = new System.Drawing.Point(3, 29);
-            this.TvGroupsMembers.Name = "TvGroupsMembers";
-            this.TvGroupsMembers.Size = new System.Drawing.Size(200, 572);
-            this.TvGroupsMembers.TabIndex = 0;
-            this.TvGroupsMembers.UseCompatibleStateImageBehavior = false;
-            this.TvGroupsMembers.View = System.Windows.Forms.View.Details;
-            this.TvGroupsMembers.SelectedIndexChanged += new System.EventHandler(this.TvGroupsMembers_SelectedIndexChanged);
-            // 
-            // olvColumn4
-            // 
-            this.olvColumn4.AspectName = "GroupName";
-            this.olvColumn4.DisplayIndex = 2;
-            this.olvColumn4.IsVisible = false;
-            this.olvColumn4.Text = "Group";
-            this.olvColumn4.Width = 0;
-            // 
-            // olvColumn1
-            // 
-            this.olvColumn1.AspectName = "FirstName";
-            this.olvColumn1.DisplayIndex = 0;
-            this.olvColumn1.Text = "Firstname";
-            this.olvColumn1.Width = 90;
-            // 
-            // olvColumn3
-            // 
-            this.olvColumn3.AspectName = "LastName";
-            this.olvColumn3.DisplayIndex = 1;
-            this.olvColumn3.Text = "Lastname";
-            this.olvColumn3.Width = 90;
             // 
             // panel4
             // 
@@ -674,6 +560,136 @@
             this.PbPicture.TabIndex = 0;
             this.PbPicture.TabStop = false;
             // 
+            // TvGroupsMembers
+            // 
+            this.TvGroupsMembers.AllColumns.Add(this.olvColumn1);
+            this.TvGroupsMembers.AllColumns.Add(this.olvColumn3);
+            this.TvGroupsMembers.AllColumns.Add(this.olvColumn4);
+            this.TvGroupsMembers.CellEditUseWholeCell = false;
+            this.TvGroupsMembers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn3});
+            this.TvGroupsMembers.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TvGroupsMembers.HideSelection = false;
+            this.TvGroupsMembers.Location = new System.Drawing.Point(3, 29);
+            this.TvGroupsMembers.Name = "TvGroupsMembers";
+            this.TvGroupsMembers.Size = new System.Drawing.Size(200, 572);
+            this.TvGroupsMembers.TabIndex = 0;
+            this.TvGroupsMembers.UseCompatibleStateImageBehavior = false;
+            this.TvGroupsMembers.View = System.Windows.Forms.View.Details;
+            this.TvGroupsMembers.SelectedIndexChanged += new System.EventHandler(this.TvGroupsMembers_SelectedIndexChanged);
+            // 
+            // olvColumn1
+            // 
+            this.olvColumn1.AspectName = "FirstName";
+            this.olvColumn1.Text = "Firstname";
+            this.olvColumn1.Width = 90;
+            // 
+            // olvColumn3
+            // 
+            this.olvColumn3.AspectName = "LastName";
+            this.olvColumn3.Text = "Lastname";
+            this.olvColumn3.Width = 90;
+            // 
+            // olvColumn4
+            // 
+            this.olvColumn4.AspectName = "GroupName";
+            this.olvColumn4.DisplayIndex = 2;
+            this.olvColumn4.IsVisible = false;
+            this.olvColumn4.Text = "Group";
+            this.olvColumn4.Width = 0;
+            // 
+            // TvOrganization
+            // 
+            this.TvOrganization.AllColumns.Add(this.olvColumn2);
+            this.TvOrganization.CellEditUseWholeCell = false;
+            this.TvOrganization.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn2});
+            this.TvOrganization.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TvOrganization.HideSelection = false;
+            this.TvOrganization.Location = new System.Drawing.Point(4, 29);
+            this.TvOrganization.Name = "TvOrganization";
+            this.TvOrganization.Size = new System.Drawing.Size(248, 572);
+            this.TvOrganization.TabIndex = 4;
+            this.TvOrganization.UseCompatibleStateImageBehavior = false;
+            this.TvOrganization.View = System.Windows.Forms.View.Details;
+            this.TvOrganization.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.TvOrganization_ItemSelectionChanged);
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "Name";
+            this.olvColumn2.Text = "Name";
+            this.olvColumn2.Width = 100;
+            // 
+            // TvFiles
+            // 
+            this.TvFiles.AllColumns.Add(this.olvColumn6);
+            this.TvFiles.AllColumns.Add(this.olvColumn7);
+            this.TvFiles.AllColumns.Add(this.olvColumn8);
+            this.TvFiles.AllColumns.Add(this.olvColumn9);
+            this.TvFiles.AllColumns.Add(this.olvColumn5);
+            this.TvFiles.CellEditUseWholeCell = false;
+            this.TvFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn6,
+            this.olvColumn7,
+            this.olvColumn8,
+            this.olvColumn9,
+            this.olvColumn5});
+            this.TvFiles.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TvFiles.HideSelection = false;
+            this.TvFiles.Location = new System.Drawing.Point(3, 29);
+            this.TvFiles.Name = "TvFiles";
+            this.TvFiles.Size = new System.Drawing.Size(611, 572);
+            this.TvFiles.TabIndex = 2;
+            this.TvFiles.UseCompatibleStateImageBehavior = false;
+            this.TvFiles.View = System.Windows.Forms.View.Details;
+            this.TvFiles.SelectionChanged += new System.EventHandler(this.TvFiles_SelectionChanged);
+            this.TvFiles.DoubleClick += new System.EventHandler(this.TvFiles_DoubleClick);
+            // 
+            // olvColumn6
+            // 
+            this.olvColumn6.AspectName = "FileName";
+            this.olvColumn6.Text = "Filename";
+            this.olvColumn6.Width = 180;
+            // 
+            // olvColumn7
+            // 
+            this.olvColumn7.AspectName = "Directory";
+            this.olvColumn7.Text = "Directory";
+            this.olvColumn7.Width = 220;
+            // 
+            // olvColumn8
+            // 
+            this.olvColumn8.AspectName = "CreateDate";
+            this.olvColumn8.Text = "Create Date";
+            this.olvColumn8.Width = 90;
+            // 
+            // olvColumn9
+            // 
+            this.olvColumn9.AspectName = "LastAccess";
+            this.olvColumn9.Text = "Last Access";
+            this.olvColumn9.Width = 90;
+            // 
+            // olvColumn5
+            // 
+            this.olvColumn5.AspectName = "GroupName";
+            this.olvColumn5.Text = "File Overhead";
+            this.olvColumn5.Width = 0;
+            // 
+            // filegroupToolStripMenuItem
+            // 
+            this.filegroupToolStripMenuItem.Name = "filegroupToolStripMenuItem";
+            this.filegroupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.filegroupToolStripMenuItem.Text = "Filegroup";
+            this.filegroupToolStripMenuItem.Click += new System.EventHandler(this.filegroupToolStripMenuItem_Click);
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
+            // 
             // OverlayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -689,16 +705,16 @@
             this.Text = "File Overwatch";
             this.Load += new System.EventHandler(this.OverlayForm_Load);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.TvFiles)).EndInit();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.TvOrganization)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.TvGroupsMembers)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TvGroupsMembers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TvOrganization)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TvFiles)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -767,6 +783,8 @@
         private BrightIdeasSoftware.OLVColumn olvColumn7;
         private BrightIdeasSoftware.OLVColumn olvColumn8;
         private BrightIdeasSoftware.OLVColumn olvColumn9;
+        private System.Windows.Forms.ToolStripMenuItem filegroupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
     }
 }
 

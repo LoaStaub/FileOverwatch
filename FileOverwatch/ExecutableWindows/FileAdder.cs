@@ -65,6 +65,7 @@ namespace ExecutableWindows
             };
             db.FileToOverheadNode.Add(fileToOverhead);
             await db.SaveChangesAsync();
+            Close();
         }
 
         private async void CbOrganizations_SelectedIndexChanged(object sender, EventArgs e)
@@ -112,6 +113,24 @@ namespace ExecutableWindows
             CbOrganizations.DataSource = organizations;
             CbOrganizations.DisplayMember = "Name";
             CbOrganizations.ValueMember = "Id";
+            if (_linkedFile.Id != 0)
+            {
+                TbDescription.Text = _linkedFile.Description;
+                TbFilename.Text = _linkedFile.FileName;
+                TbFilepath.Text = _linkedFile.Directory;
+                var fileOverhead = await db.FileOverheads.FirstOrDefaultAsync(d =>
+                    !d.Deleted && d.FileNode.Any(f => !f.Deleted && f.LinkedFileId == _linkedFile.Id));
+                var member = await db.Members.FirstOrDefaultAsync(d =>
+                    !d.Deleted && d.OverheadNode.Any(f => !f.Deleted && f.FileOverheadId == fileOverhead.Id));
+                var group = await db.Groups.FirstOrDefaultAsync(d =>
+                    !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == member.Id));
+                var organization = await db.Organizations.FirstOrDefaultAsync(d =>
+                    !d.Deleted && d.GroupNode.Any(f => !f.Deleted && f.GroupId == group.Id));
+                CbOrganizations.SelectedItem = organization;
+                CbGroups.SelectedItem = group;
+                CbMember.SelectedItem = member;
+                CbFileOverhead.SelectedItem = fileOverhead;
+            }
         }
 
         private void BtnBrowse_Click(object sender, EventArgs e)

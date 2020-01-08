@@ -237,10 +237,10 @@ namespace ExecutableWindows
             LblCreateDate.Text = organization.CreateDate.ToString(CultureInfo.CurrentCulture);
             LblGender.Text = organization.Type;
             LblGenderDesc.Text = @"Type:";
-            LblNumber.Text = string.Empty;
-            LblZip.Text = string.Empty;
-            LblState.Text = string.Empty;
-            LblStreet.Text = string.Empty;
+            LblNumber.Text = organization.HouseNumber;
+            LblZip.Text = organization.PostalCode;
+            LblState.Text = organization.State;
+            LblStreet.Text = organization.Street;
             PbPicture.Image = ImageByteConverter.BytesToImage(organization.Picture);
             TbDescription.Text = organization.Description;
         }
@@ -351,7 +351,7 @@ namespace ExecutableWindows
                 Process.Start(file.Directory);
                 file.LastAccess = DateTime.Now;
                 var db = new DataBase();
-                db.Entry(file).State = EntityState.Modified;
+                db.Entry(file.LinkedFile).State = EntityState.Modified;
                 await db.SaveChangesAsync();
             }
             else
@@ -368,7 +368,6 @@ namespace ExecutableWindows
             {
                 return;
             }
-
             ClearAllLabels();
             FileLabels(ref file, path);
         }
@@ -428,6 +427,25 @@ namespace ExecutableWindows
             ((MemberWithGroup) TvGroupsMembers.SelectedObject).Street = member.Street;
             ((MemberWithGroup) TvGroupsMembers.SelectedObject).ZipCode = member.ZipCode;
             TvGroupsMembers.UpdateObject((MemberWithGroup) TvGroupsMembers.SelectedObject);
+        }
+
+        private void filegroupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var filegroup = ((FileWithOverhead) TvFiles.SelectedObject).FileOverhead;
+            var editFilegroup = new CreateFilegroup(ref filegroup);
+            editFilegroup.ShowDialog();
+            ((FileWithOverhead) TvFiles.SelectedObject).FileOverhead = filegroup;
+            TvFiles.RefreshObject((FileWithOverhead)TvFiles.SelectedObject);
+
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var file = ((FileWithOverhead) TvFiles.SelectedObject).LinkedFile;
+            var editFile = new FileAdder(ref file);
+            editFile.ShowDialog();
+            ((FileWithOverhead) TvFiles.SelectedObject).LinkedFile = file;
+            TvFiles.RefreshObject((FileWithOverhead)TvFiles.SelectedObject);
         }
     }
 }
