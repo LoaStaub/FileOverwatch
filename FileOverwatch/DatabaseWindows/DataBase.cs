@@ -12,10 +12,6 @@ namespace DatabaseWindows
 
         }
 
-        public void ChangeDataBasePath(string path)
-        {
-            ConfigurationManager.ConnectionStrings["DataBase"].ConnectionString = path;
-        }
         
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Email> Emails { get; set; }
@@ -44,7 +40,5 @@ namespace DatabaseWindows
 
         #endregion
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder options)
-        //    => options.UseSqlite(@"Data Source=C:\Users\a-p-i\source\repos\FileOverwatch\FileOverwatch\Database\FileOverwatch.db");
     }
 }

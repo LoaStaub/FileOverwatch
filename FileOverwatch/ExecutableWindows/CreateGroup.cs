@@ -113,6 +113,7 @@ namespace ExecutableWindows
             }
 
             await db.SaveChangesAsync();
+            Close();
         }
 
         private async void BtnDelete_Click(object sender, EventArgs e)

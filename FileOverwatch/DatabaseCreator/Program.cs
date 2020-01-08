@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseCreator
 {
@@ -8,10 +10,14 @@ namespace DatabaseCreator
         static void Main(string[] args)
         {
 #if DEBUG
-            args[0] = Directory.GetCurrentDirectory() + "/FileOverwatch.db";
+            var path = Directory.GetCurrentDirectory() + @"\FileOverwatch.db";
+#else
+            var path = args[0];
 #endif
-            var db = new DataBase(args[0]);
-            db.EnsureCreated();
+            var optionsBuilder = new DbContextOptionsBuilder();
+            optionsBuilder.UseSqlite("Data Source=" + path);
+            var db = new DataBase(optionsBuilder.Options);
+            db.Database.EnsureCreated();
         }
     }
 }

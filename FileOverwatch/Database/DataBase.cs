@@ -6,15 +6,8 @@ namespace Database
 {
     public partial class DataBase : DbContext
     {
-        private static string _path;
-        public DataBase(string path)
+        public DataBase(DbContextOptions option): base(option)
         {
-            _path = path;
-        }
-
-        public void EnsureCreated()
-        {
-            Database.EnsureCreated();
         }
 
         public virtual DbSet<Member> Members { get; set; }
@@ -44,8 +37,5 @@ namespace Database
         public virtual DbSet<PhoneToMember> PhoneToMemberNode { get; set; }
 
         #endregion
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite(_path);
     }
 }

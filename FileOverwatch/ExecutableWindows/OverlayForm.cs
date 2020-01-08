@@ -65,17 +65,20 @@ namespace ExecutableWindows
         }
 
         private static bool _isItOrganization;
+
         private async void TvOrganization_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             _isItOrganization = true;
             ClearAllLabels();
             TvGroupsMembers.ClearObjects();
+            TvGroupsMembers.AlwaysGroupByColumn = olvColumn4;
             if (TvOrganization.SelectedObject != null)
             {
                 var organization = (Organization) TvOrganization.SelectedObject;
                 var db = new DataBase();
                 var groups = await db.Groups.Where(d =>
-                    !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == organization.Id)).ToListAsync();
+                        !d.Deleted && d.OrganizationNode.Any(f => !f.Deleted && f.OrganizationId == organization.Id))
+                    .ToListAsync();
 
                 foreach (var group in groups)
                 {
@@ -106,6 +109,7 @@ namespace ExecutableWindows
                         .ToList();
                     TvGroupsMembers.AddObjects(membersWithGroupList);
                 }
+
                 OrganizationLabels(ref organization);
             }
         }
@@ -148,6 +152,7 @@ namespace ExecutableWindows
             {
                 return;
             }
+
             var memberWithGroup = (MemberWithGroup) TvGroupsMembers.SelectedObject;
 
             MemberLabels(ref memberWithGroup, ((Organization) TvOrganization.SelectedObject).Name);
@@ -155,7 +160,8 @@ namespace ExecutableWindows
             var fileOverheads = await db.FileOverheads
                 .Where(d => !d.Deleted && d.MemberNode.Any(f => !f.Deleted && f.MemberId == memberWithGroup.Id))
                 .ToListAsync();
-
+            TvFiles.ClearObjects();
+            TvFiles.AlwaysGroupByColumn = olvColumn5;
             var fileList = new List<FileWithOverhead>();
             foreach (var fileOverhead in fileOverheads)
             {
@@ -193,6 +199,7 @@ namespace ExecutableWindows
                 MessageBox.Show(@"Please select an organization");
                 return;
             }
+
             var editOrganization = new CreateOrganization(ref organization);
             editOrganization.ShowDialog();
             TvOrganization.UpdateObject(organization);
@@ -261,6 +268,7 @@ namespace ExecutableWindows
         {
             LblType.Text = @"File";
             LblPath.Text = $@"{path}/{file?.GroupName}/{file?.FileName}";
+            LblBirthDateDesc.Text = @"Create Date";
             LblName.Text = file?.FileName;
             LblBirthdate.Text = file?.CreateDate.ToShortDateString();
             TbDescription.Text = file?.Description;
@@ -272,7 +280,7 @@ namespace ExecutableWindows
             var editGroup = new CreateGroup(ref group);
             editGroup.ShowDialog();
             ((MemberWithGroup) TvGroupsMembers.SelectedObject).GroupName = group.Name;
-            TvGroupsMembers.UpdateObject((MemberWithGroup)TvGroupsMembers.SelectedObject);
+            TvGroupsMembers.UpdateObject((MemberWithGroup) TvGroupsMembers.SelectedObject);
         }
 
         private async void BtnPhones_Click(object sender, EventArgs e)
@@ -289,7 +297,7 @@ namespace ExecutableWindows
             else
             {
                 var member = ((MemberWithGroup) TvGroupsMembers.SelectedObject).Member;
-                var group = ((MemberWithGroup)TvGroupsMembers.SelectedObject).Group;
+                var group = ((MemberWithGroup) TvGroupsMembers.SelectedObject).Group;
                 var doYouMean = new DoYouMean(ref group, ref member, 1);
                 doYouMean.Show();
             }
@@ -299,7 +307,7 @@ namespace ExecutableWindows
         {
             if (_isItOrganization)
             {
-                var orga = (Organization)TvOrganization.SelectedObject;
+                var orga = (Organization) TvOrganization.SelectedObject;
                 var db = new DataBase();
                 var emailList = await db.Emails.Where(d =>
                     !d.Deleted && d.OrganizationNode.Any(f => f.Organization.Id == orga.Id)).ToListAsync();
@@ -308,8 +316,8 @@ namespace ExecutableWindows
             }
             else
             {
-                var member = ((MemberWithGroup)TvGroupsMembers.SelectedObject).Member;
-                var group = ((MemberWithGroup)TvGroupsMembers.SelectedObject).Group;
+                var member = ((MemberWithGroup) TvGroupsMembers.SelectedObject).Member;
+                var group = ((MemberWithGroup) TvGroupsMembers.SelectedObject).Group;
                 var doYouMean = new DoYouMean(ref group, ref member, 2);
                 doYouMean.Show();
             }
@@ -319,7 +327,7 @@ namespace ExecutableWindows
         {
             if (_isItOrganization)
             {
-                var orga = (Organization)TvOrganization.SelectedObject;
+                var orga = (Organization) TvOrganization.SelectedObject;
                 var db = new DataBase();
                 var homepageList = await db.Homepages.Where(d =>
                     !d.Deleted && d.OrganizationNode.Any(f => f.Organization.Id == orga.Id)).ToListAsync();
@@ -328,19 +336,23 @@ namespace ExecutableWindows
             }
             else
             {
-                var member = ((MemberWithGroup)TvGroupsMembers.SelectedObject).Member;
-                var group = ((MemberWithGroup)TvGroupsMembers.SelectedObject).Group;
+                var member = ((MemberWithGroup) TvGroupsMembers.SelectedObject).Member;
+                var group = ((MemberWithGroup) TvGroupsMembers.SelectedObject).Group;
                 var doYouMean = new DoYouMean(ref group, ref member, 3);
                 doYouMean.Show();
             }
         }
 
-        private void TvFiles_DoubleClick(object sender, EventArgs e)
+        private async void TvFiles_DoubleClick(object sender, EventArgs e)
         {
             var file = (FileWithOverhead) TvFiles.SelectedObject;
             if (File.Exists(file.Directory))
             {
                 Process.Start(file.Directory);
+                file.LastAccess = DateTime.Now;
+                var db = new DataBase();
+                db.Entry(file).State = EntityState.Modified;
+                await db.SaveChangesAsync();
             }
             else
             {
@@ -356,6 +368,7 @@ namespace ExecutableWindows
             {
                 return;
             }
+
             ClearAllLabels();
             FileLabels(ref file, path);
         }
@@ -369,12 +382,14 @@ namespace ExecutableWindows
                 Settings.Default.PathToDatabase = setting;
                 Settings.Default.Save();
             }
-            var process = Process.Start(Directory.GetCurrentDirectory() + "/DatabaseCreator.exe", setting);
+
+            var process = Process.Start(Directory.GetCurrentDirectory() + "/DatabaseCreator/DatabaseCreator.exe",
+                setting);
             process?.WaitForExit();
 
             TvOrganization.Items.Clear();
+            DbSetup.ChangeDataBasePath(setting);
             var db = new DataBase();
-            db.ChangeDataBasePath(setting);
             var organizations = await db.Organizations.Where(d => !d.Deleted).AsNoTracking().ToListAsync();
             TvOrganization.ShowGroups = false;
             TvOrganization.AddObjects(organizations);
@@ -389,6 +404,30 @@ namespace ExecutableWindows
         {
             var databaseSettings = new DatabaseSettings();
             databaseSettings.ShowDialog();
+        }
+
+        private void BtnEditMember_Click(object sender, EventArgs e)
+        {
+            var member = ((MemberWithGroup) TvGroupsMembers.SelectedObject).Member;
+            var editGroup = new CreateMember(ref member);
+            editGroup.ShowDialog();
+
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).Member = member;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).Birthdate = member.Birthdate;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).City = member.City;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).Country = member.Country;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).CreateDate = member.CreateDate;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).Description = member.Description;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).FirstName = member.FirstName;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).Gender = member.Gender;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).HouseNumber = member.HouseNumber;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).LastName = member.LastName;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).MemberDate = member.MemberDate;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).Picture = member.Picture;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).State = member.State;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).Street = member.Street;
+            ((MemberWithGroup) TvGroupsMembers.SelectedObject).ZipCode = member.ZipCode;
+            TvGroupsMembers.UpdateObject((MemberWithGroup) TvGroupsMembers.SelectedObject);
         }
     }
 }

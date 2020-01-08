@@ -55,8 +55,6 @@
             this.BtnEditOrganization = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnEditGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnEditMember = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnAddContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
             this.TvGroupsMembers = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -112,18 +110,18 @@
             // 
             // TvFiles
             // 
-            this.TvFiles.AllColumns.Add(this.olvColumn5);
             this.TvFiles.AllColumns.Add(this.olvColumn6);
             this.TvFiles.AllColumns.Add(this.olvColumn7);
             this.TvFiles.AllColumns.Add(this.olvColumn8);
             this.TvFiles.AllColumns.Add(this.olvColumn9);
+            this.TvFiles.AllColumns.Add(this.olvColumn5);
             this.TvFiles.CellEditUseWholeCell = false;
             this.TvFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn5,
             this.olvColumn6,
             this.olvColumn7,
             this.olvColumn8,
-            this.olvColumn9});
+            this.olvColumn9,
+            this.olvColumn5});
             this.TvFiles.Cursor = System.Windows.Forms.Cursors.Default;
             this.TvFiles.HideSelection = false;
             this.TvFiles.Location = new System.Drawing.Point(3, 29);
@@ -212,8 +210,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem,
             this.erstellenToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.optionsToolStripMenuItem});
+            this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -235,20 +232,20 @@
             this.executeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.databaseExportToolStripMenuItem});
             this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
-            this.executeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.executeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.executeToolStripMenuItem.Text = "Execute...";
             // 
             // databaseExportToolStripMenuItem
             // 
             this.databaseExportToolStripMenuItem.Name = "databaseExportToolStripMenuItem";
-            this.databaseExportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.databaseExportToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.databaseExportToolStripMenuItem.Text = "Database Settings";
             this.databaseExportToolStripMenuItem.Click += new System.EventHandler(this.databaseExportToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -335,23 +332,9 @@
             // BtnEditMember
             // 
             this.BtnEditMember.Name = "BtnEditMember";
-            this.BtnEditMember.Size = new System.Drawing.Size(142, 22);
+            this.BtnEditMember.Size = new System.Drawing.Size(180, 22);
             this.BtnEditMember.Text = "Member";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BtnAddContextMenu});
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.optionsToolStripMenuItem.Text = "Options";
-            // 
-            // BtnAddContextMenu
-            // 
-            this.BtnAddContextMenu.Name = "BtnAddContextMenu";
-            this.BtnAddContextMenu.Size = new System.Drawing.Size(174, 22);
-            this.BtnAddContextMenu.Text = "Add Context Menu";
-            this.BtnAddContextMenu.Click += new System.EventHandler(this.BtnAddContextMenu_Click);
+            this.BtnEditMember.Click += new System.EventHandler(this.BtnEditMember_Click);
             // 
             // panel3
             // 
@@ -363,12 +346,11 @@
             // 
             // TvGroupsMembers
             // 
-            this.TvGroupsMembers.AllColumns.Add(this.olvColumn4);
             this.TvGroupsMembers.AllColumns.Add(this.olvColumn1);
             this.TvGroupsMembers.AllColumns.Add(this.olvColumn3);
+            this.TvGroupsMembers.AllColumns.Add(this.olvColumn4);
             this.TvGroupsMembers.CellEditUseWholeCell = false;
             this.TvGroupsMembers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn4,
             this.olvColumn1,
             this.olvColumn3});
             this.TvGroupsMembers.Cursor = System.Windows.Forms.Cursors.Default;
@@ -688,6 +670,7 @@
             this.PbPicture.Location = new System.Drawing.Point(3, 69);
             this.PbPicture.Name = "PbPicture";
             this.PbPicture.Size = new System.Drawing.Size(248, 188);
+            this.PbPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PbPicture.TabIndex = 0;
             this.PbPicture.TabStop = false;
             // 
@@ -732,8 +715,6 @@
         private System.Windows.Forms.ToolStripMenuItem groupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem employeeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem BtnAddContextMenu;
         private System.Windows.Forms.ToolStripMenuItem BtnLinkFile;
         private BrightIdeasSoftware.ObjectListView TvOrganization;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
